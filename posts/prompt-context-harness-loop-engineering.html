@@ -22,39 +22,51 @@
 <a class="back-link" href="../index.html">&larr; All posts</a>
 <article class="post">
   <h1>Prompt Engineering vs. Context Engineering vs. Harness Engineering vs. Loop Engineering</h1>
-  <div class="meta">Concepts · 9 min read</div>
+  <div class="meta">Concepts · 8 min read</div>
 
   <p>These four terms get used interchangeably in agent discourse, which is a problem, because they describe four different layers of the same system and each one fails for a different reason. If your Cowork workflow is underperforming, the fix depends on which layer is actually broken. Treating a harness problem as a prompt problem — rewording instructions when the real issue is missing tool access or no verification step — burns turns without fixing anything.</p>
 
   <p>Here's the layer breakdown, roughly in the order the industry adopted the vocabulary: prompt engineering (ChatGPT era, 2022), context engineering (2025, as agents started juggling multi-turn state and long context windows), harness engineering (2026, as the scaffolding around the model became the bottleneck), and loop engineering (mid-2026, for systems that decide on their own when to invoke the agent at all — a term Addy Osmani popularized building on work from Peter Steinberger and Anthropic's Boris Cherny).</p>
 
+  <style>
+    .layer-tag { display:inline-block; font-size:0.72rem; font-weight:600; padding:4px 14px; border-radius:var(--radius-pill); margin-bottom:14px; letter-spacing:0.02em; }
+    .layer-tag--prompt { background:rgba(63,42,123,0.10); color:var(--action-primary); border:1px solid rgba(63,42,123,0.22); }
+    .layer-tag--context { background:rgba(87,120,160,0.12); color:var(--accent-steel-blue); border:1px solid rgba(87,120,160,0.28); }
+    .layer-tag--harness { background:rgba(61,125,123,0.12); color:var(--action-secondary); border:1px solid rgba(61,125,123,0.26); }
+    .layer-tag--loop { background:rgba(155,67,104,0.10); color:var(--accent-pink); border:1px solid rgba(155,67,104,0.24); }
+    .layer-cell--prompt { color:var(--action-primary); font-weight:600; }
+    .layer-cell--context { color:var(--accent-steel-blue); font-weight:600; }
+    .layer-cell--harness { color:var(--action-secondary); font-weight:600; }
+    .layer-cell--loop { color:var(--accent-pink); font-weight:600; }
+  </style>
+
   <h2>Prompt engineering: what to ask</h2>
+  <div class="layer-tag layer-tag--prompt">Single turn · everything already provided</div>
   <p>This is the layer everyone starts with and the one this site already covers in depth. It's about a single turn: the wording, structure, and constraints of one request to the model. Specify the deliverable, the audience, the format, what's out of scope. This is necessary but it's the smallest lever in the stack — a perfectly worded prompt still fails if the model doesn't have the right information or the right tools to act on it.</p>
-  <p>This is the right layer for tasks that are self-contained and finish in one turn: drafting a Slack message, rewriting a paragraph for a different audience, generating a SQL query against a schema you paste inline, or asking Cowork to summarize a document that's already in the conversation. If the task starts and ends with "here's everything you need, now produce the output," you're squarely in prompt-engineering territory and don't need anything heavier.</p>
 
   <h2>Context engineering: what the model needs to know</h2>
+  <div class="layer-tag layer-tag--context">What information the model can see</div>
   <p>Context engineering is about curating what gets loaded into the model's working memory for a given task — which files, which prior turns, which retrieved documents, which schema definitions — so the model can answer confidently without guessing or hallucinating. This matters more than prompt wording once you're past toy tasks, because a context window is a scarce, expensive resource: cramming in everything "just in case" degrades performance as much as leaving out the one fact that mattered.</p>
   <p>In our world, this looks like the difference between asking Cowork to "summarize the Tyson audience" cold versus pointing it at the actual Predactiv MCP tools so it pulls live composition data instead of working from stale training knowledge or a half-remembered Slack thread. The prompt didn't change much; what changed is what the model had in front of it when it answered.</p>
-  <p>Other good fits: retrieving the right Confluence page before writing a spec instead of letting the model guess at prior decisions, pulling a partner's actual contract terms before drafting a renewal email, or grounding a lookalike-model writeup in the real feature importances from the run rather than a generic description of logistic regression. Anywhere the model would otherwise be reasoning from training-data priors instead of your actual data, that's a context problem, not a prompt problem.</p>
 
   <h2>Harness engineering: how the whole thing operates reliably</h2>
+  <div class="layer-tag layer-tag--harness">Multi-step · tools · safety gates</div>
   <p>Harness engineering is the operational layer around the model: the toolchain it can call, the constraints on what it's allowed to touch, the feedback loops that tell it whether an action succeeded, and the lifecycle that carries state across multiple context windows rather than a single turn. Where context engineering optimizes what's inside one window, harness engineering is what happens when a task is too big for one window — context resets, structured handoffs between phases, and phase gates that keep a multi-step task coherent as the model's working memory gets wiped and rebuilt.</p>
   <p>This is the layer that actually determines whether an agent can be trusted with a real, multi-step, technical task. A skill definition with a scoped tool list, a checklist the agent has to satisfy before moving to the next phase, and a verification step before anything ships — that's harness, not prompt. The <code>agent-pm</code> skill's rule that Slack drafts always route to a review channel before hitting a real recipient is a harness constraint: it's not asking the model nicely to be careful, it's removing the ability to skip the check.</p>
-  <p>Other good fits: a partner POC that has to pull data from three systems, run a feature-parity check, and write up findings without losing track of what it already tried; a bulk audience-creation workflow that has to validate each segment against a schema before submitting it, so one bad row doesn't silently corrupt a batch; or an onboarding flow that has to gate on "did the user actually confirm this" before it touches anything with side effects. The common thread is a task with enough steps, tools, or blast radius that a single well-crafted prompt can't hold it together end to end.</p>
 
   <h2>Loop engineering: the system that decides when to prompt at all</h2>
+  <div class="layer-tag layer-tag--loop">Runs unattended · self-evaluates</div>
   <p>Loop engineering is the newest and most autonomous layer: instead of a human typing each prompt, you build the system that decides what work exists, acts on it, verifies the result, remembers what's done, and decides what to do next — on a schedule or continuously, without a human in the loop for each cycle. The agent stops being a tool you hold and becomes a long-running process with its own scheduling and evaluation logic.</p>
   <p>A scheduled Cowork task that checks a data pipeline every morning and only pings you when something's actually wrong is a small-scale version of this. The interesting failure mode at this layer isn't a bad response — it's a system that keeps confidently doing the wrong thing on a loop because nothing is verifying its own output before it acts on step two.</p>
-  <p>Other good fits: a nightly job that re-scores audience segments against fresh conversion data and only surfaces the ones that drifted past a threshold, a monitor that watches partner data-delivery SLAs and escalates automatically when a feed goes stale, or a recurring competitive-intel sweep that only writes to the tracker when something material actually changed. The test for whether a task belongs here is whether it needs to run and re-evaluate itself without a human deciding, each time, that it's worth running.</p>
 
   <figure class="diagram">
     <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four nested layers from innermost to outermost: prompt engineering inside context engineering inside harness engineering inside loop engineering, showing increasing scope from a single turn to an autonomous multi-cycle system.">
       <style>
-        .lyr-outer { fill: var(--surface-0); stroke: var(--border-1); stroke-width: 1.5; }
-        .lyr-l1 { fill: var(--surface-1); }
-        .lyr-l2 { fill: var(--surface-1); opacity: 0.75; }
-        .lyr-l3 { fill: var(--surface-1); opacity: 0.55; }
-        .lyr-l4 { fill: var(--action-secondary); opacity: 0.18; }
+        .lyr-outer { stroke-width: 1.5; }
+        .lyr-l1 { fill: var(--action-primary); opacity: 0.16; stroke: var(--action-primary); }
+        .lyr-l2 { fill: var(--accent-steel-blue); opacity: 0.14; stroke: var(--accent-steel-blue); }
+        .lyr-l3 { fill: var(--action-secondary); opacity: 0.14; stroke: var(--action-secondary); }
+        .lyr-l4 { fill: var(--accent-pink); opacity: 0.12; stroke: var(--accent-pink); }
         .lyr-title { fill: var(--text-1); font: 600 13px "Poppins", sans-serif; }
         .lyr-sub { fill: var(--text-2); font: 400 11px "Poppins", sans-serif; }
       </style>
@@ -79,18 +91,110 @@
   <h2>Which layer is actually broken?</h2>
   <table style="width:100%; border-collapse:collapse; margin:20px 0;">
     <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0; color:var(--text-2);">Symptom</td><td style="padding:8px 0; color:var(--text-2);">Likely layer</td></tr>
-    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0;">Response is vague, wrong format, or misses the deliverable</td><td style="padding:8px 0;">Prompt</td></tr>
-    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0;">Response is confidently wrong or stale despite a clear prompt</td><td style="padding:8px 0;">Context</td></tr>
-    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0;">Agent can't complete a multi-step task, loses state, or skips a required check</td><td style="padding:8px 0;">Harness</td></tr>
-    <tr><td style="padding:8px 0;">A recurring/scheduled agent keeps taking the wrong action unattended</td><td style="padding:8px 0;">Loop</td></tr>
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0;">Response is vague, wrong format, or misses the deliverable</td><td style="padding:8px 0;" class="layer-cell--prompt">Prompt</td></tr>
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0;">Response is confidently wrong or stale despite a clear prompt</td><td style="padding:8px 0;" class="layer-cell--context">Context</td></tr>
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0;">Agent can't complete a multi-step task, loses state, or skips a required check</td><td style="padding:8px 0;" class="layer-cell--harness">Harness</td></tr>
+    <tr><td style="padding:8px 0;">A recurring/scheduled agent keeps taking the wrong action unattended</td><td style="padding:8px 0;" class="layer-cell--loop">Loop</td></tr>
   </table>
 
   <p>For a Product org managing model development, audience infrastructure, and partner POCs, the practical implication is where you invest engineering time. Prompt quality is a training problem — coach the team, see <a href="prompting-tips-for-cowork.html">Prompting Tips That Actually Move the Needle in Cowork</a>. Context and harness quality are skill-design problems — this is what we're doing every time we scope a Cowork skill's tool list, add a phase gate, or require a review step before something goes external. Loop engineering is where scheduled tasks and always-on monitoring live, and it's the layer that most needs a verification step baked in before you trust it unattended, since nothing is watching it turn by turn.</p>
 
+  <h2>Which layer does this task need?</h2>
+  <p>The table above diagnoses a task that's already misbehaving. Before building anything, it's more useful to ask the question forward: escalate one layer at a time, and only once the current layer has a demonstrated, specific gap — never start from loop engineering by default because it feels more "automated."</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Decision chart for choosing which engineering layer a new task needs. Start by asking if the task fits in one prompt and one turn; if not, ask whether it is missing information, then whether it needs multiple steps or safety gates, then whether it needs to run unattended and re-evaluate itself. Each yes lands on a layer; if none apply, the task likely does not need automation.">
+      <defs>
+        <marker id="dtArrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 z" fill="var(--text-2)"></path>
+        </marker>
+      </defs>
+      <style>
+        .dt-diamond { fill: var(--surface-0); stroke: var(--border-1); stroke-width: 1.5; }
+        .dt-outcome { stroke-width: 1.5; }
+        .dt-outcome--prompt { fill: var(--action-primary); fill-opacity: 0.14; stroke: var(--action-primary); }
+        .dt-outcome--context { fill: var(--accent-steel-blue); fill-opacity: 0.16; stroke: var(--accent-steel-blue); }
+        .dt-outcome--harness { fill: var(--action-secondary); fill-opacity: 0.16; stroke: var(--action-secondary); }
+        .dt-outcome--loop { fill: var(--accent-pink); fill-opacity: 0.14; stroke: var(--accent-pink); }
+        .dt-final { fill: var(--surface-2); stroke: var(--border-1); stroke-width: 1.5; }
+        .dt-q { fill: var(--text-1); font: 500 12px "Poppins", sans-serif; text-anchor: middle; }
+        .dt-a { fill: var(--text-1); font: 600 13px "Poppins", sans-serif; text-anchor: middle; }
+        .dt-label { fill: var(--text-2); font: 600 10px "Poppins", sans-serif; }
+        .dt-line { stroke: var(--text-2); stroke-width: 1.5; fill: none; }
+      </style>
+
+      <path class="dt-line" d="M160,115 L160,185" marker-end="url(#dtArrow)"></path>
+      <path class="dt-line" d="M160,275 L160,345" marker-end="url(#dtArrow)"></path>
+      <path class="dt-line" d="M160,435 L160,505" marker-end="url(#dtArrow)"></path>
+      <path class="dt-line" d="M160,595 L160,642" marker-end="url(#dtArrow)"></path>
+      <text x="172" y="155" class="dt-label">No</text>
+      <text x="172" y="315" class="dt-label">No</text>
+      <text x="172" y="475" class="dt-label">No</text>
+      <text x="172" y="623" class="dt-label">No</text>
+
+      <path class="dt-line" d="M290,70 L410,70" marker-end="url(#dtArrow)"></path>
+      <path class="dt-line" d="M290,230 L410,230" marker-end="url(#dtArrow)"></path>
+      <path class="dt-line" d="M290,390 L410,390" marker-end="url(#dtArrow)"></path>
+      <path class="dt-line" d="M290,550 L410,550" marker-end="url(#dtArrow)"></path>
+      <text x="330" y="62" class="dt-label">Yes</text>
+      <text x="330" y="222" class="dt-label">Yes</text>
+      <text x="330" y="382" class="dt-label">Yes</text>
+      <text x="330" y="542" class="dt-label">Yes</text>
+
+      <polygon class="dt-diamond" points="160,25 290,70 160,115 30,70"></polygon>
+      <text x="160" y="66" class="dt-q">Fits in one prompt,</text>
+      <text x="160" y="82" class="dt-q">one turn?</text>
+
+      <polygon class="dt-diamond" points="160,185 290,230 160,275 30,230"></polygon>
+      <text x="160" y="226" class="dt-q">Missing piece is just</text>
+      <text x="160" y="242" class="dt-q">info or data?</text>
+
+      <polygon class="dt-diamond" points="160,345 290,390 160,435 30,390"></polygon>
+      <text x="160" y="386" class="dt-q">Needs multiple steps</text>
+      <text x="160" y="402" class="dt-q">or safety gates?</text>
+
+      <polygon class="dt-diamond" points="160,505 290,550 160,595 30,550"></polygon>
+      <text x="160" y="546" class="dt-q">Needs to run and</text>
+      <text x="160" y="562" class="dt-q">self-evaluate unattended?</text>
+
+      <rect class="dt-outcome dt-outcome--prompt" x="410" y="42" width="230" height="56" rx="12"></rect>
+      <text x="525" y="76" class="dt-a">Prompt engineering only</text>
+
+      <rect class="dt-outcome dt-outcome--context" x="410" y="202" width="230" height="56" rx="12"></rect>
+      <text x="525" y="236" class="dt-a">+ Context engineering</text>
+
+      <rect class="dt-outcome dt-outcome--harness" x="410" y="362" width="230" height="56" rx="12"></rect>
+      <text x="525" y="396" class="dt-a">+ Harness engineering</text>
+
+      <rect class="dt-outcome dt-outcome--loop" x="410" y="522" width="230" height="56" rx="12"></rect>
+      <text x="525" y="556" class="dt-a">+ Loop engineering</text>
+
+      <rect class="dt-final" x="30" y="642" width="260" height="56" rx="12"></rect>
+      <text x="160" y="666" class="dt-a">Re-scope — likely doesn't</text>
+      <text x="160" y="682" class="dt-a">need automation at all</text>
+    </svg>
+    <figcaption>Each layer is additive, not a replacement for the one before it — a harness-level task still needs a well-written prompt and the right context inside it.</figcaption>
+  </figure>
+
+  <table style="width:100%; border-collapse:collapse; margin:20px 0;">
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0; color:var(--text-2);">Layer</td><td style="padding:8px 0; color:var(--text-2);">Example tasks</td></tr>
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0;" class="layer-cell--prompt">Prompt</td><td style="padding:8px 0;">Slack drafts, paragraph rewrites, inline SQL against a pasted schema, summarizing an attached doc</td></tr>
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0;" class="layer-cell--context">Context</td><td style="padding:8px 0;">Live Predactiv MCP lookups, pulling the right Confluence page before a spec, real contract terms before a renewal email</td></tr>
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0;" class="layer-cell--harness">Harness</td><td style="padding:8px 0;">Multi-system partner POCs, bulk audience creation with per-row validation, onboarding flows gated on confirmation</td></tr>
+    <tr><td style="padding:8px 0;" class="layer-cell--loop">Loop</td><td style="padding:8px 0;">Nightly audience re-scoring, partner SLA monitoring, recurring competitive-intel sweeps</td></tr>
+  </table>
+
   <h2>When each layer is over-engineering</h2>
   <p>Every layer above the one a task actually needs is pure overhead — added latency, added failure surface, and added maintenance burden for a benefit nobody collects. The same impact-vs-effort lens we'd apply to a roadmap decision applies here: escalate to the next layer only when the current one has a demonstrated, specific failure, not because the heavier pattern feels more rigorous.</p>
-  <p>Reaching for context engineering is over-engineering when the task's full context already fits in the prompt itself — building a retrieval step to fetch a document the user could have just pasted adds a moving part that can fail (stale index, wrong doc, silent miss) in exchange for saving one copy-paste. Reaching for harness engineering is over-engineering when the task is genuinely one or two steps — wrapping a single well-defined transformation in a multi-phase skill with tool scoping and checklists adds review overhead and rigidity to something that was never going to drift. A useful tell: if you can't name the specific failure mode the extra structure prevents, you're adding ceremony, not reliability.</p>
-  <p>Reaching for loop engineering is the costliest over-engineering because it's the hardest to unwind: a scheduled or always-on system that nobody asked for turns into noise (alerts people learn to ignore), a silent maintenance liability (nobody remembers why it runs or what it's for six months later), or a source of compounding errors if its own output feeds the next cycle unverified. The right question before automating anything into a loop isn't "could this run on a schedule" — almost anything could — it's "does this need to act without a human deciding each time, and do we have a way to catch it if it starts confidently doing the wrong thing." If the honest answer is "we just wanted it off our plate," that's a one-off task wearing a loop's clothing, and it will cost more in cleanup than it ever saved in typing.</p>
+
+  <table style="width:100%; border-collapse:collapse; margin:20px 0;">
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0; color:var(--text-2);">Layer</td><td style="padding:8px 0; color:var(--text-2);">Over-engineering signal</td><td style="padding:8px 0; color:var(--text-2);">Cost when misapplied</td></tr>
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0;" class="layer-cell--context">Context</td><td style="padding:8px 0;">Full context already fits in the prompt itself</td><td style="padding:8px 0;">A retrieval step adds a moving part — stale index, wrong doc, silent miss — to save one copy-paste</td></tr>
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0;" class="layer-cell--harness">Harness</td><td style="padding:8px 0;">Task is genuinely one or two steps</td><td style="padding:8px 0;">Tool scoping and checklists add review overhead and rigidity to something that was never going to drift</td></tr>
+    <tr><td style="padding:8px 0;" class="layer-cell--loop">Loop</td><td style="padding:8px 0;">Nobody actually needs it to act without a human deciding each time</td><td style="padding:8px 0;">Becomes ignored alert noise, an unowned maintenance liability, or a source of compounding errors from unverified output</td></tr>
+  </table>
+
+  <p>A useful tell across all three: if you can't name the specific failure mode the extra structure prevents, you're adding ceremony, not reliability. The right question before automating anything into a loop isn't "could this run on a schedule" — almost anything could — it's "does this need to act without a human deciding each time, and do we have a way to catch it if it starts confidently doing the wrong thing." If the honest answer is "we just wanted it off our plate," that's a one-off task wearing a loop's clothing, and it will cost more in cleanup than it ever saved in typing.</p>
 
   <p><strong>Try:</strong> "Before we automate this as a scheduled task, walk through it as a harness: what tools does it need, what should block it from proceeding to the next step, and what should trigger a human review instead of an autonomous action?"</p>
 
