@@ -341,3 +341,31 @@ footer.site-footer {
 }
 .pdp-btn:hover { filter: brightness(0.92); text-decoration: none; }
 .pdp-btn--secondary { background: var(--action-secondary); }
+
+/* ---- Inline flow/structure diagrams within posts ---- */
+figure.diagram {
+  margin: 28px 0;
+  padding: 20px;
+  background: var(--surface-1);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-lg);
+}
+figure.diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+figure.diagram figcaption {
+  margin-top: 14px;
+  color: var(--text-2);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+figure.diagram figcaption code {
+  background: var(--surface-2);
+  border: 1px solid var(--border-1);
+  padding: 1px 6px;
+  border-radius: var(--radius-xs);
+  font-size: 0.85em;
+  color: var(--action-primary);
+}
