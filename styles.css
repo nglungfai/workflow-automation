@@ -342,6 +342,114 @@ footer.site-footer {
 .pdp-btn:hover { filter: brightness(0.92); text-decoration: none; }
 .pdp-btn--secondary { background: var(--action-secondary); }
 
+/* ---- Reading list: lane-colored feature rows (reading-list.html) ---- */
+p.rl-lane-desc {
+  color: var(--text-2);
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+.rl-lane-key {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 20px 0 0;
+  font-size: 0.82rem;
+  color: var(--text-2);
+}
+.rl-lane-key span::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  margin-right: 6px;
+  background: var(--k);
+}
+
+.rl-row {
+  background: var(--surface-0);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-lg);
+  border-left: 6px solid var(--lane, var(--action-primary));
+  padding: 18px 24px;
+  margin: 14px 0;
+  box-shadow: var(--shadow-xs);
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 4px 18px;
+  transition: box-shadow var(--duration-med) var(--ease-standard);
+}
+.rl-row:hover { box-shadow: var(--shadow-md); }
+
+.lane-papers { --lane: var(--action-primary); }
+.lane-eng    { --lane: var(--action-secondary); }
+.lane-apply  { --lane: var(--accent-pink); }
+
+.rl-num {
+  grid-row: span 3;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--lane, var(--action-primary));
+  opacity: 0.35;
+  line-height: 1.1;
+  padding-top: 2px;
+}
+
+.rl-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.rl-head h4 {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.35;
+}
+.rl-head h4 a { color: var(--action-primary); }
+.rl-head h4 a:hover { color: var(--action-primary-hover); }
+
+.rl-src {
+  font-size: 0.78rem;
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+article.post .rl-row p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+  color: var(--text-2);
+}
+
+article.post p.rl-apply {
+  font-size: 0.85rem;
+  color: var(--text-1);
+  background: var(--surface-1);
+  border-radius: var(--radius-xs);
+  padding: 6px 12px;
+  margin-top: 8px;
+}
+p.rl-apply strong { color: var(--lane, var(--action-primary)); }
+
+.rl-pill {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--action-primary-soft);
+  color: var(--action-primary);
+  border: 1px solid rgba(63, 42, 123, 0.15);
+}
+.rl-pill--intro {
+  background: var(--alert-success-light);
+  color: var(--action-secondary-hover);
+  border-color: rgba(61, 125, 123, 0.25);
+}
+
 /* ---- Inline flow/structure diagrams within posts ---- */
 figure.diagram {
   margin: 28px 0;
