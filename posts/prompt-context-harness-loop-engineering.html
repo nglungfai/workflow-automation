@@ -197,7 +197,13 @@
 
   <p>A useful tell across all three: if you can't name the specific failure mode the extra structure prevents, you're adding ceremony, not reliability. The right question before automating anything into a loop isn't "could this run on a schedule" — almost anything could — it's "does this need to act without a human deciding each time, and do we have a way to catch it if it starts confidently doing the wrong thing." If the honest answer is "we just wanted it off our plate," that's a one-off task wearing a loop's clothing, and it will cost more in cleanup than it ever saved in typing.</p>
 
-  <p><strong>Try:</strong> "Before we automate this as a scheduled task, walk through it as a harness: what tools does it need, what should block it from proceeding to the next step, and what should trigger a human review instead of an autonomous action?"</p>
+  <div class="try-box">
+    <p class="try-box-label">Try it — copy into Cowork</p>
+    <div class="try-box-row">
+      <code class="try-box-text">Before we automate this as a scheduled task, walk through it as a harness: what tools does it need, what should block it from proceeding to the next step, and what should trigger a human review instead of an autonomous action?</code>
+      <button type="button" class="try-copy-btn">Copy</button>
+    </div>
+  </div>
 
   <blockquote>Related: <a href="prompting-tips-for-cowork.html">Prompting Tips That Actually Move the Needle in Cowork</a> — the prompt-engineering layer in practice, before you get to context, harness, or loop.</blockquote>
 
@@ -210,5 +216,6 @@
   Built by the Predactiv Product team · Contributions welcome via pull request
 </footer>
 
+<script src="../assets/copy-prompt.js" defer></script>
 </body>
 </html>
