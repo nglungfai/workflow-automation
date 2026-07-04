@@ -1,5 +1,5 @@
 # Workflow Automation
-
+ 
 Static site with tips and tutorials on using Claude Cowork, built for Predactiv employees navigating our AI transformation.
 
 ## Structure
