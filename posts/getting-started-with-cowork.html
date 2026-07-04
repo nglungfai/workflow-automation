@@ -22,9 +22,15 @@
 <a class="back-link" href="../index.html">&larr; All posts</a>
 <article class="post">
   <h1>Getting Started with Claude Cowork</h1>
-  <div class="meta">Getting Started · 6 min read</div>
+  <div class="meta">Getting Started · 7 min read</div>
 
   <p>Cowork is Claude's mode for working directly on your files and tasks — not just chatting about them. If you've used Claude for research or drafting before, the mental shift is: Cowork can read your folders, write and edit real files, run code in a sandbox, and hand you back finished deliverables (docs, spreadsheets, decks) rather than pasted text.</p>
+
+  <blockquote>
+    <p><strong>Your first 5 minutes.</strong> If you have Google Drive for Desktop, your Drive files are already a folder Cowork can connect to — no export needed. Connect a project folder from My Drive or a shared drive, then paste this:</p>
+    <p><strong>Try:</strong> "Look through this folder and tell me what's here, which files were touched most recently, and where the latest project left off."</p>
+    <p>Nothing gets modified — Cowork reads and reports back. Product team: connect the Atlassian connector instead and try <em>"Summarize the last three updates to our team's Confluence space and flag any open decisions."</em></p>
+  </blockquote>
 
   <h2>How Cowork is different from a normal chat</h2>
   <p>In a regular chat, you get an answer in the conversation. In Cowork, Claude can:</p>
@@ -35,6 +41,51 @@
     <li>Use connected tools (Slack, Jira/Confluence, Google Drive, and internal MCP connectors like our Predactiv audience platform) to pull live data instead of you copy-pasting it in</li>
     <li>Follow multi-step task lists and keep working through them, rather than requiring a single one-shot prompt</li>
   </ul>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comparison of a regular chat workflow versus a Cowork workflow" style="font-family: var(--font-display); width:100%; height:auto;">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--neutral-300)"/>
+        </marker>
+      </defs>
+
+      <!-- Lane 1: Regular chat -->
+      <text x="24" y="34" font-size="15" font-weight="600" fill="var(--text-2)">Regular chat</text>
+      <rect x="24" y="50" width="180" height="64" rx="10" fill="var(--neutral-600)" stroke="var(--border-2)"/>
+      <text x="114" y="78" text-anchor="middle" font-size="13" font-weight="600" fill="var(--text-1)">You paste data in</text>
+      <text x="114" y="96" text-anchor="middle" font-size="11" fill="var(--text-2)">copy from DataSphere, sheets</text>
+      <path d="M 212 82 L 244 82" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#arr)"/>
+      <rect x="248" y="50" width="180" height="64" rx="10" fill="var(--neutral-600)" stroke="var(--border-2)"/>
+      <text x="338" y="78" text-anchor="middle" font-size="13" font-weight="600" fill="var(--text-1)">Claude replies in text</text>
+      <text x="338" y="96" text-anchor="middle" font-size="11" fill="var(--text-2)">an answer, not a file</text>
+      <path d="M 436 82 L 468 82" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#arr)"/>
+      <rect x="472" y="50" width="200" height="64" rx="10" fill="var(--neutral-600)" stroke="var(--border-2)"/>
+      <text x="572" y="78" text-anchor="middle" font-size="13" font-weight="600" fill="var(--text-1)">You rebuild it yourself</text>
+      <text x="572" y="96" text-anchor="middle" font-size="11" fill="var(--text-2)">copy, format, assemble</text>
+
+      <line x1="24" y1="150" x2="676" y2="150" stroke="var(--border-1)" stroke-dasharray="4 4"/>
+
+      <!-- Lane 2: Cowork -->
+      <text x="24" y="186" font-size="15" font-weight="600" fill="var(--action-primary)">Cowork</text>
+      <rect x="24" y="202" width="140" height="64" rx="10" fill="var(--action-primary-soft)" stroke="var(--action-primary)"/>
+      <text x="94" y="230" text-anchor="middle" font-size="13" font-weight="600" fill="var(--text-1)">One prompt</text>
+      <text x="94" y="248" text-anchor="middle" font-size="11" fill="var(--text-2)">describe the deliverable</text>
+      <path d="M 172 234 L 200 234" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#arr)"/>
+      <rect x="204" y="202" width="150" height="64" rx="10" fill="var(--action-primary-soft)" stroke="var(--action-primary)"/>
+      <text x="279" y="230" text-anchor="middle" font-size="13" font-weight="600" fill="var(--text-1)">Reads your work</text>
+      <text x="279" y="248" text-anchor="middle" font-size="11" fill="var(--text-2)">Drive folders, Confluence</text>
+      <path d="M 362 234 L 390 234" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#arr)"/>
+      <rect x="394" y="202" width="130" height="64" rx="10" fill="var(--action-primary-soft)" stroke="var(--action-primary)"/>
+      <text x="459" y="230" text-anchor="middle" font-size="13" font-weight="600" fill="var(--text-1)">Does the work</text>
+      <text x="459" y="248" text-anchor="middle" font-size="11" fill="var(--text-2)">sandbox: scripts, QA</text>
+      <path d="M 532 234 L 560 234" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#arr)"/>
+      <rect x="564" y="202" width="112" height="64" rx="10" fill="var(--surface-0)" stroke="var(--action-secondary)" stroke-width="1.5"/>
+      <text x="620" y="230" text-anchor="middle" font-size="13" font-weight="600" fill="var(--action-secondary-hover)">Finished file</text>
+      <text x="620" y="248" text-anchor="middle" font-size="11" fill="var(--text-2)">.docx · .xlsx · .pptx</text>
+    </svg>
+    <figcaption>The output of a chat is text you still have to turn into work. The output of Cowork is the work.</figcaption>
+  </figure>
 
   <h2>The first three things to try</h2>
 
@@ -47,8 +98,16 @@
   <h3>3. Let it use a task list for anything with more than two steps</h3>
   <p>For multi-step requests (research, then build a doc, then check it), Cowork will often show a visible task list as it works. You don't need to ask for this explicitly — but if a request feels big, breaking it into a numbered list yourself in your prompt helps it plan the work the way you want.</p>
 
-  <h2>Where it fits into an AI transformation effort</h2>
-  <p>The pitch internally isn't "AI replaces X." It's narrower and more useful: Cowork removes the busywork around drafting, formatting, and first-pass synthesis so the person can spend their judgment where it actually matters — reviewing, deciding, and refining. For a data-heavy org like ours, that shows up in status reporting, documentation, audience/data QA passes, and technical write-ups for partners.</p>
+  <h2>What this looks like in practice</h2>
+  <p>Real tasks from our own team, before and after. Times are approximate — try one and compare. The first three work in your very first session with nothing but a file or a connected folder; the last uses a skill our team built, and is where this goes once the basics feel natural.</p>
+  <table style="width:100%; border-collapse:collapse; margin:20px 0;">
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 8px 8px 0; color:var(--text-2);">Task</td><td style="padding:8px 8px 8px 0; color:var(--text-2);">Before</td><td style="padding:8px 0; color:var(--text-2);">With Cowork</td></tr>
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 8px 8px 0;">Cleaning a messy spreadsheet</td><td style="padding:8px 8px 8px 0;">30&ndash;60 min scanning a segment list or taxonomy CSV by hand</td><td style="padding:8px 0;">Minutes: "Standardize naming, dedupe, and flag anything that doesn't match the pattern"</td></tr>
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 8px 8px 0;">Meeting notes &rarr; action items</td><td style="padding:8px 8px 8px 0;">~20 min tidying raw notes after every sync</td><td style="padding:8px 0;">~2 min reviewing a one-pager with owners and open decisions</td></tr>
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 8px 8px 0;">Weekly POC status update to a partner</td><td style="padding:8px 8px 8px 0;">~45 min assembling notes, Slack threads, and formatting</td><td style="padding:8px 0;">~10 min reviewing a drafted Word doc</td></tr>
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 8px 8px 0;">Bulk syndicated segment creation in DataSphere <em>(advanced)</em></td><td style="padding:8px 8px 8px 0;">~3&ndash;4 min of clicking per segment; 40 segments &asymp; half a day</td><td style="padding:8px 0;">One Google Sheet + a team-built skill; supervise a ~15 min run — <a href="datasphere-segment-automation-skills.html">details when you're ready</a></td></tr>
+  </table>
+  <p>The pattern across all four: Cowork removes the busywork around drafting, formatting, and first-pass synthesis, so your time goes where judgment actually matters — reviewing, deciding, and refining.</p>
 
   <blockquote>Next up: <a href="five-workflows-for-data-and-product-teams.html">Five Cowork Workflows for Data & Product Teams at Predactiv</a> — concrete examples mapped to our actual tools.</blockquote>
 
