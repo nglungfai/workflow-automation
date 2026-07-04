@@ -24,8 +24,9 @@ Plain HTML/CSS, no build step, no dependencies.
 Repo: **https://github.com/nglungfai/workflow-automation**
 
 1. Push this folder's contents to the repo root (see commands below).
-2. In the repo: **Settings → Pages → Build and deployment → Source: Deploy from a branch**. Branch: `main`, folder: `/ (root)`. Save.
-3. GitHub Pages will serve it at `https://nglungfai.github.io/workflow-automation/` — live in about a minute.
+2. In the repo: **Settings → Pages → Build and deployment
+3. → Source: Deploy from a branch**. Branch: `main`, folder: `/ (root)`. Save.
+4. GitHub Pages will serve it at `https://nglungfai.github.io/workflow-automation/` — live in about a minute.
 
 ```bash
 cd workflow-automation
