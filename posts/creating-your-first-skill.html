@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creating Your First Skill: A Beginner's Guide — Workflow Automation</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand"><img src="../assets/predactiv-mark.svg" alt="Predactiv">Workflow Automation</div>
+    <nav class="site-nav">
+      <a href="../index.html">Posts</a>
+      <a href="../reading-list.html">Reading List</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<a class="back-link" href="../index.html">&larr; All posts</a>
+<article class="post">
+  <h1>Creating Your First Skill: A Beginner's Guide</h1>
+  <div class="meta">Skill Deep Dive · 4 min read</div>
+
+  <p>Half the posts on this site mention a skill by name — <code>predactiv-design</code>, <code>agent-new-syndicated-segments</code>, <code>agent-pm</code> — but none of them explain what a skill actually is or how to build one from scratch. If you've been installing other people's skills and wondering how they're made, this is that post.</p>
+
+  <h2>What a skill actually is</h2>
+  <p>A skill is a folder. That's the whole starting point. Inside that folder sits one required file, <code>SKILL.md</code>, plus whatever else you want to bundle alongside it — reference docs, scripts, templates. Anthropic's own definition: Agent Skills are modular capabilities that extend Claude's functionality, each one packaging instructions, metadata, and optional resources that Claude uses automatically when relevant. Nothing about that requires special tooling — <code>SKILL.md</code> is a plain markdown file with a small YAML header on top.</p>
+  <p>The reason skills exist instead of just re-explaining things in your prompt every time: a skill loads on demand and eliminates the need to repeat the same guidance across conversations. Write the instructions once, install the skill, and every future request that matches its description pulls those instructions in automatically — no "remember how we do this" reminder needed.</p>
+
+  <h2>The one thing that makes skills different from a saved prompt: progressive disclosure</h2>
+  <p>This is the part beginners usually skip past, and it's the part that actually explains why skills scale where a giant system prompt doesn't. Skill content loads in three stages, and Claude only pays the token cost for what it actually needs:</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three levels of progressive disclosure: Level 1 metadata always loaded at roughly 100 tokens, Level 2 SKILL.md body loaded only when the skill is triggered at under 5000 tokens, Level 3 bundled scripts and reference files loaded only as needed with effectively unlimited size">
+      <style>
+        .pd-box { fill: var(--surface-0); stroke: var(--border-1); stroke-width: 1.5; }
+        .pd-box.l1 { stroke: var(--action-secondary); }
+        .pd-box.l2 { stroke: var(--action-primary); }
+        .pd-box.l3 { fill: var(--action-primary-soft); stroke: var(--action-primary); }
+        .pd-title { fill: var(--text-1); font: 700 13px "Poppins", sans-serif; }
+        .pd-sub { fill: var(--text-2); font: 400 11px "Poppins", sans-serif; }
+        .pd-arrow { stroke: var(--action-secondary); stroke-width: 2; fill: none; marker-end: url(#pd-arrowhead); }
+      </style>
+      <defs>
+        <marker id="pd-arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="var(--action-secondary)"></path>
+        </marker>
+      </defs>
+
+      <rect class="pd-box l1" x="10" y="20" width="700" height="60" rx="14"></rect>
+      <text x="30" y="45" class="pd-title">Level 1 — Metadata (always loaded)</text>
+      <text x="30" y="65" class="pd-sub">Just the name: and description: fields from the frontmatter · ~100 tokens per skill</text>
+
+      <path class="pd-arrow" d="M360,80 L360,100"></path>
+
+      <rect class="pd-box l2" x="10" y="104" width="700" height="60" rx="14"></rect>
+      <text x="30" y="129" class="pd-title">Level 2 — SKILL.md body (loaded when triggered)</text>
+      <text x="30" y="149" class="pd-sub">Your request matches the description, so Claude reads the full file · under 5,000 tokens</text>
+
+      <path class="pd-arrow" d="M360,164 L360,184"></path>
+
+      <rect class="pd-box l3" x="10" y="188" width="700" height="60" rx="14"></rect>
+      <text x="30" y="213" class="pd-title">Level 3 — Bundled scripts and reference files (loaded as needed)</text>
+      <text x="30" y="233" class="pd-sub">Only opened if SKILL.md points to them · effectively unlimited size</text>
+    </svg>
+    <figcaption>Claude only loads what a task actually needs — this is why you can install a dozen skills without bloating every conversation's context.</figcaption>
+  </figure>
+
+  <p>Practically, the <code>description</code> field is doing real work: it's the only thing Claude sees before deciding whether your skill is even relevant. Front-load concrete "use this when..." trigger phrases — a vague description means your skill either never fires or fires on the wrong requests.</p>
+
+  <h2>Anatomy of a SKILL.md</h2>
+  <p>Two required frontmatter fields: <strong><code>name</code></strong> (lowercase letters, numbers, hyphens only, max 64 characters, can't contain "anthropic" or "claude") and <strong><code>description</code></strong> (max 1,024 characters, can't be empty — and it's the field that decides whether your skill triggers). Below that, the body is just markdown instructions, written the way you'd brief a new hire:</p>
+
+  <pre><code>---
+name: weekly-metrics-digest
+description: Pull last week's key product metrics into a short digest. Use when the user asks for "weekly numbers", "metrics recap", or "how did we do last week".
+---
+
+# Weekly Metrics Digest
+1. Pull signups, activation rate, and churn for the last 7 days.
+2. Compare against the prior 7 days, call out any move greater than 10%.
+3. Write 3-5 sentences, ending with one recommended action.</code></pre>
+
+  <p>That's already a complete, installable skill — no scripts or bundled files required. Reach for Level 3 resources only once instructions alone get unwieldy, or you need something deterministic like a script that formats a spreadsheet the same way every time.</p>
+
+  <h2>Building one, step by step</h2>
+  <ol>
+    <li><strong>Start from a real, narrow problem.</strong> "Summarize meetings" is too broad — Cowork already does that unprompted. "Turn our Monday standup notes into the yesterday/today/blockers format Michael expects" is narrow enough to be worth packaging.</li>
+    <li><strong>Draft and test it.</strong> Use the <code>skill-creator</code> skill (also installed here at Predactiv) to scaffold the frontmatter and check your description against the rules above. Then paste the draft into a real conversation and try the exact prompts teammates would use — if it doesn't trigger, the description is almost always the culprit.</li>
+    <li><strong>Package and install.</strong> Zip the skill's folder so the zip contains the wrapping folder itself (matching <code>name:</code>) with <code>SKILL.md</code> inside — not a flat dump of loose files. Then upload the <code>.skill</code> file under <strong>Settings → Capabilities → Skills</strong>. From then on, matching requests trigger it automatically.</li>
+  </ol>
+
+  <h2>Try it</h2>
+  <p>Pick one thing you re-explain to Cowork more than twice a month — a report format, a checklist, a way you always want data pulled — and ask Cowork to help you build it:</p>
+  <blockquote>"Use skill-creator to help me draft a skill that turns raw survey export CSVs into a themed summary with a top-3-issues callout, formatted the way I do it in Confluence today."</blockquote>
+  <p>Skill-creator will scaffold the frontmatter, push back if your description is too vague to trigger reliably, and can run a quick eval against your draft before you package and install it. One rule worth carrying forward: only install skills from people or sources you trust — a skill's instructions can direct Claude to run code and access files, so treat installing one the way you'd treat installing any other piece of software on a work machine.</p>
+
+  <h2>Further reading</h2>
+  <p>Anthropic's <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/quickstart">Agent Skills quickstart</a> is the hands-on next step; <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices">authoring best practices</a> covers writing descriptions that trigger reliably; and <a href="https://github.com/anthropics/skills">anthropics/skills on GitHub</a> has real <code>SKILL.md</code> files worth copying structure from. For a Predactiv-specific example end to end, see <a href="install-the-predactiv-design-skill.html">Turn a Drive Folder into a Cowork Skill</a>.</p>
+
+  <blockquote><p><strong>Also on the Reading List:</strong> <a href="../reading-list.html#rl-04">Claude Code Best Practices</a> — the same "give the agent structured context, not just a prompt" discipline this post applies to skills.</p></blockquote>
+
+</article>
+</main>
+
+<footer class="site-footer">
+  Built by the Predactiv Product team · Contributions welcome via pull request
+</footer>
+
+</body>
+</html>
