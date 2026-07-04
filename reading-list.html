@@ -24,158 +24,157 @@
   <h1>Predactiv AI Reading List</h1>
   <div class="meta">Curated by Product · Updated monthly</div>
 
-  <p>A curated, hand-picked set of the best AI reading for our team, organized into three lanes. Jump to the section that fits what you need — the science, how other teams built it, or how to use AI day to day. Each entry has a one-line summary and a note on how it applies to our work; click a title to open the source.</p>
+  <p>A curated, hand-picked set of the best AI reading for our team, organized into three lanes. Jump to the section that fits what you need — how to use AI day to day, how other teams built it, or the science underneath. Each entry has a one-line summary and a note on how it applies to our work; click a title to open the source.</p>
 
   <p>Each month's new list is published at the top of the page under its own dated heading; earlier lists stay below in descending date order for reference. Many entries pair naturally with the tutorials in <a href="index.html">Posts</a> — the list is the theory, the posts are how we put it to work.</p>
 
   <div class="rl-lane-key">
-    <span style="--k:#3F2A7B">Research papers</span>
-    <span style="--k:#3D7D7B">Engineering write-ups</span>
     <span style="--k:#9B4368">Applying AI in our work</span>
+    <span style="--k:#3D7D7B">Engineering write-ups</span>
+    <span style="--k:#3F2A7B">Research papers</span>
   </div>
 
   <h2>July 2026</h2>
-
-  <h3>Research papers</h3>
-  <p class="rl-lane-desc">The science — foundational methods and applied research behind audience modeling, response, and measurement.</p>
-
-  <div id="rl-01" class="rl-row lane-papers">
-    <div class="rl-num">01</div>
-    <div class="rl-head"><h4><a href="https://www.kdd.org/kdd2016/papers/files/adf0483-liuA.pdf">Audience Expansion for Online Social Network Advertising</a></h4><span class="rl-src">Liu et al. (LinkedIn) · 2016</span><span class="rl-pill">Core</span></div>
-    <p>LinkedIn documents its production system for growing a campaign's target audience to similar members, comparing a campaign-agnostic and a campaign-aware method plus a hybrid, validated with large-scale online experiments.</p>
-    <p class="rl-apply"><strong>Apply at Predactiv:</strong> A direct reference architecture for our lookalike product — the agnostic-vs-aware split maps straight onto our reach/precision tradeoff.</p>
-  </div>
-
-  <div id="rl-02" class="rl-row lane-papers">
-    <div class="rl-num">02</div>
-    <div class="rl-head"><h4><a href="https://arxiv.org/abs/1301.3781">Efficient Estimation of Word Representations (Word2Vec)</a></h4><span class="rl-src">Mikolov et al. · 2013</span><span class="rl-pill">Core</span></div>
-    <p>Introduces skip-gram and CBOW, two efficient models that learn word vectors from large corpora, producing embeddings whose geometry captures meaningful semantic and syntactic relationships.</p>
-    <p class="rl-apply"><strong>Apply at Predactiv:</strong> Train user2vec / prod2vec on event logs, then nearest-neighbor from the seed set to expand audiences.</p>
-  </div>
-
-  <div id="rl-03" class="rl-row lane-papers">
-    <div class="rl-num">03</div>
-    <div class="rl-head"><h4><a href="https://research.facebook.com/publications/practical-lessons-from-predicting-clicks-on-ads-at-facebook/">Practical Lessons from Predicting Clicks on Ads at Facebook</a></h4><span class="rl-src">He et al. (Facebook) · 2014</span><span class="rl-pill">Core</span></div>
-    <p>Facebook shows that feeding gradient-boosted-tree outputs into a linear classifier sharply improves ad-click prediction, and shares lessons on data freshness and sampling.</p>
-    <p class="rl-apply"><strong>Apply at Predactiv:</strong> A cheap, strong baseline for conversion/CTR scoring — reach for this before deep nets.</p>
-  </div>
-
-  <div id="rl-04" class="rl-row lane-papers">
-    <div class="rl-num">04</div>
-    <div class="rl-head"><h4><a href="https://doi.org/10.1089/big.2017.0104">A Literature Survey of the State-of-the-Art in Uplift Modeling</a></h4><span class="rl-src">Devriendt, Moldovan, Verbeke · 2018</span><span class="rl-pill">Core</span></div>
-    <p>A structured review of uplift methods, which estimate the incremental effect of a treatment per individual, with an experimental comparison across approaches and datasets.</p>
-    <p class="rl-apply"><strong>Apply at Predactiv:</strong> The discipline that separates real audience value from correlation — essential for defensible incrementality claims to clients.</p>
-  </div>
-
-  <h3>Engineering write-ups</h3>
-  <p class="rl-lane-desc">How industry teams actually built it — practitioner posts, more readable than papers, each linking to the original.</p>
-
-  <div id="rl-05" class="rl-row lane-eng">
-    <div class="rl-num">05</div>
-    <div class="rl-head"><h4><a href="https://medium.com/airbnb-engineering/listing-embeddings-for-similar-listing-recommendations-and-real-time-personalization-in-search-601172f7603e">Real-time Personalization using Embeddings for Search Ranking</a></h4><span class="rl-src">Airbnb · Grbovic et al. · 2018</span><span class="rl-pill">Core</span></div>
-    <p>Airbnb explains how it learns embeddings for listings and users from booking search sessions, then uses nearest-neighbor lookups to personalize search results in real time.</p>
-    <p class="rl-apply"><strong>Apply at Predactiv:</strong> Close to our lookalike problem — the session-embedding recipe transfers directly to building audience vectors from event streams.</p>
-  </div>
-
-  <div id="rl-06" class="rl-row lane-eng">
-    <div class="rl-num">06</div>
-    <div class="rl-head"><h4><a href="https://medium.com/pinterest-engineering/pinnersage-multi-modal-user-embedding-framework-for-recommendations-at-pinterest-bfd116b49475">PinnerSage: Multi-Modal User Embedding</a></h4><span class="rl-src">Pinterest · 2020</span><span class="rl-pill">Core</span></div>
-    <p>Pinterest represents each user with multiple embeddings — clusters of their distinct interests — rather than one averaged vector, improving recommendation quality.</p>
-    <p class="rl-apply"><strong>Apply at Predactiv:</strong> A better representation for multi-interest audiences — avoids the averaging that blurs seed segments.</p>
-  </div>
-
-  <div id="rl-07" class="rl-row lane-eng">
-    <div class="rl-num">07</div>
-    <div class="rl-head"><h4><a href="https://www.uber.com/blog/michelangelo-machine-learning-platform/">Meet Michelangelo: Uber's Machine Learning Platform</a></h4><span class="rl-src">Uber · 2017</span><span class="rl-pill rl-pill--intro">Intro</span></div>
-    <p>Uber introduces Michelangelo, its internal end-to-end ML platform spanning feature storage, training, evaluation, and serving — the post that popularized the pattern.</p>
-    <p class="rl-apply"><strong>Apply at Predactiv:</strong> A blueprint for how Predactiv's ML and DE teams industrialize model delivery and feature reuse.</p>
-  </div>
-
-  <div id="rl-08" class="rl-row lane-eng">
-    <div class="rl-num">08</div>
-    <div class="rl-head"><h4><a href="https://dl.acm.org/doi/10.1145/3292500.3330744">150 Successful Machine Learning Models: 6 Lessons Learned</a></h4><span class="rl-src">Booking.com · Bernardi et al. · 2019</span><span class="rl-pill">Core</span></div>
-    <p>Booking.com distills lessons from deploying 150 models in production, including the finding that offline metric gains frequently fail to translate into business value.</p>
-    <p class="rl-apply"><strong>Apply at Predactiv:</strong> A sober checklist for our model program — judge audience models on business lift, not offline AUC.</p>
-  </div>
-
-  <div id="rl-09" class="rl-row lane-eng">
-    <div class="rl-num">09</div>
-    <div class="rl-head"><h4><a href="https://netflixtechblog.com/its-all-a-bout-testing-the-netflix-experimentation-platform-4e1ca458c15">It's All A/Bout Testing: The Netflix Experimentation Platform</a></h4><span class="rl-src">Netflix · 2016</span><span class="rl-pill rl-pill--intro">Intro</span></div>
-    <p>Netflix's accessible overview of how it treats experimentation as core infrastructure and culture, running controlled tests throughout the product.</p>
-    <p class="rl-apply"><strong>Apply at Predactiv:</strong> The organizational model for making incrementality testing routine at Predactiv.</p>
-  </div>
-
-  <div id="rl-10" class="rl-row lane-eng">
-    <div class="rl-num">10</div>
-    <div class="rl-head"><h4><a href="https://www.uber.com/blog/xp/">Under the Hood of Uber's Experimentation Platform</a></h4><span class="rl-src">Uber · 2018</span><span class="rl-pill">Core</span></div>
-    <p>Uber details the architecture that lets it run thousands of concurrent experiments reliably, covering assignment, statistics engines, and monitoring.</p>
-    <p class="rl-apply"><strong>Apply at Predactiv:</strong> A reference architecture if Predactiv builds its own measurement and experimentation tooling.</p>
-  </div>
-
-  <div id="rl-11" class="rl-row lane-eng">
-    <div class="rl-num">11</div>
-    <div class="rl-head"><h4><a href="https://about.fb.com/news/2021/08/privacy-enhancing-technologies-and-ads/">Private Lift: Privacy-Enhancing Measurement</a></h4><span class="rl-src">Meta · 2021</span><span class="rl-pill">Core</span></div>
-    <p>Meta describes privacy-preserving measurement using secure multiparty computation, letting advertisers measure campaign lift without either side exposing raw user data.</p>
-    <p class="rl-apply"><strong>Apply at Predactiv:</strong> The trust architecture for partner measurement — measure incrementality across datasets without moving identities.</p>
-  </div>
-
-  <div id="rl-12" class="rl-row lane-eng">
-    <div class="rl-num">12</div>
-    <div class="rl-head"><h4><a href="https://privacysandbox.google.com/private-advertising/attribution-reporting">Privacy Sandbox: Attribution Reporting API</a></h4><span class="rl-src">Google · 2022</span><span class="rl-pill rl-pill--intro">Intro</span></div>
-    <p>Google's framework for measuring ad conversions without cross-site identifiers, relying on aggregated and noised reports instead of user-level tracking.</p>
-    <p class="rl-apply"><strong>Apply at Predactiv:</strong> Required reading for a cookieless measurement roadmap — the constraints our measurement products must live within.</p>
-  </div>
-
   <h3>Applying AI in our work</h3>
   <p class="rl-lane-desc">The practice — using AI tools day to day: prompting, AI-assisted coding, and automating our own workflows.</p>
 
-  <div id="rl-13" class="rl-row lane-apply">
-    <div class="rl-num">13</div>
+  <div id="rl-01" class="rl-row lane-apply">
+    <div class="rl-num">01</div>
     <div class="rl-head"><h4><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview">Prompt Engineering Overview</a></h4><span class="rl-src">Anthropic · 2024</span><span class="rl-pill rl-pill--intro">Intro</span></div>
     <p>Anthropic's reference on prompting techniques — being explicit, giving examples, requesting structure, and letting the model reason — with concrete before-and-after examples.</p>
     <p class="rl-apply"><strong>Apply at Predactiv:</strong> Baseline skill for everyone — analysts prompting for SQL and EDA, PMs drafting docs, engineers scaffolding code. Start here. <em>In practice: <a href="posts/prompting-tips-for-cowork.html">Prompting Tips</a>.</em></p>
   </div>
 
-  <div id="rl-14" class="rl-row lane-apply">
-    <div class="rl-num">14</div>
+  <div id="rl-02" class="rl-row lane-apply">
+    <div class="rl-num">02</div>
     <div class="rl-head"><h4><a href="https://www.youtube.com/watch?v=zjkBMFhNj_g">Intro to Large Language Models</a></h4><span class="rl-src">Andrej Karpathy · 2023</span><span class="rl-pill rl-pill--intro">Intro</span></div>
     <p>Andrej Karpathy's approachable one-hour talk explaining what large language models are, how they're trained, and how to reason about their capabilities and limits.</p>
     <p class="rl-apply"><strong>Apply at Predactiv:</strong> The shared mental model the whole team should hold before adopting AI tools — what to trust and what to verify. <em>In practice: <a href="posts/getting-started-with-cowork.html">Getting Started with Cowork</a>.</em></p>
   </div>
 
-  <div id="rl-15" class="rl-row lane-apply">
-    <div class="rl-num">15</div>
+  <div id="rl-03" class="rl-row lane-apply">
+    <div class="rl-num">03</div>
     <div class="rl-head"><h4><a href="https://simonwillison.net/2024/Dec/31/llms-in-2024/">Things We Learned About LLMs</a></h4><span class="rl-src">Simon Willison · 2024</span><span class="rl-pill">Core</span></div>
     <p>Simon Willison's clear-eyed practitioner review of what LLMs can and can't reliably do, updated as the tools and their failure modes evolve.</p>
     <p class="rl-apply"><strong>Apply at Predactiv:</strong> Builds the habit of testing AI output rather than trusting it — essential where a wrong number costs real money. <em>In practice: <a href="posts/prompt-context-harness-loop-engineering.html">Prompt vs. Context vs. Harness vs. Loop</a>.</em></p>
   </div>
 
-  <div id="rl-16" class="rl-row lane-apply">
-    <div class="rl-num">16</div>
+  <div id="rl-04" class="rl-row lane-apply">
+    <div class="rl-num">04</div>
     <div class="rl-head"><h4><a href="https://www.anthropic.com/engineering/claude-code-best-practices">Claude Code Best Practices</a></h4><span class="rl-src">Anthropic · 2025</span><span class="rl-pill">Core</span></div>
     <p>Anthropic's field-tested guidance for using an agentic coding assistant effectively inside a real codebase — supply context, work in small steps, keep a human reviewing.</p>
     <p class="rl-apply"><strong>Apply at Predactiv:</strong> Directly upskills DE, MLE, and frontend on shipping faster with AI pair-programming. <em>In practice: <a href="posts/install-the-predactiv-design-skill.html">Turn a Drive Folder into a Cowork Skill</a>.</em></p>
   </div>
 
-  <div id="rl-17" class="rl-row lane-apply">
-    <div class="rl-num">17</div>
+  <div id="rl-05" class="rl-row lane-apply">
+    <div class="rl-num">05</div>
     <div class="rl-head"><h4><a href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/">ChatGPT Prompt Engineering for Developers</a></h4><span class="rl-src">DeepLearning.AI · Ng, Fulford · 2023</span><span class="rl-pill rl-pill--intro">Intro</span></div>
     <p>A free, hands-on short course from DeepLearning.AI and OpenAI covering practical prompting patterns for people who build software.</p>
     <p class="rl-apply"><strong>Apply at Predactiv:</strong> A quick onboarding hour for analysts and engineers new to prompting. <em>In practice: <a href="posts/prompting-tips-for-cowork.html">Prompting Tips</a>.</em></p>
   </div>
 
-  <div id="rl-18" class="rl-row lane-apply">
-    <div class="rl-num">18</div>
+  <div id="rl-06" class="rl-row lane-apply">
+    <div class="rl-num">06</div>
     <div class="rl-head"><h4><a href="https://www.anthropic.com/engineering/building-effective-agents">Building Effective Agents</a></h4><span class="rl-src">Anthropic · 2024</span><span class="rl-pill">Core</span></div>
     <p>Anthropic's grounded taxonomy of agent and workflow patterns, with guidance on when a simple chained workflow beats a fully autonomous agent.</p>
     <p class="rl-apply"><strong>Apply at Predactiv:</strong> The judgment for where to automate internal workflows — audience QA, reporting — without over-engineering an agent. <em>In practice: <a href="posts/five-workflows-for-data-and-product-teams.html">Five Cowork Workflows</a> · <a href="posts/prompt-context-harness-loop-engineering.html">Prompt vs. Context vs. Harness vs. Loop</a>.</em></p>
   </div>
 
-  <div id="rl-19" class="rl-row lane-apply">
-    <div class="rl-num">19</div>
+  <div id="rl-07" class="rl-row lane-apply">
+    <div class="rl-num">07</div>
     <div class="rl-head"><h4><a href="https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/">A Practical Guide to Building Agents</a></h4><span class="rl-src">OpenAI · 2025</span><span class="rl-pill">Core</span></div>
     <p>OpenAI's practitioner guide to scoping agentic systems — defining the task, the tools, and the guardrails before building.</p>
     <p class="rl-apply"><strong>Apply at Predactiv:</strong> A pre-build checklist before we point any agent at a Predactiv workflow. <em>In practice: <a href="posts/datasphere-segment-automation-skills.html">Automating DataSphere Segments</a>.</em></p>
+  </div>
+
+  <h3>Engineering write-ups</h3>
+  <p class="rl-lane-desc">How industry teams actually built it — practitioner posts, more readable than papers, each linking to the original.</p>
+
+  <div id="rl-08" class="rl-row lane-eng">
+    <div class="rl-num">08</div>
+    <div class="rl-head"><h4><a href="https://medium.com/airbnb-engineering/listing-embeddings-for-similar-listing-recommendations-and-real-time-personalization-in-search-601172f7603e">Real-time Personalization using Embeddings for Search Ranking</a></h4><span class="rl-src">Airbnb · Grbovic et al. · 2018</span><span class="rl-pill">Core</span></div>
+    <p>Airbnb explains how it learns embeddings for listings and users from booking search sessions, then uses nearest-neighbor lookups to personalize search results in real time.</p>
+    <p class="rl-apply"><strong>Apply at Predactiv:</strong> Close to our lookalike problem — the session-embedding recipe transfers directly to building audience vectors from event streams.</p>
+  </div>
+
+  <div id="rl-09" class="rl-row lane-eng">
+    <div class="rl-num">09</div>
+    <div class="rl-head"><h4><a href="https://medium.com/pinterest-engineering/pinnersage-multi-modal-user-embedding-framework-for-recommendations-at-pinterest-bfd116b49475">PinnerSage: Multi-Modal User Embedding</a></h4><span class="rl-src">Pinterest · 2020</span><span class="rl-pill">Core</span></div>
+    <p>Pinterest represents each user with multiple embeddings — clusters of their distinct interests — rather than one averaged vector, improving recommendation quality.</p>
+    <p class="rl-apply"><strong>Apply at Predactiv:</strong> A better representation for multi-interest audiences — avoids the averaging that blurs seed segments.</p>
+  </div>
+
+  <div id="rl-10" class="rl-row lane-eng">
+    <div class="rl-num">10</div>
+    <div class="rl-head"><h4><a href="https://www.uber.com/blog/michelangelo-machine-learning-platform/">Meet Michelangelo: Uber's Machine Learning Platform</a></h4><span class="rl-src">Uber · 2017</span><span class="rl-pill rl-pill--intro">Intro</span></div>
+    <p>Uber introduces Michelangelo, its internal end-to-end ML platform spanning feature storage, training, evaluation, and serving — the post that popularized the pattern.</p>
+    <p class="rl-apply"><strong>Apply at Predactiv:</strong> A blueprint for how Predactiv's ML and DE teams industrialize model delivery and feature reuse.</p>
+  </div>
+
+  <div id="rl-11" class="rl-row lane-eng">
+    <div class="rl-num">11</div>
+    <div class="rl-head"><h4><a href="https://dl.acm.org/doi/10.1145/3292500.3330744">150 Successful Machine Learning Models: 6 Lessons Learned</a></h4><span class="rl-src">Booking.com · Bernardi et al. · 2019</span><span class="rl-pill">Core</span></div>
+    <p>Booking.com distills lessons from deploying 150 models in production, including the finding that offline metric gains frequently fail to translate into business value.</p>
+    <p class="rl-apply"><strong>Apply at Predactiv:</strong> A sober checklist for our model program — judge audience models on business lift, not offline AUC.</p>
+  </div>
+
+  <div id="rl-12" class="rl-row lane-eng">
+    <div class="rl-num">12</div>
+    <div class="rl-head"><h4><a href="https://netflixtechblog.com/its-all-a-bout-testing-the-netflix-experimentation-platform-4e1ca458c15">It's All A/Bout Testing: The Netflix Experimentation Platform</a></h4><span class="rl-src">Netflix · 2016</span><span class="rl-pill rl-pill--intro">Intro</span></div>
+    <p>Netflix's accessible overview of how it treats experimentation as core infrastructure and culture, running controlled tests throughout the product.</p>
+    <p class="rl-apply"><strong>Apply at Predactiv:</strong> The organizational model for making incrementality testing routine at Predactiv.</p>
+  </div>
+
+  <div id="rl-13" class="rl-row lane-eng">
+    <div class="rl-num">13</div>
+    <div class="rl-head"><h4><a href="https://www.uber.com/blog/xp/">Under the Hood of Uber's Experimentation Platform</a></h4><span class="rl-src">Uber · 2018</span><span class="rl-pill">Core</span></div>
+    <p>Uber details the architecture that lets it run thousands of concurrent experiments reliably, covering assignment, statistics engines, and monitoring.</p>
+    <p class="rl-apply"><strong>Apply at Predactiv:</strong> A reference architecture if Predactiv builds its own measurement and experimentation tooling.</p>
+  </div>
+
+  <div id="rl-14" class="rl-row lane-eng">
+    <div class="rl-num">14</div>
+    <div class="rl-head"><h4><a href="https://about.fb.com/news/2021/08/privacy-enhancing-technologies-and-ads/">Private Lift: Privacy-Enhancing Measurement</a></h4><span class="rl-src">Meta · 2021</span><span class="rl-pill">Core</span></div>
+    <p>Meta describes privacy-preserving measurement using secure multiparty computation, letting advertisers measure campaign lift without either side exposing raw user data.</p>
+    <p class="rl-apply"><strong>Apply at Predactiv:</strong> The trust architecture for partner measurement — measure incrementality across datasets without moving identities.</p>
+  </div>
+
+  <div id="rl-15" class="rl-row lane-eng">
+    <div class="rl-num">15</div>
+    <div class="rl-head"><h4><a href="https://privacysandbox.google.com/private-advertising/attribution-reporting">Privacy Sandbox: Attribution Reporting API</a></h4><span class="rl-src">Google · 2022</span><span class="rl-pill rl-pill--intro">Intro</span></div>
+    <p>Google's framework for measuring ad conversions without cross-site identifiers, relying on aggregated and noised reports instead of user-level tracking.</p>
+    <p class="rl-apply"><strong>Apply at Predactiv:</strong> Required reading for a cookieless measurement roadmap — the constraints our measurement products must live within.</p>
+  </div>
+
+  <h3>Research papers</h3>
+  <p class="rl-lane-desc">The science — foundational methods and applied research behind audience modeling, response, and measurement.</p>
+
+  <div id="rl-16" class="rl-row lane-papers">
+    <div class="rl-num">16</div>
+    <div class="rl-head"><h4><a href="https://www.kdd.org/kdd2016/papers/files/adf0483-liuA.pdf">Audience Expansion for Online Social Network Advertising</a></h4><span class="rl-src">Liu et al. (LinkedIn) · 2016</span><span class="rl-pill">Core</span></div>
+    <p>LinkedIn documents its production system for growing a campaign's target audience to similar members, comparing a campaign-agnostic and a campaign-aware method plus a hybrid, validated with large-scale online experiments.</p>
+    <p class="rl-apply"><strong>Apply at Predactiv:</strong> A direct reference architecture for our lookalike product — the agnostic-vs-aware split maps straight onto our reach/precision tradeoff.</p>
+  </div>
+
+  <div id="rl-17" class="rl-row lane-papers">
+    <div class="rl-num">17</div>
+    <div class="rl-head"><h4><a href="https://arxiv.org/abs/1301.3781">Efficient Estimation of Word Representations (Word2Vec)</a></h4><span class="rl-src">Mikolov et al. · 2013</span><span class="rl-pill">Core</span></div>
+    <p>Introduces skip-gram and CBOW, two efficient models that learn word vectors from large corpora, producing embeddings whose geometry captures meaningful semantic and syntactic relationships.</p>
+    <p class="rl-apply"><strong>Apply at Predactiv:</strong> Train user2vec / prod2vec on event logs, then nearest-neighbor from the seed set to expand audiences.</p>
+  </div>
+
+  <div id="rl-18" class="rl-row lane-papers">
+    <div class="rl-num">18</div>
+    <div class="rl-head"><h4><a href="https://research.facebook.com/publications/practical-lessons-from-predicting-clicks-on-ads-at-facebook/">Practical Lessons from Predicting Clicks on Ads at Facebook</a></h4><span class="rl-src">He et al. (Facebook) · 2014</span><span class="rl-pill">Core</span></div>
+    <p>Facebook shows that feeding gradient-boosted-tree outputs into a linear classifier sharply improves ad-click prediction, and shares lessons on data freshness and sampling.</p>
+    <p class="rl-apply"><strong>Apply at Predactiv:</strong> A cheap, strong baseline for conversion/CTR scoring — reach for this before deep nets.</p>
+  </div>
+
+  <div id="rl-19" class="rl-row lane-papers">
+    <div class="rl-num">19</div>
+    <div class="rl-head"><h4><a href="https://doi.org/10.1089/big.2017.0104">A Literature Survey of the State-of-the-Art in Uplift Modeling</a></h4><span class="rl-src">Devriendt, Moldovan, Verbeke · 2018</span><span class="rl-pill">Core</span></div>
+    <p>A structured review of uplift methods, which estimate the incremental effect of a treatment per individual, with an experimental comparison across approaches and datasets.</p>
+    <p class="rl-apply"><strong>Apply at Predactiv:</strong> The discipline that separates real audience value from correlation — essential for defensible incrementality claims to clients.</p>
   </div>
 
 </article>
