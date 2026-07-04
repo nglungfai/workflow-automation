@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompting Tips for Cowork — Workflow Automation</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand"><img src="../assets/predactiv-mark.svg" alt="Predactiv">Workflow Automation</div>
+    <nav class="site-nav">
+      <a href="../index.html">Posts</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<a class="back-link" href="../index.html">&larr; All posts</a>
+<article class="post">
+  <h1>Prompting Tips That Actually Move the Needle in Cowork</h1>
+  <div class="meta">Tips · 5 min read</div>
+
+  <p>Most disappointing Cowork results trace back to an underspecified first prompt, not a model limitation. These are the patterns that consistently produce a usable first draft.</p>
+
+  <h2>State the deliverable, not just the topic</h2>
+  <p>"Look into competitor pricing" produces a meandering answer. "Build a one-page competitive pricing brief as a Word doc, covering [X, Y, Z], for a pricing conversation with Michael" produces a finished artifact you can act on. Name the format, the audience, and the decision it's feeding.</p>
+
+  <h2>Give it the constraints you'd give a new hire</h2>
+  <p>Scope, tone, length, and what's out of bounds. "Draft release notes for V2, technical enough for engineering but skip internal ticket numbers, under 300 words" beats "write release notes." Cowork can't read the constraints you're holding in your head.</p>
+
+  <h2>Point it at real data instead of describing it</h2>
+  <p>If the data exists in a connected tool or file, reference it directly rather than summarizing it yourself first — "pull the last 4 weeks of [audience] insights and chart the category breakdown" instead of pasting numbers you've already tallied. Let Cowork do the retrieval; that's the part it's actually saving you time on.</p>
+
+  <h2>Break big asks into an explicit sequence</h2>
+  <p>For anything with more than two or three steps — research, then draft, then format as a deck — spell out the sequence in your prompt. This helps Cowork build the right task list and avoids it collapsing steps or skipping the research phase to jump straight to writing.</p>
+
+  <h2>Treat the first output as a draft, review deliberately</h2>
+  <p>Especially for anything technical (model methodology, audience definitions, partner-facing numbers), review the draft against the source data before it goes anywhere external. Cowork is good at structure and synthesis; it isn't a substitute for your domain judgment on correctness.</p>
+
+  <h2>Iterate in place instead of restarting</h2>
+  <p>If a draft is 80% right, say what's wrong and ask for a revision rather than rewriting the original prompt from scratch. Cowork keeps the context of what it already built and can edit the existing file rather than regenerating it.</p>
+
+  <h2>Quick before/after</h2>
+  <p><strong>Before:</strong> "Can you help me understand our audience data?"</p>
+  <p><strong>After:</strong> "Pull the top 10 categories for the [Tyson] audience, compare against our overall platform baseline, and flag any category that's more than 2x overrepresented. Format as a short table."</p>
+
+  <blockquote>Related: <a href="prompt-context-harness-loop-engineering.html">Prompt vs. Context vs. Harness vs. Loop Engineering</a> — prompt wording is one layer of four; if these tips aren't fixing your results, the problem may be a layer up.</blockquote>
+
+</article>
+</main>
+
+<footer class="site-footer">
+  Built by the Predactiv Product team · Contributions welcome via pull request
+</footer>
+
+</body>
+</html>
