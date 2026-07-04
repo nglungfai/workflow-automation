@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Five Cowork Workflows for Data & Product Teams — Workflow Automation</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand"><img src="../assets/predactiv-mark.svg" alt="Predactiv">Workflow Automation</div>
+    <nav class="site-nav">
+      <a href="../index.html">Posts</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<a class="back-link" href="../index.html">&larr; All posts</a>
+<article class="post">
+  <h1>Five Cowork Workflows for Data & Product Teams at Predactiv</h1>
+  <div class="meta">Workflows · 8 min read</div>
+
+  <p>These are five workflows worth trying this month, chosen because they map to work our Product, Data Science, ML Engineering, and Frontend teams already do — not generic "AI use cases."</p>
+
+  <h2>1. Audience segment QA before delivery</h2>
+  <p>Before a syndicated audience ships to a partner, someone manually eyeballs composition, size estimate, and filter logic. Cowork can connect to our audience platform and pull an audience's definition, insights, and preview numbers, then flag anything that looks off — a filter that silently zeroes out a segment, a size estimate that's implausible relative to the seed, or a keyword set that drifted from the original brief.</p>
+  <p><strong>Try:</strong> "Pull the definition and size estimate for [audience], and flag anything inconsistent with a US, 25-44, in-market description."</p>
+
+  <h2>2. First-draft technical write-ups for partner POCs</h2>
+  <p>High-stakes POCs generate a lot of documentation: methodology summaries, model performance write-ups, integration notes. Cowork can take your raw notes or a Slack thread and produce a structured first draft — methodology, results, caveats, next steps — that you then tighten rather than write from a blank page. This is where the time savings are largest, because the structure (not the judgment) is the expensive part.</p>
+  <p><strong>Try:</strong> "Turn these notes on the lookalike model POC into a one-page technical summary for [partner], structured as: approach, validation results, limitations, next steps."</p>
+
+  <h2>3. Stakeholder and status updates</h2>
+  <p>Weekly updates to Michael or cross-functional stakeholders eat real time when done well. Cowork can draft a status update pulling from Jira/Confluence activity, Slack threads, or your own bullet notes, tailored to the audience — exec brief vs. engineering detail vs. partner-facing.</p>
+  <p><strong>Try:</strong> "Draft this week's product status update for Michael: what shipped, what's blocked, one decision I need from him."</p>
+
+  <h2>4. Bulk audience/segment creation and refresh</h2>
+  <p>When Raghav or the analytics team has a list of new syndicated segments to create in DataSphere, doing it one-by-one in the UI doesn't scale. Two purpose-built skills cover this: <code>agent-new-syndicated-segments</code> creates audiences in bulk from a Google Sheet, and <code>agent-update-syndicated-segments</code> re-autoscales keywords on existing audiences. Both turn an afternoon of clicking into a five-minute review-and-approve. See the <a href="datasphere-segment-automation-skills.html">full write-up</a> for how each one works and the guardrails built in.</p>
+  <p><strong>Try:</strong> "Create syndicated segments in DataSphere from this sheet of names and keywords."</p>
+
+  <h2>5. Research synthesis for roadmap decisions</h2>
+  <p>When Alice's UX research or support ticket themes need to feed into prioritization, Cowork can synthesize interview notes, survey responses, or ticket dumps into ranked themes with supporting quotes — a defensible input for a roadmap conversation rather than a gut call.</p>
+  <p><strong>Try:</strong> "Synthesize these 12 user interview transcripts into themes ranked by frequency and impact, with a recommendation for what to prioritize next sprint."</p>
+
+  <h2>A note on judgment</h2>
+  <p>Every one of these produces a <em>draft</em>, not a final answer — treat Cowork's output as a strong first pass that still needs a domain expert's review, especially anything going to a partner or leadership. The value is compressing the blank-page problem, not removing the review step.</p>
+
+</article>
+</main>
+
+<footer class="site-footer">
+  Built by the Predactiv Product team · Contributions welcome via pull request
+</footer>
+
+</body>
+</html>

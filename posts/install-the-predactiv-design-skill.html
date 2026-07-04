@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turn a Drive Folder into a Cowork Skill: Auto-Applying the Predactiv Design System — Workflow Automation</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand"><img src="../assets/predactiv-mark.svg" alt="Predactiv">Workflow Automation</div>
+    <nav class="site-nav">
+      <a href="../index.html">Posts</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<a class="back-link" href="../index.html">&larr; All posts</a>
+<article class="post">
+  <h1>Turn a Drive Folder into a Cowork Skill: Auto-Applying the Predactiv Design System</h1>
+  <div class="meta">Skill Deep Dive · 6 min read</div>
+
+  <p>This site itself just got re-themed with Predactiv's actual brand — Poppins type, the aubergine/teal action colors, pill buttons, 20px card radii — instead of a generic dark theme. The interesting part isn't the re-theme; it's how we made that automatic for every future HTML task, not just this one. If your team ships internal tools, decks, or prototypes and wants them to look like Predactiv without re-explaining the brand every time, this is the pattern to copy.</p>
+
+  <h2>The problem: a design system sitting in Drive doesn't help unless something reads it</h2>
+  <p>Predactiv already has a real design system — <code>colors_and_type.css</code> with every color, type, radius, and shadow token; logo SVGs; a Figma-sourced brand guide — living in a "Predactiv Design System" folder in Google Drive. Useful, but only if whoever's building something remembers it exists, finds it, and copies the right values in by hand. That doesn't scale past one person.</p>
+
+  <h2>The fix: package it as an installable Cowork skill</h2>
+  <p>Cowork skills are just a folder with a <code>SKILL.md</code> manifest plus supporting files, zipped with a <code>.skill</code> extension. Once installed via <strong>Settings → Capabilities → Skills</strong>, Cowork matches the skill's description against your requests and pulls it in automatically — no need to say "use the Predactiv design system" every time. It turns out our Drive folder already had a <code>SKILL.md</code> sitting in it, written for exactly this purpose; it just hadn't been packaged and installed yet.</p>
+
+  <h3>What we did, step by step</h3>
+  <ol>
+    <li><strong>Located the source folder.</strong> Searched Google Drive for "Predactiv Design System" and found <code>SKILL.md</code>, <code>README.md</code>, <code>colors_and_type.css</code>, plus an <code>assets/</code> folder with logo SVGs and bundled Poppins font files.</li>
+    <li><strong>Pulled exact file contents.</strong> This is the part that's easy to get wrong: reading a file's "natural language representation" (what you get from a casual content preview) mangles code syntax — quotes get escaped, symbols get converted to entities. For anything that has to run as real CSS or markdown, you need the exact bytes, which means downloading the raw file content and decoding it, not summarizing it.</li>
+    <li><strong>Assembled the skill folder.</strong> <code>SKILL.md</code>, <code>README.md</code>, and <code>colors_and_type.css</code> copied byte-for-byte, plus the 6 logo SVGs under <code>assets/</code>.</li>
+    <li><strong>Zipped it with the right structure.</strong> The zip needs to contain the skill's folder (matching the <code>name:</code> field in <code>SKILL.md</code>'s frontmatter) with <code>SKILL.md</code> inside it — not a flat dump of files, and not the folder's contents zipped without the wrapping folder.</li>
+    <li><strong>Installed it.</strong> Uploaded the <code>.skill</code> file via Settings → Capabilities → Skills. From that point on, any request that looks like building a branded interface, mock, deck, or prototype for Predactiv triggers the skill automatically.</li>
+  </ol>
+
+  <h2>What we deliberately left out — and why</h2>
+  <p>The full Drive folder also has ~30 HTML preview cards (every component rendered standalone) and a full React reconstruction of the Predactiv Data Platform UI under <code>ui_kits/platform/</code>. Those stayed in Drive rather than going into the installed skill, for a simple reason: package size and relevance. The core token file plus logos covers the vast majority of "make this look like Predactiv" requests — plain HTML pages, decks, one-off mocks. The full UI kit is for a narrower case (recreating the actual platform app) and is still just a Drive search away when someone needs it.</p>
+  <p>We also left out the 8 bundled Poppins <code>.ttf</code> font files — binary assets are impractical to move through a text-based packaging pipeline. <code>colors_and_type.css</code> still references them via local <code>@font-face</code> rules, so if they're genuinely absent, add a Google Fonts fallback link to the page <code>&lt;head&gt;</code> before the stylesheet:</p>
+  <pre><code>&lt;link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap"&gt;</code></pre>
+
+  <h2>A real discrepancy we caught in the process</h2>
+  <p>Worth flagging for whoever owns the design system: <code>README.md</code> and <code>colors_and_type.css</code> disagree on the primary action color. The README describes royal purple <code>#590094</code> as primary with turquoise <code>#00CBB2</code> as secondary. The actual CSS file — which labels itself "source of truth" — defines deep aubergine <code>#3F2A7B</code> as primary and muted teal <code>#3D7D7B</code> as secondary. We used the CSS file's values everywhere on this site, since that's what actually renders, but the two documents should be reconciled so the next person pulling from Drive doesn't get conflicting guidance.</p>
+
+  <h2>Try it yourself</h2>
+  <p>The <code>predactiv-design</code> skill is now installed and available. If you're building an internal tool, a one-off HTML mock, or a deck and want it on-brand without hand-copying hex codes:</p>
+  <ul>
+    <li>Just ask Cowork to build it — mentioning "Predactiv" or "branded" is usually enough to trigger the skill.</li>
+    <li>Link <code>colors_and_type.css</code> in your page <code>&lt;head&gt;</code> and use its CSS variables (<code>var(--action-primary)</code>, <code>var(--radius-pill)</code>, etc.) instead of hardcoding hex values — that's what keeps everything consistent if the tokens ever change.</li>
+    <li>Reach for the existing utility classes (<code>.pdp-btn--primary</code>, <code>.pdp-chip--succeeded</code>, <code>.pdp-card</code>) before rolling your own.</li>
+  </ul>
+
+  <blockquote>If your team has a similar "the real answer lives in a doc/folder somewhere" problem — a style guide, a glossary, a set of house rules — this same pattern (SKILL.md + supporting files, zipped, installed) is worth copying. See <a href="../about.html">About</a> for how to contribute a follow-up post once you've tried it.</blockquote>
+
+</article>
+</main>
+
+<footer class="site-footer">
+  Built by the Predactiv Product team · Contributions welcome via pull request
+</footer>
+
+</body>
+</html>
