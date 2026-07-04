@@ -29,33 +29,48 @@
 
   <h2>1. First-draft write-ups for partner POCs</h2>
   <p>High-stakes POCs generate a lot of documentation, and most of it starts the same way: scattered meeting notes and Slack threads that someone has to turn into something a partner can actually read. Cowork can take that raw material and produce a structured first draft — what we agreed on, open questions, next steps — that you then tighten rather than write from a blank page. This is where the time savings are largest, because the structure and polish (not the judgment calls) is the expensive part.</p>
+  <p><em>Cowork can't see your notes unless you give it something to read. Either attach the notes doc/file directly to the chat, paste the raw notes below the prompt, or point Cowork at a folder you've connected (e.g. "read the notes in [filename] in my POC folder"). A bare prompt with no notes attached or pasted will just get you a request for the notes.</em></p>
   <div class="try-box">
-    <p class="try-box-label">Try it — copy into Cowork</p>
+    <p class="try-box-label">Try it — attach or paste your notes, then send this</p>
     <div class="try-box-row">
-      <code class="try-box-text">Turn these notes from our kickoff call with [partner] into a one-page summary: what we agreed on, open questions, and next steps.</code>
+      <code class="try-box-text">Using the attached notes from our kickoff call with [partner], write a one-page summary: what we agreed on, open questions, and next steps.</code>
       <button type="button" class="try-copy-btn">Copy</button>
     </div>
   </div>
+  <figure class="diagram">
+    <img src="../assets/cowork-attach-dragdrop.gif" alt="Animated illustration of dragging kickoff-notes.docx into the Cowork composer, where it appears as an attachment chip, followed by typing and sending the summary prompt." style="width:100%; height:auto; border-radius: var(--radius-md); display:block;">
+    <figcaption>Drag the file into the message box first — the attachment chip is what gives Cowork something to read. (Illustrative mockup, not a product recording.)</figcaption>
+  </figure>
 
   <h2>2. Stakeholder and status updates</h2>
   <p>Weekly updates to our CPO or cross-functional stakeholders eat real time when done well. Cowork can draft a status update pulling from Jira/Confluence activity, Slack threads, or your own bullet notes, tailored to the audience — exec brief vs. engineering detail vs. partner-facing.</p>
+  <p><em>The Jira/Confluence pull only works if the Atlassian connector is authorized in your Cowork settings — otherwise name the specific project or page ("pull activity from the [project key] Jira board") so Cowork knows where to look, or just paste your own bullet notes into the chat instead.</em></p>
   <div class="try-box">
     <p class="try-box-label">Try it — copy into Cowork</p>
     <div class="try-box-row">
-      <code class="try-box-text">Draft this week's product status update for our CPO: what shipped, what's blocked, one decision I need from them.</code>
+      <code class="try-box-text">Pull this week's activity from the [Jira project/board name] and [Confluence space], plus these bullet notes I'm pasting below, and draft this week's product status update for our CPO: what shipped, what's blocked, one decision I need from them.</code>
       <button type="button" class="try-copy-btn">Copy</button>
     </div>
   </div>
+  <figure class="diagram">
+    <img src="../assets/cowork-paste-notes.gif" alt="Animated illustration of pasting bullet notes into the Cowork composer, naming the Jira board and Confluence space directly in the prompt, then sending." style="width:100%; height:auto; border-radius: var(--radius-md); display:block;">
+    <figcaption>Name the exact Jira board or Confluence space, or paste your notes directly — Cowork won't guess which project you mean. (Illustrative mockup, not a product recording.)</figcaption>
+  </figure>
 
   <h2>3. Research synthesis for roadmap decisions</h2>
   <p>When our PM's research or support ticket themes need to feed into prioritization, Cowork can synthesize interview notes, survey responses, or ticket dumps into ranked themes with supporting quotes — a defensible input for a roadmap conversation rather than a gut call.</p>
+  <p><em>Attach the transcript files (or the folder they're in) to the chat before sending this, or point Cowork at the connected folder that holds them. If nothing's attached, Cowork has no transcripts to synthesize and will just ask you for them.</em></p>
   <div class="try-box">
-    <p class="try-box-label">Try it — copy into Cowork</p>
+    <p class="try-box-label">Try it — attach the transcripts, then send this</p>
     <div class="try-box-row">
-      <code class="try-box-text">Synthesize these 12 user interview transcripts into themes ranked by frequency and impact, with a recommendation for what to prioritize next sprint.</code>
+      <code class="try-box-text">Using the attached interview transcripts, synthesize them into themes ranked by frequency and impact, with a recommendation for what to prioritize next sprint.</code>
       <button type="button" class="try-copy-btn">Copy</button>
     </div>
   </div>
+  <figure class="diagram">
+    <img src="../assets/cowork-attach-transcripts.gif" alt="Animated illustration of dragging a batch of interview transcript files into the Cowork composer, where they appear as attachment chips, followed by the synthesis prompt." style="width:100%; height:auto; border-radius: var(--radius-md); display:block;">
+    <figcaption>Same pattern for a batch of files — drag them all in before asking for the synthesis. (Illustrative mockup, not a product recording.)</figcaption>
+  </figure>
 
   <h2>4. Audience segment QA before delivery</h2>
   <p>Before a syndicated audience ships to a partner, someone manually eyeballs composition, size estimate, and filter logic. Cowork can connect to our audience platform and pull an audience's definition, insights, and preview numbers, then flag anything that looks off — a filter that silently zeroes out a segment, a size estimate that's implausible relative to the seed, or a keyword set that drifted from the original brief.</p>
