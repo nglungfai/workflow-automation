@@ -171,6 +171,79 @@ main {
   margin: 0 0 6px;
 }
 
+.hero-cta {
+  margin: 22px 0 0;
+}
+.hero-cta .pdp-btn {
+  height: 44px;
+  font-size: 15px;
+  padding: 0 24px;
+}
+
+/* ---- Latest post callout ---- */
+.latest-post {
+  max-width: 960px;
+  margin: 28px auto 0;
+  padding: 0 24px;
+}
+.latest-post a {
+  display: block;
+  background: var(--action-primary-soft);
+  border: 1px solid rgba(63, 42, 123, 0.18);
+  border-left: 4px solid var(--action-primary);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  transition: box-shadow var(--duration-med) var(--ease-standard);
+}
+.latest-post a:hover {
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+.latest-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--action-primary);
+  margin-bottom: 4px;
+}
+.latest-title {
+  display: block;
+  font-weight: 600;
+  font-size: 1.08rem;
+  color: var(--text-1);
+  margin-bottom: 4px;
+}
+.latest-desc {
+  display: block;
+  color: var(--text-2);
+  font-size: 0.92rem;
+}
+
+/* ---- Card byline ---- */
+.post-card .byline {
+  margin-top: 12px;
+  font-size: 0.78rem;
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+/* ---- Section "coming soon" badge ---- */
+.coming-soon {
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  vertical-align: middle;
+  margin-left: 8px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  color: var(--text-2);
+  border: 1px solid var(--border-1);
+}
+
 .tag-row {
   display: flex;
   gap: 8px;
