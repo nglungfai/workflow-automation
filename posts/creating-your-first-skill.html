@@ -10,7 +10,7 @@
 
 <header class="site-header">
   <div class="header-inner">
-    <div class="brand"><img src="../assets/predactiv-mark.svg" alt="Predactiv">Workflow Automation</div>
+    <div class="brand">Workflow Automation</div>
     <nav class="site-nav">
       <a href="../index.html">Posts</a>
       <a href="../reading-list.html">Reading List</a>
@@ -25,7 +25,7 @@
   <h1>Creating Your First Skill: A Beginner's Guide</h1>
   <div class="meta">Skill Deep Dive · 4 min read</div>
 
-  <p>Half the posts on this site mention a skill by name — <code>predactiv-design</code>, <code>agent-new-syndicated-segments</code>, <code>agent-pm</code> — but none of them explain what a skill actually is or how to build one from scratch. If you've been installing other people's skills and wondering how they're made, this is that post.</p>
+  <p>Half the posts on this site mention a skill by name — <code>design-system</code>, <code>agent-new-syndicated-segments</code>, <code>agent-pm</code> — but none of them explain what a skill actually is or how to build one from scratch. If you've been installing other people's skills and wondering how they're made, this is that post.</p>
 
   <h2>What a skill actually is</h2>
   <p>A skill is a folder. That's the whole starting point. Inside that folder sits one required file, <code>SKILL.md</code>, plus whatever else you want to bundle alongside it — reference docs, scripts, templates. Anthropic's own definition: Agent Skills are modular capabilities that extend Claude's functionality, each one packaging instructions, metadata, and optional resources that Claude uses automatically when relevant. Nothing about that requires special tooling — <code>SKILL.md</code> is a plain markdown file with a small YAML header on top.</p>
@@ -90,7 +90,7 @@ description: Pull last week's key product metrics into a short digest. Use when 
   <h2>Building one, step by step</h2>
   <ol>
     <li><strong>Start from a real, narrow problem.</strong> "Summarize meetings" is too broad — Cowork already does that unprompted. "Turn our Monday standup notes into the yesterday/today/blockers format our CPO expects" is narrow enough to be worth packaging.</li>
-    <li><strong>Draft and test it.</strong> Use the <code>skill-creator</code> skill (also installed here at Predactiv) to scaffold the frontmatter and check your description against the rules above. Then paste the draft into a real conversation and try the exact prompts teammates would use — if it doesn't trigger, the description is almost always the culprit.</li>
+    <li><strong>Draft and test it.</strong> Use the <code>skill-creator</code> skill (also installed on our team) to scaffold the frontmatter and check your description against the rules above. Then paste the draft into a real conversation and try the exact prompts teammates would use — if it doesn't trigger, the description is almost always the culprit.</li>
     <li><strong>Package and install.</strong> Zip the skill's folder so the zip contains the wrapping folder itself (matching <code>name:</code>) with <code>SKILL.md</code> inside — not a flat dump of loose files. Then upload the <code>.skill</code> file under <strong>Settings → Capabilities → Skills</strong>. From then on, matching requests trigger it automatically.</li>
   </ol>
 
@@ -106,7 +106,7 @@ description: Pull last week's key product metrics into a short digest. Use when 
   <p>Skill-creator will scaffold the frontmatter, push back if your description is too vague to trigger reliably, and can run a quick eval against your draft before you package and install it. One rule worth carrying forward: only install skills from people or sources you trust — a skill's instructions can direct Claude to run code and access files, so treat installing one the way you'd treat installing any other piece of software on a work machine.</p>
 
   <h2>Further reading</h2>
-  <p>Anthropic's <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/quickstart">Agent Skills quickstart</a> is the hands-on next step; <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices">authoring best practices</a> covers writing descriptions that trigger reliably; and <a href="https://github.com/anthropics/skills">anthropics/skills on GitHub</a> has real <code>SKILL.md</code> files worth copying structure from. For a Predactiv-specific example end to end, see <a href="install-the-predactiv-design-skill.html">Turn a Drive Folder into a Cowork Skill</a>.</p>
+  <p>Anthropic's <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/quickstart">Agent Skills quickstart</a> is the hands-on next step; <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices">authoring best practices</a> covers writing descriptions that trigger reliably; and <a href="https://github.com/anthropics/skills">anthropics/skills on GitHub</a> has real <code>SKILL.md</code> files worth copying structure from. For a real end-to-end example, see <a href="design-system-skill.html">Turn a Drive Folder into a Cowork Skill</a>.</p>
 
   <blockquote><p><strong>Also on the Reading List:</strong> <a href="../reading-list.html#rl-04">Claude Code Best Practices</a> — the same "give the agent structured context, not just a prompt" discipline this post applies to skills.</p></blockquote>
 
@@ -114,7 +114,7 @@ description: Pull last week's key product metrics into a short digest. Use when 
 </main>
 
 <footer class="site-footer">
-  Built by the Predactiv Product team · Contributions welcome via pull request
+  Built, shipped, and maintained by agentic workflows · Curated by Lungfai Ng
 </footer>
 
 <script src="../assets/copy-prompt.js" defer></script>
