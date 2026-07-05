@@ -10,7 +10,7 @@
 
 <header class="site-header">
   <div class="header-inner">
-    <div class="brand"><img src="../assets/predactiv-mark.svg" alt="Predactiv">Workflow Automation</div>
+    <div class="brand">Workflow Automation</div>
     <nav class="site-nav">
       <a href="../index.html">Posts</a>
       <a href="../reading-list.html">Reading List</a>
@@ -48,7 +48,7 @@
   <h2>Context engineering: what the model needs to know</h2>
   <div class="layer-tag layer-tag--context">What information the model can see</div>
   <p>Context engineering is about curating what gets loaded into the model's working memory for a given task — which files, which prior turns, which retrieved documents, which schema definitions — so the model can answer confidently without guessing or hallucinating. This matters more than prompt wording once you're past toy tasks, because a context window is a scarce, expensive resource: cramming in everything "just in case" degrades performance as much as leaving out the one fact that mattered.</p>
-  <p>In our world, this looks like the difference between asking Cowork to "summarize the Tyson audience" cold versus pointing it at the actual Predactiv MCP tools so it pulls live composition data instead of working from stale training knowledge or a half-remembered Slack thread. The prompt didn't change much; what changed is what the model had in front of it when it answered.</p>
+  <p>In our world, this looks like the difference between asking Cowork to "summarize the [client] audience" cold versus pointing it at our platform's actual MCP tools so it pulls live composition data instead of working from stale training knowledge or a half-remembered Slack thread. The prompt didn't change much; what changed is what the model had in front of it when it answered.</p>
 
   <h2>Harness engineering: how the whole thing operates reliably</h2>
   <div class="layer-tag layer-tag--harness">Multi-step · tools · safety gates</div>
@@ -180,7 +180,7 @@
   <table style="width:100%; border-collapse:collapse; margin:20px 0;">
     <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0; color:var(--text-2);">Layer</td><td style="padding:8px 0; color:var(--text-2);">Example tasks</td></tr>
     <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0;" class="layer-cell--prompt">Prompt</td><td style="padding:8px 0;">Slack drafts, paragraph rewrites, inline SQL against a pasted schema, summarizing an attached doc</td></tr>
-    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0;" class="layer-cell--context">Context</td><td style="padding:8px 0;">Live Predactiv MCP lookups, pulling the right Confluence page before a spec, real contract terms before a renewal email</td></tr>
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0;" class="layer-cell--context">Context</td><td style="padding:8px 0;">Live platform MCP lookups, pulling the right Confluence page before a spec, real contract terms before a renewal email</td></tr>
     <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0;" class="layer-cell--harness">Harness</td><td style="padding:8px 0;">Multi-system partner POCs, bulk audience creation with per-row validation, onboarding flows gated on confirmation</td></tr>
     <tr><td style="padding:8px 0;" class="layer-cell--loop">Loop</td><td style="padding:8px 0;">Nightly audience re-scoring, partner SLA monitoring, recurring competitive-intel sweeps</td></tr>
   </table>
@@ -208,12 +208,12 @@
   <blockquote>Related: <a href="prompting-tips-for-cowork.html">Prompting Tips That Actually Move the Needle in Cowork</a> — the prompt-engineering layer in practice, before you get to context, harness, or loop.</blockquote>
 
 
-<blockquote><p><strong>Further reading:</strong> <a href="../reading-list.html#rl-06">Building Effective Agents</a> and <a href="../reading-list.html#rl-03">Things We Learned About LLMs</a> on the <a href="../reading-list.html">Predactiv AI Reading List</a> ground these four layers in practice.</p></blockquote>
+<blockquote><p><strong>Further reading:</strong> <a href="../reading-list.html#rl-06">Building Effective Agents</a> and <a href="../reading-list.html#rl-03">Things We Learned About LLMs</a> on the <a href="../reading-list.html">AI Reading List</a> ground these four layers in practice.</p></blockquote>
 </article>
 </main>
 
 <footer class="site-footer">
-  Built by the Predactiv Product team · Contributions welcome via pull request
+  Built, shipped, and maintained by agentic workflows · Curated by Lungfai Ng
 </footer>
 
 <script src="../assets/copy-prompt.js" defer></script>
