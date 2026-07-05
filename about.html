@@ -21,23 +21,52 @@
 
 <main>
 <article class="post">
-  <h1>About this site</h1>
-  <div class="meta">Maintained by the Product team</div>
+  <h1>How we practice AI</h1>
+  <div class="meta">The Predactiv Product team · What this site is and how it's made</div>
 
-  <p>This site is a working knowledge base for using <strong>Claude Cowork</strong> at Predactiv — practical tutorials, workflow write-ups, and prompting tips aimed at helping the team get real value out of AI tooling during our transformation. It's also the home of the <a href="reading-list.html">Predactiv AI Reading List</a>.</p>
+  <p>This site is the working knowledge base for using <strong>Claude Cowork</strong> at Predactiv — and the clearest demonstration of how we operate. We don't consume AI second-hand. We run a full pipeline on it. Agentic search sweeps the AI literature across every topic that touches our work. A living knowledge base distills what matters into the <a href="reading-list.html">Predactiv AI Reading List</a> and hands-on tutorials. Agentic workflows turn those ideas into shipped work — every week. Research in, working systems out: that's the standard we hold ourselves to as practitioners.</p>
 
-  <h2>Who this is for</h2>
-  <p>Everyone at Predactiv. The examples lean toward Product, Data, and Engineering because that's where we started — but the core workflows (meeting notes into action items, status updates, document drafting, research synthesis) apply to any role, and <a href="posts/getting-started-with-cowork.html">Getting Started</a> assumes no technical background. If you're in sales, marketing, ops, or finance, the "Start here" steps below work exactly the same for you.</p>
+  <h2>Research in, workflows out</h2>
+  <p><strong>Discovery is automated and broad.</strong> The pipeline starts with coverage no manual reading habit can match: search agents sweep new research papers, engineering write-ups, and practitioner guides across the full topic surface of our stack — prompting and context engineering, agent architectures, retrieval and embeddings, evaluation, applied machine learning — and screens every candidate against one question: does this change how Predactiv builds or operates?</p>
 
-  <h2>Start here</h2>
-  <ol>
-    <li>Read <a href="posts/getting-started-with-cowork.html">Getting Started with Claude Cowork</a> — what it is, how it differs from a normal chat, and what it can safely touch.</li>
-    <li>Run its five-minute prompt against one of your own Drive folders — it's read-only, nothing gets modified, and it's the fastest way to build intuition.</li>
-    <li>Skim the <a href="reading-list.html">reading list</a>'s "Applying AI in our work" lane — the ideas behind the workflows, each with a note on how it applies here.</li>
-  </ol>
+  <p><strong>What survives becomes a knowledge base, not a link dump.</strong> Every entry in the reading list carries an "Apply at Predactiv" note and cross-links to a tutorial showing the idea running in our own workflows. A monthly curation cycle retires stale entries and promotes what's proven. Theory is indexed against practice, so nothing sits on a shelf.</p>
 
-  <h2>Impact so far</h2>
-  <p>Real tasks from our own team — full context and more examples in <a href="posts/getting-started-with-cowork.html">Getting Started</a>:</p>
+  <p><strong>Then the ideas go to work.</strong> The same research feeds the workflows we run every day — packaged skills for bulk segment creation, scheduled reviews that maintain this very site, connector pipelines that turn meetings into action items and drafts into shipped documents. The distance from a paper we read to a workflow we run is measured in days, not quarters.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three-stage pipeline: agentic discovery searches the AI literature, a curated knowledge base distills it, and daily agentic workflows apply it — with what ships feeding back into what gets searched next">
+      <defs>
+        <marker id="arw2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--neutral-300)"/>
+        </marker>
+      </defs>
+      <text x="116" y="34" font-size="11" font-weight="600" fill="var(--text-3)" letter-spacing="1" text-anchor="middle">CONTINUOUS</text>
+      <text x="350" y="34" font-size="11" font-weight="600" fill="var(--text-3)" letter-spacing="1" text-anchor="middle">CURATED MONTHLY</text>
+      <text x="584" y="34" font-size="11" font-weight="600" fill="var(--text-3)" letter-spacing="1" text-anchor="middle">RUNNING DAILY</text>
+
+      <rect x="16" y="50" width="200" height="64" rx="10" fill="var(--action-primary-soft)" stroke="var(--action-primary)"/>
+      <text x="116" y="76" font-size="12" font-weight="600" fill="var(--action-primary)" text-anchor="middle">Agentic discovery</text>
+      <text x="116" y="94" font-size="11" fill="var(--text-2)" text-anchor="middle">search the literature, every topic</text>
+
+      <rect x="250" y="50" width="200" height="64" rx="10" fill="var(--surface-0)" stroke="var(--border-2)"/>
+      <text x="350" y="76" font-size="12" font-weight="600" fill="var(--text-1)" text-anchor="middle">Knowledge base</text>
+      <text x="350" y="94" font-size="11" fill="var(--text-2)" text-anchor="middle">reading list + applied tutorials</text>
+
+      <rect x="484" y="50" width="200" height="64" rx="10" fill="var(--brand-purple-deep)" stroke="var(--brand-purple-deep)"/>
+      <text x="584" y="76" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">Agentic workflows</text>
+      <text x="584" y="94" font-size="11" fill="#FFFFFF" opacity="0.8" text-anchor="middle">skills, schedules, connectors</text>
+
+      <line x1="216" y1="82" x2="246" y2="82" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#arw2)"/>
+      <line x1="450" y1="82" x2="480" y2="82" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#arw2)"/>
+
+      <path d="M584 114 L584 160 L116 160 L116 118" fill="none" stroke="var(--neutral-300)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arw2)"/>
+      <text x="350" y="150" font-size="11" fill="var(--text-3)" text-anchor="middle">what ships in practice steers what gets searched next</text>
+    </svg>
+    <figcaption>The full loop: agents search the research, curation builds the knowledge base, and the knowledge base powers the workflows we run daily — which in turn steer the next search.</figcaption>
+  </figure>
+
+  <h2>What the team gets back</h2>
+  <p>The pipeline is judged by what it hands back to people. Agents absorb the mechanical work — clicking, assembling, formatting — while humans keep the judgment: what ships, what changes, what's next. The hours in the table below didn't vanish; they moved from production to decisions. Real tasks from our own team — measured, not marketed. Full context and more examples in <a href="posts/getting-started-with-cowork.html">Getting Started</a>:</p>
   <table style="width:100%; border-collapse:collapse; margin:20px 0;">
     <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 8px 8px 0; color:var(--text-2);">Task</td><td style="padding:8px 8px 8px 0; color:var(--text-2);">Before</td><td style="padding:8px 0; color:var(--text-2);">With Cowork</td></tr>
     <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 8px 8px 0;">Bulk syndicated segment creation</td><td style="padding:8px 8px 8px 0;">≈ half a day of clicking</td><td style="padding:8px 0;">~15 min supervised run</td></tr>
@@ -45,75 +74,24 @@
     <tr><td style="padding:8px 8px 8px 0;">Meeting notes → action items</td><td style="padding:8px 8px 8px 0;">~20 min per sync</td><td style="padding:8px 0;">~2 min reviewing a one-pager</td></tr>
   </table>
 
-  <h2>The Reading List</h2>
-  <p>Alongside the tutorials, this site hosts the <a href="reading-list.html">Predactiv AI Reading List</a> — the canonical, monthly-curated set of AI reading for the team, in three lanes: research papers, engineering write-ups, and applying AI in our work. Each entry notes how it applies at Predactiv, and entries cross-link with the tutorials here: the list is the theory, the posts are how we put it to work. To suggest an entry, ping the Product team or open a pull request.</p>
-
   <h2>How this site is made</h2>
-  <p>Cowork isn't just the subject of this site — it's the co-author. Posts are drafted, formatted, cross-linked, and published through the same workflows the tutorials teach: a person describes the deliverable, Cowork does the drafting and the mechanics, and nothing ships without human review. The reading list runs on the same loop — a scheduled monthly review proposes updates, and a person approves them before anything changes.</p>
+  <p>This site isn't written <em>about</em> agentic workflows — it <em>is</em> one. Every page you're reading was drafted, cross-linked, and committed to production by Cowork. A person describes the deliverable; the agent writes the HTML, pushes the commit, and the change is live in about a minute. Humans hold exactly two gates: review before anything publishes, approval before any maintenance change ships.</p>
 
-  <figure class="diagram">
-    <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two-lane workflow: publishing (describe, Cowork drafts, human review, Cowork publishes, live site) and maintenance (monthly review proposes, human approves, feeding back into publishing)">
-      <defs>
-        <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-          <path d="M0 0 L10 5 L0 10 z" fill="var(--neutral-300)"/>
-        </marker>
-      </defs>
-      <!-- Lane labels -->
-      <text x="16" y="30" font-size="12" font-weight="600" fill="var(--text-3)" letter-spacing="1">PUBLISHING</text>
-      <text x="16" y="170" font-size="12" font-weight="600" fill="var(--text-3)" letter-spacing="1">MAINTENANCE — MONTHLY</text>
-      <!-- Row 1 -->
-      <rect x="16" y="46" width="118" height="58" rx="10" fill="var(--surface-0)" stroke="var(--border-2)"/>
-      <text x="75" y="70" font-size="12" font-weight="600" fill="var(--text-1)" text-anchor="middle">You describe</text>
-      <text x="75" y="88" font-size="11" fill="var(--text-2)" text-anchor="middle">post or change</text>
+  <p>Maintenance runs on agents too. A scheduled agent audits the site monthly — stale entries, broken links, drifted claims — and files a report. It proposes; it never decides.</p>
 
-      <rect x="156" y="46" width="118" height="58" rx="10" fill="var(--action-primary-soft)" stroke="var(--action-primary)"/>
-      <text x="215" y="70" font-size="12" font-weight="600" fill="var(--action-primary)" text-anchor="middle">Cowork drafts</text>
-      <text x="215" y="88" font-size="11" fill="var(--text-2)" text-anchor="middle">template &amp; links</text>
+  <p>And the system compounds. Every reviewer correction and every failure the pipeline hits is encoded back into the skills and memory the agents run on — a deployment quirk becomes a documented recovery step, a style correction becomes a rule the next draft follows automatically. The same mistake doesn't ship twice, and each publish cycle runs on everything learned from the last. That's the operating model we advocate everywhere at Predactiv: agentic, self-improving, running in production.</p>
 
-      <rect x="296" y="46" width="118" height="58" rx="10" fill="var(--alert-success-light)" stroke="var(--action-secondary)"/>
-      <text x="355" y="70" font-size="12" font-weight="600" fill="var(--action-secondary-hover)" text-anchor="middle">You review</text>
-      <text x="355" y="88" font-size="11" fill="var(--text-2)" text-anchor="middle">the human gate</text>
-
-      <rect x="436" y="46" width="118" height="58" rx="10" fill="var(--action-primary-soft)" stroke="var(--action-primary)"/>
-      <text x="495" y="70" font-size="12" font-weight="600" fill="var(--action-primary)" text-anchor="middle">Cowork publishes</text>
-      <text x="495" y="88" font-size="11" fill="var(--text-2)" text-anchor="middle">commit + deploy</text>
-
-      <rect x="576" y="46" width="108" height="58" rx="10" fill="var(--brand-purple-deep)" stroke="var(--brand-purple-deep)"/>
-      <text x="630" y="70" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">Live site</text>
-      <text x="630" y="88" font-size="11" fill="#FFFFFF" opacity="0.8" text-anchor="middle">in ~1 minute</text>
-
-      <line x1="134" y1="75" x2="152" y2="75" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#arw)"/>
-      <line x1="274" y1="75" x2="292" y2="75" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#arw)"/>
-      <line x1="414" y1="75" x2="432" y2="75" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#arw)"/>
-      <line x1="554" y1="75" x2="572" y2="75" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#arw)"/>
-
-      <!-- Row 2 -->
-      <rect x="16" y="186" width="158" height="52" rx="10" fill="var(--action-primary-soft)" stroke="var(--action-primary)"/>
-      <text x="95" y="207" font-size="12" font-weight="600" fill="var(--action-primary)" text-anchor="middle">Scheduled review</text>
-      <text x="95" y="224" font-size="11" fill="var(--text-2)" text-anchor="middle">stale &amp; broken links</text>
-
-      <rect x="216" y="186" width="158" height="52" rx="10" fill="var(--surface-0)" stroke="var(--border-2)"/>
-      <text x="295" y="207" font-size="12" font-weight="600" fill="var(--text-1)" text-anchor="middle">Report, not edits</text>
-      <text x="295" y="224" font-size="11" fill="var(--text-2)" text-anchor="middle">proposed changes only</text>
-
-      <rect x="416" y="186" width="138" height="52" rx="10" fill="var(--alert-success-light)" stroke="var(--action-secondary)"/>
-      <text x="485" y="207" font-size="12" font-weight="600" fill="var(--action-secondary-hover)" text-anchor="middle">You approve</text>
-      <text x="485" y="224" font-size="11" fill="var(--text-2)" text-anchor="middle">item by item</text>
-
-      <line x1="174" y1="212" x2="212" y2="212" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#arw)"/>
-      <line x1="374" y1="212" x2="412" y2="212" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#arw)"/>
-      <!-- Loop back up into publishing -->
-      <path d="M554 212 L630 212 L630 112" fill="none" stroke="var(--neutral-300)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arw)"/>
-      <text x="622" y="155" font-size="11" fill="var(--text-3)" text-anchor="end">approved edits ship</text>
-      <text x="622" y="170" font-size="11" fill="var(--text-3)" text-anchor="end">the same way</text>
-    </svg>
-    <figcaption>Cowork does the drafting and the mechanics; a person holds both gates. Approved maintenance edits flow through the same publish pipeline.</figcaption>
-  </figure>
-
-  <h2>Have a workflow to share?</h2>
-  <p>If you've built a Cowork workflow worth documenting, reach out to the Product team — we'll help you turn it into a post.</p>
+  <h2>Start here</h2>
+  <p>This is for everyone at Predactiv — the examples lean toward Product, Data, and Engineering because that's where we started, but the workflows fit any role and assume no technical background.</p>
+  <ol>
+    <li>Read <a href="posts/getting-started-with-cowork.html">Getting Started with Claude Cowork</a> — what it is, how it differs from a normal chat, and what it can safely touch.</li>
+    <li>Run its five-minute prompt against one of your own Drive folders — it's read-only, nothing gets modified, and it's the fastest way to build intuition.</li>
+    <li>Skim the <a href="reading-list.html">reading list</a>'s "Applying AI in our work" lane — the ideas behind the workflows, each with a note on how it applies here.</li>
+  </ol>
+  <p>Built a workflow worth documenting, or read something that belongs on the <a href="reading-list.html">reading list</a>? Ping the Product team or open a pull request — we'll help you ship it.</p>
 </article>
 </main>
+
 
 <footer class="site-footer">
   Built by the Predactiv Product team · Contributions welcome via pull request
