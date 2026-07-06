@@ -9,110 +9,126 @@
 <body>
 
 <header class="site-header">
-<div class="header-inner">
-<div class="brand">Workflow Automation</div>
-<nav class="site-nav">
-<a href="index.html">Posts</a>
-<a href="reading-list.html">Reading List</a>
-<a href="about.html">About</a>
-</nav>
-</div>
+  <div class="header-inner">
+    <div class="brand">Workflow Automation</div>
+    <nav class="site-nav">
+      <a href="index.html">Posts</a>
+      <a href="reading-list.html">Reading List</a>
+      <a href="about.html">About</a>
+    </nav>
+  </div>
 </header>
 
 <section class="hero">
-<h1>Stop doing the work a machine should do.</h1>
-<p class="lede">A working portfolio of agentic workflows in production — practical playbooks, packaged skills, and automated pipelines that turn POC write-ups, bulk segment creation, and status reports from hours into minutes. Every page here was drafted, committed, and deployed by the same kind of workflow it documents.</p>
-<div class="hero-cta">
-<a class="pdp-btn" href="posts/getting-started-with-cowork.html">Start with the basics →</a>
-</div>
+  <h1>Stop doing the work a machine should do.</h1>
+  <p class="lede">A working portfolio of agentic workflows in production — practical playbooks, packaged skills, and automated pipelines that turn POC write-ups, bulk segment creation, and status reports from hours into minutes. Every page here was drafted, committed, and deployed by the same kind of workflow it documents — <a href="posts/how-this-site-ships-itself.html">here's exactly how</a>.</p>
+  <div class="hero-cta">
+    <a class="pdp-btn" href="posts/getting-started-with-cowork.html">Start with the basics →</a>
+  </div>
 </section>
 
 <div class="latest-post">
-<a href="posts/prompt-context-harness-loop-engineering.html">
-<span class="latest-label">Latest post</span>
-<span class="latest-title">Prompt vs. Context vs. Harness vs. Loop Engineering</span>
-<span class="latest-desc">Four layers of the same agent system, four different failure modes — and why rewording a prompt won't fix a broken harness.</span>
-</a>
+  <a href="posts/how-this-site-ships-itself.html">
+    <span class="latest-label">Latest post</span>
+    <span class="latest-title">How This Site Ships Itself: Inside an Agent-Run Publishing Pipeline</span>
+    <span class="latest-desc">One real 17-commit release, end to end: browser-driven commits, hash-verified payloads, deploy failures and recoveries — the receipts behind the homepage claim.</span>
+  </a>
 </div>
 
 <div class="section-heading">
-<h2>Start here</h2>
-<p>New to Cowork? Read these four, in order.</p>
+  <h2>Start here</h2>
+  <p>New to Cowork? Read these four, in order.</p>
 </div>
 
 <div class="post-list">
 
-<a class="post-card" href="posts/getting-started-with-cowork.html">
-<div class="meta">Step 1 · Getting Started · 7 min read</div>
-<h2>Getting Started with Claude Cowork</h2>
-<p>What Cowork actually is, how it differs from claude.ai chat, and a five-minute first prompt to try today.</p>
-<div class="byline">By Lungfai Ng · Updated Jul 2026</div>
-</a>
+  <a class="post-card" href="posts/getting-started-with-cowork.html">
+    <div class="meta">Step 1 · Getting Started · 7 min read</div>
+    <h2>Getting Started with Claude Cowork</h2>
+    <p>What Cowork actually is, how it differs from claude.ai chat, and a five-minute first prompt to try today.</p>
+    <div class="byline">By Lungfai Ng · Updated Jul 2026</div>
+  </a>
 
-<a class="post-card" href="posts/prompting-tips-for-cowork.html">
-<div class="meta">Step 2 · Tips · 5 min read</div>
-<h2>Prompting Tips That Actually Move the Needle in Cowork</h2>
-<p>Why vague requests waste turns, and the prompt patterns that get you a usable first draft.</p>
-<div class="byline">By Lungfai Ng · Updated Jul 2026</div>
-</a>
+  <a class="post-card" href="posts/prompting-tips-for-cowork.html">
+    <div class="meta">Step 2 · Tips · 5 min read</div>
+    <h2>Prompting Tips That Actually Move the Needle in Cowork</h2>
+    <p>Why vague requests waste turns, and the prompt patterns that get you a usable first draft.</p>
+    <div class="byline">By Lungfai Ng · Updated Jul 2026</div>
+  </a>
 
-<a class="post-card" href="posts/five-workflows-for-data-and-product-teams.html">
-<div class="meta">Step 3 · Workflows · 8 min read</div>
-<h2>Five Cowork Workflows for Data & Product Teams</h2>
-<p>From POC write-ups to bulk segment automation — real workflows mapped to how Product, Data Science, and Engineering teams actually work.</p>
-<div class="byline">By Lungfai Ng · Updated Jul 2026</div>
-</a>
+  <a class="post-card" href="posts/five-workflows-for-data-and-product-teams.html">
+    <div class="meta">Step 3 · Workflows · 8 min read</div>
+    <h2>Five Cowork Workflows for Data & Product Teams</h2>
+    <p>From POC write-ups to bulk segment automation — real workflows mapped to how Product, Data Science, and Engineering teams actually work.</p>
+    <div class="byline">By Lungfai Ng · Updated Jul 2026</div>
+  </a>
 
-<a class="post-card" href="posts/creating-your-first-skill.html">
-<div class="meta">Step 4 · Skill Deep Dive · 4 min read</div>
-<h2>Creating Your First Skill: A Beginner's Guide</h2>
-<p>What a skill actually is, why progressive disclosure makes it different from a saved prompt, and the three steps to build and install your own — with links to Anthropic's official docs.</p>
-<div class="byline">By Lungfai Ng · Updated Jul 2026</div>
-</a>
-
-</div>
-
-<div class="section-heading">
-<h2>Skill Deep Dives</h2>
-<p>How real production skills were built, end to end — so you can build the next one.</p>
-</div>
-
-<div class="post-list">
-
-<a class="post-card" href="posts/audience-platform-automation-skills.html">
-<div class="meta">Skill Deep Dive · 7 min read</div>
-<h2>Automating Audience Segments with Two Cowork Skills</h2>
-<p>Inside <code>agent-new-syndicated-segments</code> and <code>agent-update-syndicated-segments</code> — what each does, when to use which, and the guardrails that keep bulk changes safe.</p>
-<div class="byline">By Lungfai Ng · Updated Jul 2026</div>
-</a>
-
-<a class="post-card" href="posts/design-system-skill.html">
-<div class="meta">Skill Deep Dive · 6 min read</div>
-<h2>Turn a Drive Folder into a Cowork Skill: Auto-Applying a Design System</h2>
-<p>How we packaged a company design system from Google Drive into an installable skill, so every future HTML task is on-brand automatically — no copy-pasting hex codes.</p>
-<div class="byline">By Lungfai Ng · Updated Jul 2026</div>
-</a>
+  <a class="post-card" href="posts/creating-your-first-skill.html">
+    <div class="meta">Step 4 · Skill Deep Dive · 4 min read</div>
+    <h2>Creating Your First Skill: A Beginner's Guide</h2>
+    <p>What a skill actually is, why progressive disclosure makes it different from a saved prompt, and the three steps to build and install your own — with links to Anthropic's official docs.</p>
+    <div class="byline">By Lungfai Ng · Updated Jul 2026</div>
+  </a>
 
 </div>
 
 <div class="section-heading">
-<h2>Concepts <span class="coming-soon">More coming soon</span></h2>
-<p>The vocabulary behind the workflows, for when you want the why, not just the how.</p>
+  <h2>Skill Deep Dives</h2>
+  <p>How real production skills were built, end to end — so you can build the next one.</p>
 </div>
 
 <div class="post-list">
 
-<a class="post-card" href="posts/prompt-context-harness-loop-engineering.html">
-<div class="meta">Concepts · 7 min read</div>
-<h2>Prompt vs. Context vs. Harness vs. Loop Engineering</h2>
-<p>Four layers of the same agent system, four different failure modes — and why rewording a prompt won't fix a broken harness.</p>
-<div class="byline">By Lungfai Ng · Updated Jul 2026</div>
-</a>
+  <a class="post-card" href="posts/audience-platform-automation-skills.html">
+    <div class="meta">Skill Deep Dive · 7 min read</div>
+    <h2>Automating Audience Segments with Two Cowork Skills</h2>
+    <p>Inside <code>agent-new-syndicated-segments</code> and <code>agent-update-syndicated-segments</code> — what each does, when to use which, and the guardrails that keep bulk changes safe.</p>
+    <div class="byline">By Lungfai Ng · Updated Jul 2026</div>
+  </a>
+
+  <a class="post-card" href="posts/design-system-skill.html">
+    <div class="meta">Skill Deep Dive · 6 min read</div>
+    <h2>Turn a Drive Folder into a Cowork Skill: Auto-Applying a Design System</h2>
+    <p>How we packaged a company design system from Google Drive into an installable skill, so every future HTML task is on-brand automatically — no copy-pasting hex codes.</p>
+    <div class="byline">By Lungfai Ng · Updated Jul 2026</div>
+  </a>
+
+</div>
+
+<div class="section-heading">
+  <h2>Case Studies</h2>
+  <p>The pipeline behind this site, documented with evidence — commits, failures, and recoveries included.</p>
+</div>
+
+<div class="post-list">
+
+  <a class="post-card" href="posts/how-this-site-ships-itself.html">
+    <div class="meta">Case Study · 5 min read</div>
+    <h2>How This Site Ships Itself: Inside an Agent-Run Publishing Pipeline</h2>
+    <p>One real 17-commit release, with receipts: browser-driven commits, hash-verified payloads, deploy failures — and the missed commit the verification habit itself caught.</p>
+    <div class="byline">By Lungfai Ng · Updated Jul 2026</div>
+  </a>
+
+</div>
+
+<div class="section-heading">
+  <h2>Concepts <span class="coming-soon">More coming soon</span></h2>
+  <p>The vocabulary behind the workflows, for when you want the why, not just the how.</p>
+</div>
+
+<div class="post-list">
+
+  <a class="post-card" href="posts/prompt-context-harness-loop-engineering.html">
+    <div class="meta">Concepts · 7 min read</div>
+    <h2>Prompt vs. Context vs. Harness vs. Loop Engineering</h2>
+    <p>Four layers of the same agent system, four different failure modes — and why rewording a prompt won't fix a broken harness.</p>
+    <div class="byline">By Lungfai Ng · Updated Jul 2026</div>
+  </a>
 
 </div>
 
 <footer class="site-footer">
-Built, shipped, and maintained by agentic workflows · Curated by Lungfai Ng
+  Built, shipped, and maintained by agentic workflows · Curated by Lungfai Ng
 </footer>
 
 </body>
