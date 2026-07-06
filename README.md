@@ -1,54 +1,43 @@
- # Workflow Automation
- 
-Static site with tips and tutorials on using Claude Cowork, built for Predactiv employees navigating our AI transformation.
+# Workflow Automation
+
+A live portfolio of agentic workflow engineering: a static site that is written, cross-linked, committed, and deployed by AI agents (Claude Cowork) under human review — documenting the same production workflows that maintain it.
+
+**Live site:** https://nglungfai.github.io/workflow-automation/
+
+## What this demonstrates
+
+- **Agent-authored, human-gated publishing.** Every page was drafted and pushed to production by an agentic workflow; humans hold two gates — review before publish, approval before maintenance changes ship.
+- **Packaged skills running against production systems.** Deep dives cover real skills: bulk audience-segment automation driving a live web app through browser automation, and a company design system packaged into an auto-triggering skill.
+- **Self-maintaining content.** A scheduled agent audits the site monthly for stale entries, broken links, and drifted claims, and files a report. Corrections and failures are encoded back into the skills and memory the agents run on, so the same mistake doesn't ship twice.
 
 ## Structure
 
 ```
 workflow-automation/
-├── index.html              # homepage / post list
-├── about.html               # about + contribution guide
-├── styles.css                # shared styles
+├── index.html                # homepage / post list
+├── about.html                # how the site is made (the operating model)
+├── reading-list.html         # curated AI reading list, updated monthly
+├── styles.css                # shared styles (design-system tokens)
+├── assets/                   # diagrams, illustrations, copy-prompt.js
 └── posts/
     ├── getting-started-with-cowork.html
-    ├── five-workflows-for-data-and-product-teams.html
     ├── prompting-tips-for-cowork.html
-    ├── datasphere-segment-automation-skills.html
-    └── install-the-predactiv-design-skill.html
+    ├── five-workflows-for-data-and-product-teams.html
+    ├── creating-your-first-skill.html
+    ├── audience-platform-automation-skills.html
+    ├── design-system-skill.html
+    └── prompt-context-harness-loop-engineering.html
 ```
 
 Plain HTML/CSS, no build step, no dependencies.
 
-## Publish with GitHub Pages
+## Publishing
 
-Repo: **https://github.com/nglungfai/workflow-automation**
-
-1. Push this folder's contents to the repo root (see commands below).
-2. In the repo: **Settings → Pages → Build and deployment
-3. → Source: Deploy from a branch**. Branch: `main`, folder: `/ (root)`. Save.
-4. GitHub Pages will serve it at `https://nglungfai.github.io/workflow-automation/` — live in about a minute.
-
-```bash
-cd workflow-automation
-git init
-git add .
-git commit -m "Initial site: getting started, workflows, prompting tips, skill deep dives"
-git branch -M main
-git remote add origin https://github.com/nglungfai/workflow-automation.git
-git push -u origin main
-```
+Deployed with GitHub Pages from the `main` branch root via the "Deploy static content to Pages" workflow. Commits land through the same agentic pipeline that writes the content; changes are live within a minute or two.
 
 ## Adding a new post
 
 1. Copy an existing file in `posts/` as a template.
 2. Write the new post using the same `<article class="post">` structure.
 3. Add a `<a class="post-card">` entry to `index.html` linking to it.
-4. Commit and push — GitHub Pages redeploys automatically within a minute or two.
-
-## Ideas for future posts
-
-- Cowork + Predactiv MCP: building a live audience dashboard artifact
-- Writing effective PRDs with the write-spec skill
-- Cowork for incident postmortems and runbooks
-- Scheduling recurring Cowork reports (daily briefings, weekly digests)
-
+4. Commit and push — GitHub Pages redeploys automatically.
