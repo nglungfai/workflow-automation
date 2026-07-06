@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How This Site Ships Itself — Workflow Automation</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">Workflow Automation</div>
+    <nav class="site-nav">
+      <a href="../index.html">Posts</a>
+      <a href="../reading-list.html">Reading List</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<a class="back-link" href="../index.html">&larr; All posts</a>
+<article class="post">
+  <h1>How This Site Ships Itself: Inside an Agent-Run Publishing Pipeline</h1>
+  <div class="meta">Case Study · 5 min read</div>
+
+  <p>The homepage makes a claim you should be skeptical of: <em>every page here was drafted, committed, and deployed by the same kind of workflow it documents</em>. This post backs it up with one real release — what the AI did, what a human did, what broke, and how it was caught — with a public paper trail you can check: the <a href="https://github.com/nglungfai/workflow-automation/commits/main" target="_blank" rel="noopener">commit history</a> (the site's save-and-publish log) and the <a href="https://github.com/nglungfai/workflow-automation/actions" target="_blank" rel="noopener">deploy log</a>.</p>
+
+  <p>The pipeline: a person describes what should exist; an AI agent writes it; the person approves; the agent publishes it by operating the same website a human contributor would use, clicking the same buttons. A human touches exactly two steps.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 700 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Six-stage pipeline: human describes the deliverable, agent drafts, human reviews and approves, agent commits through the browser, GitHub Pages deploys, agent verifies the live site. A dashed feedback arrow returns failures and corrections into the agent's skills and memory.">
+      <defs>
+        <marker id="pp-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--neutral-300)"/>
+        </marker>
+      </defs>
+      <text x="118" y="26" font-size="11" font-weight="600" fill="var(--text-3)" letter-spacing="1" text-anchor="middle">HUMAN</text>
+      <text x="350" y="26" font-size="11" font-weight="600" fill="var(--text-3)" letter-spacing="1" text-anchor="middle">GATE: REVIEW + APPROVAL</text>
+      <text x="582" y="26" font-size="11" font-weight="600" fill="var(--text-3)" letter-spacing="1" text-anchor="middle">AGENT</text>
+
+      <rect x="12" y="40" width="130" height="56" rx="10" fill="var(--surface-0)" stroke="var(--border-2)"/>
+      <text x="77" y="64" font-size="12" font-weight="600" fill="var(--text-1)" text-anchor="middle">Describe</text>
+      <text x="77" y="82" font-size="10.5" fill="var(--text-2)" text-anchor="middle">the deliverable</text>
+
+      <line x1="142" y1="68" x2="168" y2="68" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#pp-arr)"/>
+
+      <rect x="172" y="40" width="130" height="56" rx="10" fill="var(--action-primary-soft)" stroke="var(--action-primary)"/>
+      <text x="237" y="64" font-size="12" font-weight="600" fill="var(--action-primary)" text-anchor="middle">Draft</text>
+      <text x="237" y="82" font-size="10.5" fill="var(--text-2)" text-anchor="middle">page on template</text>
+
+      <line x1="302" y1="68" x2="328" y2="68" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#pp-arr)"/>
+
+      <rect x="332" y="40" width="130" height="56" rx="10" fill="var(--surface-0)" stroke="var(--border-2)" stroke-dasharray="5 3"/>
+      <text x="397" y="64" font-size="12" font-weight="600" fill="var(--text-1)" text-anchor="middle">Approve</text>
+      <text x="397" y="82" font-size="10.5" fill="var(--text-2)" text-anchor="middle">human gate</text>
+
+      <line x1="462" y1="68" x2="488" y2="68" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#pp-arr)"/>
+
+      <rect x="492" y="40" width="130" height="56" rx="10" fill="var(--action-primary-soft)" stroke="var(--action-primary)"/>
+      <text x="557" y="64" font-size="12" font-weight="600" fill="var(--action-primary)" text-anchor="middle">Publish</text>
+      <text x="557" y="82" font-size="10.5" fill="var(--text-2)" text-anchor="middle">via browser, like a person</text>
+
+      <line x1="557" y1="96" x2="557" y2="122" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#pp-arr)"/>
+
+      <rect x="492" y="126" width="130" height="56" rx="10" fill="var(--surface-0)" stroke="var(--border-2)"/>
+      <text x="557" y="150" font-size="12" font-weight="600" fill="var(--text-1)" text-anchor="middle">Go live</text>
+      <text x="557" y="168" font-size="10.5" fill="var(--text-2)" text-anchor="middle">auto-deploy, ~1 min</text>
+
+      <line x1="492" y1="154" x2="466" y2="154" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#pp-arr)"/>
+
+      <rect x="336" y="126" width="130" height="56" rx="10" fill="var(--brand-purple-deep)" stroke="var(--brand-purple-deep)"/>
+      <text x="401" y="150" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">Verify live</text>
+      <text x="401" y="168" font-size="10.5" fill="#FFFFFF" opacity="0.8" text-anchor="middle">check the real site</text>
+
+      <path d="M336 154 L100 154 L100 100" fill="none" stroke="var(--neutral-300)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#pp-arr)"/>
+      <text x="190" y="146" font-size="10.5" fill="var(--text-3)" text-anchor="middle">every failure becomes</text>
+      <text x="190" y="160" font-size="10.5" fill="var(--text-3)" text-anchor="middle">a lesson the agent keeps</text>
+    </svg>
+    <figcaption>Two boxes belong to the human: describing the work and approving it. Everything else is the agent's job.</figcaption>
+  </figure>
+
+  <h2>One release, 17 published changes</h2>
+  <p>The worked example is this site's biggest release: the overhaul that turned an internal knowledge base into this public portfolio. Every page rewritten; two articles renamed, with every link that pointed at them updated; four files deleted; and three animated illustrations that had a label baked into the pixels edited frame by frame and re-uploaded. Sequencing mattered: new pages went up before anything linked to them, old pages came down last — so mid-release, a visitor never hit a broken site.</p>
+  <table style="width:100%; border-collapse:collapse; margin:20px 0;">
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 8px 8px 0; color:var(--text-2);">Change</td><td style="padding:8px 8px 8px 0; color:var(--text-2);">Count</td><td style="padding:8px 0; color:var(--text-2);">How the agent did it</td></tr>
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 8px 8px 0;">Pages rewritten</td><td style="padding:8px 8px 8px 0;">10</td><td style="padding:8px 0;">Typed into the web editor, verified before saving</td></tr>
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 8px 8px 0;">Articles renamed</td><td style="padding:8px 8px 8px 0;">2</td><td style="padding:8px 0;">New name created first, old one removed last</td></tr>
+    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 8px 8px 0;">Files deleted</td><td style="padding:8px 8px 8px 0;">4</td><td style="padding:8px 0;">Same delete flow a person would click through</td></tr>
+    <tr><td style="padding:8px 8px 8px 0;">Images re-edited</td><td style="padding:8px 8px 8px 0;">3 animations</td><td style="padding:8px 0;">Patched frame by frame, re-uploaded</td></tr>
+  </table>
+
+  <h2>The hard part: publishing like a person</h2>
+  <p>The agent has no publishing keys and no direct line to the server — by design, it can only do what a person with a browser could. But GitHub's editor is built for human hands and won't accept text from a program, so the agent does what hands do, synthetically: a "select all" keystroke and a "paste" event, the same signals a keyboard and clipboard produce. For the technically curious:</p>
+  <pre><code>cm.dispatchEvent(new KeyboardEvent('keydown',
+  {key:'a', code:'KeyA', metaKey:true, bubbles:true, cancelable:true}));
+const dt = new DataTransfer();
+dt.setData('text/plain', newContent);
+cm.dispatchEvent(new ClipboardEvent('paste',
+  {clipboardData: dt, bubbles: true, cancelable: true}));</code></pre>
+  <p>The failures here are <em>silent</em>: select the wrong way and the editor quietly pastes a second copy of the page below the first; sometimes the automation reports "failed" when the paste actually worked, so a retry would double the content. The working rule: <strong>never trust the report, check the result.</strong> After every paste, the agent screenshots the end of the file — right line count, page ends exactly once.</p>
+
+  <h2>Trust nothing, fingerprint everything</h2>
+  <p>Before saving, the agent computes a <em>fingerprint</em> of what the page should say — a short code where a one-character difference changes everything — and refuses to save unless the rebuilt page matches. It also sweeps for terms that aren't allowed on the public site. That paranoia paid off mid-release: one page came out 216 characters short. The cause was invisible spacing differences left by an old hand edit — harmless, and the fingerprint (built to ignore spacing) proved the content matched, so the release went on with the discrepancy understood rather than ignored. After the final change, the same audit ran against the live site: banned terms zero, renamed pages resolving, retired addresses correctly dead.</p>
+  <p>The publishing infrastructure failed twice mid-release, too. Neither needed fixing — each publish pushes the entire site, so the last successful one carried everything. The recovery playbook for failures that do need action was learned the hard way once, then written into the agent's instructions for good.</p>
+
+  <h2>The questions worth asking</h2>
+  <p><strong>"Why click through a website when programmers have better tools?"</strong> Safety and generality. The agent's blast radius is a person's blast radius — and most tools worth automating (dashboards, admin consoles, vendor portals) have no programmer's entrance at all. The browser is the universal one; this pipeline is the publicly auditable rehearsal.</p>
+  <p><strong>"Why not just make 17 changes by hand?"</strong> A person could, in an afternoon — but the afternoon repeats every release, and human effort doesn't compound. Every lesson here is written into the agent's standing instructions, so the next release starts smarter. And the agent runs the same checks identically on the first edit and the seventeenth; human attention doesn't.</p>
+  <p><strong>"Why trust it at all?"</strong> You don't — that's the design. Nothing publishes without human approval; nothing is assumed to have worked without checking the result. The trust sits in the verification, not in the AI.</p>
+  <p><strong>"What about hijacking — the agent reads web pages with a real session?"</strong> The risk is prompt injection: a page containing text crafted to look like instructions. The defense is architectural: instructions come only from the operator (page content is data, never commands), the agent works against a fixed set of destinations, and the approval gate is the firebreak — a fooled agent still can't publish anything unsigned. Worst case here is a bad commit to a public repo: visible, revertible. Injection is an open problem industry-wide; anyone claiming immunity is selling something.</p>
+  <p><strong>"Your checks verify mechanics. Who checks the writing?"</strong> A human, deliberately — fingerprints can't prove a paragraph is good. But the gate feeds back: each correction becomes a standing rule the next draft follows, so the reviewer repeats themselves at most once. What's missing is a formal evaluation harness — scored test cases per skill, re-run when models change. That's the known next layer, and the right question to ask any agent system claiming to be production-grade.</p>
+
+  <h2>The system caught its own mistake</h2>
+  <p>While drafting <em>this very post</em>, an audit of the release's logs found one of the 17 changes had never landed — a button click missed, the edit silently discarded, unflagged for a day because the routine check looked at public pages and this file wasn't one. A verification gap, found by the verification habit, fixed in the same release that shipped this post — and the checklist now reconciles intended changes against the actual log, every release. That's the honest pitch: not that agents don't make mistakes, but that every mistake gets caught by a check, and every check becomes standing procedure. The same error doesn't ship twice.</p>
+
+  <h2>So what?</h2>
+  <p>A website that publishes itself is a parlor trick. The operating model is not. Swap "publish a page" for bulk-creating audience segments in a live production tool, turning meeting notes into partner-ready documents, or auditing content monthly for drift — the same loop runs them all: describe, draft, gate, execute, verify, keep the lessons. Those systems are private. This one you can <a href="https://github.com/nglungfai/workflow-automation/commits/main" target="_blank" rel="noopener">audit</a>.</p>
+
+  <div class="try-box">
+    <p class="try-box-label">Audit this post — copy into Cowork</p>
+    <div class="try-box-row">
+      <code class="try-box-text">This post claims a 17-commit agent-run release with two deploy failures and one silently dropped commit: nglungfai.github.io/workflow-automation/posts/how-this-site-ships-itself.html. Audit it against the repo's commit history and Actions log — verify each claim and flag anything the post gets wrong or omits.</code>
+      <button type="button" class="try-copy-btn">Copy</button>
+    </div>
+  </div>
+
+  <blockquote>Related: <a href="prompt-context-harness-loop-engineering.html">Prompt vs. Context vs. Harness vs. Loop Engineering</a> — everything here is harness and loop engineering; the prompts are the least interesting part.</blockquote>
+
+<blockquote><p><strong>Further reading:</strong> <a href="../reading-list.html#rl-06">Building Effective Agents</a> on when a gated workflow beats an autonomous agent — the design position this pipeline takes — on the <a href="../reading-list.html">AI Reading List</a>.</p></blockquote>
+</article>
+</main>
+
+<footer class="site-footer">
+  Built, shipped, and maintained by agentic workflows · Curated by Lungfai Ng
+</footer>
+
+<script src="../assets/copy-prompt.js" defer></script>
+</body>
+</html>
