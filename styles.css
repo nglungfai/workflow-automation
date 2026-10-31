@@ -684,3 +684,6 @@ article.post .table-note { font-size: var(--fs-small); color: var(--text-2); mar
 article.post .cta-box p { margin: 0 0 var(--space-4); }
 .about-career { margin: var(--space-4) 0 var(--space-5); padding-left: 1.2rem; }
 article.post .about-career li { margin-bottom: var(--space-2); }
+
+/* ---- Homepage ---- */
+.hero-cta { display: flex; flex-wrap: wrap; gap: var(--space-3); }
