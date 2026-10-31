@@ -34,6 +34,72 @@
     <span style="--k:#3F2A7B">Research papers</span>
   </div>
 
+  <h2>August 2026</h2>
+  <h3>Applying AI in our work</h3>
+  <p class="rl-lane-desc">The practice — using AI tools day to day: prompting, AI-assisted coding, and automating our own workflows.</p>
+
+  <div id="rl-aug-01" class="rl-row lane-apply">
+    <div class="rl-num">01</div>
+    <div class="rl-head"><h4><a href="https://addyo.substack.com/p/practical-loop-engineering">Practical Loop Engineering</a></h4><span class="rl-src">Addy Osmani · Aug 2026</span><span class="rl-pill">Core</span></div>
+    <p>Osmani shows how he runs many parallel agents with goal-driven and scheduled loops, and sorts loops into agentic, goal-based, time-based, and proactive types, with example prompts.</p>
+    <p class="rl-apply"><strong>Apply it:</strong> The practical follow-on to loop design: bound each task with a measurable endpoint, schedule what needs to persist, and delegate the task but never the judgment. <em>In practice: <a href="posts/prompt-context-harness-loop-engineering.html">Prompt vs. Context vs. Harness vs. Loop</a>.</em></p>
+  </div>
+
+  <div id="rl-aug-02" class="rl-row lane-apply">
+    <div class="rl-num">02</div>
+    <div class="rl-head"><h4><a href="https://normaltech.ai/p/ai-agents-cant-yet-do-open-ended">AI agents can't yet do open-ended AI research</a></h4><span class="rl-src">Kapoor &amp; Narayanan (AI Snake Oil) · Aug 2026</span><span class="rl-pill">Core</span></div>
+    <p>Princeton researchers tested frontier agents with “shadow evaluations” on two unpublished papers; the original authors rejected both outputs, and logs showed weak research judgment, poor budget awareness, and little response to feedback.</p>
+    <p class="rl-apply"><strong>Apply it:</strong> A calibrated view of where agents are reliable (execution) and where they are not (judgment) — the case for keeping a human gate on anything open-ended. <em>In practice: <a href="posts/how-this-site-ships-itself.html">How This Site Ships Itself</a>.</em></p>
+  </div>
+
+  <div id="rl-aug-03" class="rl-row lane-apply">
+    <div class="rl-num">03</div>
+    <div class="rl-head"><h4><a href="https://threedots.tech/post/ddd-and-ai-coding/">Domain-Driven Design matters more when AI writes your code</a></h4><span class="rl-src">Three Dots Labs · Aug 2026</span><span class="rl-pill">Core</span></div>
+    <p>Argues that as agents take over implementation, understanding the business problem and agreeing on design and shared vocabulary before any code is written becomes the hard, valuable part.</p>
+    <p class="rl-apply"><strong>Apply it:</strong> Agree on definitions and naming before pointing an agent at a pipeline or a skill — it is what lets us verify what it produces.</p>
+  </div>
+
+  <h3>Engineering write-ups</h3>
+  <p class="rl-lane-desc">How industry teams actually built it — practitioner posts, more readable than papers, each linking to the original.</p>
+
+  <div id="rl-aug-04" class="rl-row lane-eng">
+    <div class="rl-num">04</div>
+    <div class="rl-head"><h4><a href="https://eugeneyan.com/writing/llm-patterns/">Patterns for Building LLM-based Systems &amp; Products</a></h4><span class="rl-src">Eugene Yan · 2023</span><span class="rl-pill">Core</span></div>
+    <p>Seven practical patterns for putting LLMs into production — evals, retrieval, fine-tuning, caching, guardrails, defensive UX, and user feedback — organized by whether they improve performance or cut cost and risk.</p>
+    <p class="rl-apply"><strong>Apply it:</strong> A pattern catalog to check any new AI workflow against before it ships: which of the seven do we have, and which are we skipping?</p>
+  </div>
+
+  <div id="rl-aug-05" class="rl-row lane-eng">
+    <div class="rl-num">05</div>
+    <div class="rl-head"><h4><a href="https://hamel.dev/blog/posts/evals/">Your AI Product Needs Evals</a></h4><span class="rl-src">Hamel Husain · 2024</span><span class="rl-pill">Core</span></div>
+    <p>Argues that LLM products stall without evaluation tailored to their own users and tasks, and lays out three levels — unit tests, human and model-based review, and A/B tests — using a production assistant as the case study.</p>
+    <p class="rl-apply"><strong>Apply it:</strong> The blueprint for testing our agent workflows: start with cheap deterministic checks, then add graded review, then live experiments.</p>
+  </div>
+
+  <div id="rl-aug-06" class="rl-row lane-eng">
+    <div class="rl-num">06</div>
+    <div class="rl-head"><h4><a href="https://medium.com/pinterest-engineering/pinsage-a-new-graph-convolutional-neural-network-for-web-scale-recommender-systems-88795a107f48">PinSage: A New Graph Convolutional Neural Network for Web-Scale Recommender Systems</a></h4><span class="rl-src">Pinterest · He et al. · 2018</span><span class="rl-pill">Core</span></div>
+    <p>Pinterest builds embeddings for billions of items with a graph neural network that samples neighbors via random walks, separating items that look alike but mean different things; it won in offline tests, user studies, and A/B tests.</p>
+    <p class="rl-apply"><strong>Apply it:</strong> A step beyond sequence-only embeddings for audience vectors — graph context can sharpen similarity where behavior alone is sparse.</p>
+  </div>
+
+  <h3>Research papers</h3>
+  <p class="rl-lane-desc">The science — foundational methods and applied research behind audience modeling, response, and measurement.</p>
+
+  <div id="rl-aug-07" class="rl-row lane-papers">
+    <div class="rl-num">07</div>
+    <div class="rl-head"><h4><a href="https://arxiv.org/abs/2608.10182">From Prediction to Incrementality: Causal Optimization for Large-Scale Targeting and Recommendation</a></h4><span class="rl-src">Wei et al. · Aug 2026</span><span class="rl-pill">Core</span></div>
+    <p>Combines a Transformer-based causal network for individual treatment effects, a Bayesian bandit layer for exploration, and a constrained-allocation layer; an online A/B test on marketing traffic showed a 7.20% lift in its primary long-term-value metric.</p>
+    <p class="rl-apply"><strong>Apply it:</strong> Moves targeting from “who is likely to convert” to “who is changed by the treatment” — a template for incrementality-aware audience selection under budget constraints.</p>
+  </div>
+
+  <div id="rl-aug-08" class="rl-row lane-papers">
+    <div class="rl-num">08</div>
+    <div class="rl-head"><h4><a href="https://arxiv.org/abs/2608.26804">Incremental Recommendation via Causal Models</a></h4><span class="rl-src">Vlontzos et al. · Aug 2026</span><span class="rl-pill">Core</span></div>
+    <p>Turns an existing production recommender into a causal model using holdback data already being collected, with a dual-threshold policy; in a large A/B test it cut recommendation impressions by 7% without a meaningful drop in consumption.</p>
+    <p class="rl-apply"><strong>Apply it:</strong> Shows how existing holdout groups can double as causal training data — a cheap route to incrementality signal without new experiments.</p>
+  </div>
+
   <h2>July 2026</h2>
   <h3>Applying AI in our work</h3>
   <p class="rl-lane-desc">The practice — using AI tools day to day: prompting, AI-assisted coding, and automating our own workflows.</p>
