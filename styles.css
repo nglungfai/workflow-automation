@@ -650,3 +650,37 @@ figure.diagram figcaption code {
   font-size: 0.85em;
   color: var(--action-primary);
 }
+
+
+/* ---- About page ---- */
+article.post .about-lede { font-size: 1.15rem; line-height: 1.6; color: var(--text-1); }
+.principles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+  margin: var(--space-5) 0;
+}
+.principle {
+  background: var(--surface-0);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-xs);
+}
+article.post .principle h3 { margin: 0 0 var(--space-2); font-size: 1.05rem; line-height: 1.3; }
+article.post .principle p { margin: 0 0 var(--space-3); font-size: var(--fs-small); line-height: var(--lh-small); color: var(--text-2); }
+.principle .more { font-size: var(--fs-small); font-weight: 500; }
+.about-table { width: 100%; border-collapse: collapse; margin: var(--space-5) 0 var(--space-2); }
+.about-table th { text-align: left; font-weight: 500; color: var(--text-2); padding: var(--space-2) var(--space-2) var(--space-2) 0; border-bottom: 1px solid var(--border-1); }
+.about-table td { padding: var(--space-2) var(--space-2) var(--space-2) 0; border-bottom: 1px solid var(--border-1); }
+article.post .table-note { font-size: var(--fs-small); color: var(--text-2); margin-top: 0; }
+.cta-box {
+  background: var(--action-primary-soft);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-6);
+  margin: var(--space-5) 0 var(--space-6);
+}
+article.post .cta-box p { margin: 0 0 var(--space-4); }
+.about-career { margin: var(--space-4) 0 var(--space-5); padding-left: 1.2rem; }
+article.post .about-career li { margin-bottom: var(--space-2); }
