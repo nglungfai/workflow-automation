@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About — Workflow Automation</title>
+<title>About Lungfai Ng — Workflow Automation</title>
+<meta name="description" content="Lungfai Ng turns research into data products and now builds agentic workflows with evals, memory, and human gates, documented in public.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="I build agentic workflows that can prove they work">
+<meta property="og:description" content="From patented data products to advertiser measurement to agentic workflows: evals, agent memory, and human-gated publishing, with a live site that ships itself as the evidence.">
+<meta property="og:url" content="https://nglungfai.github.io/workflow-automation/about.html">
+<meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -21,17 +27,40 @@
 
 <main>
 <article class="post">
-  <h1>How we practice AI</h1>
-  <div class="meta">What this site is, how it's made, and why it's a live demonstration rather than a write-up</div>
+  <h1>I build agentic workflows that can prove they work</h1>
+  <div class="meta">Lungfai Ng · turning research into data products</div>
 
-  <p>This site is a working portfolio of agentic workflow engineering. It began as the internal knowledge base for using <strong>Claude Cowork</strong> on my product team, and it remains the clearest demonstration of how we operate: everything described on these pages runs in production, including the pipeline that publishes this very page. We don't consume AI second-hand. We run a full pipeline on it. Agentic search sweeps the AI literature across every topic that touches our work. A living knowledge base distills what matters into the <a href="reading-list.html">AI Reading List</a> and hands-on tutorials. Agentic workflows turn those ideas into shipped work — every week. Research in, working systems out: that's the standard we hold ourselves to as practitioners.</p>
+  <p class="about-lede">I turn research into data products, and I ask the same question at every step: how do we know it's right?</p>
+  <ul class="about-career">
+    <li><strong>Acxiom:</strong> applied the company's patents to data products at scale, including audience propensity models.</li>
+    <li><strong>IPG:</strong> joined the research team after the acquisition; worked with some of the world's largest advertisers on audience targeting and developed measurement solutions.</li>
+    <li><strong>Today:</strong> I lead product and innovation at an AI-driven audience data platform, where I led the launch of a foundation model for human behavior.</li>
+  </ul>
 
-  <h2>Research in, workflows out</h2>
-  <p><strong>Discovery is automated and broad.</strong> The pipeline starts with coverage no manual reading habit can match: search agents sweep new research papers, engineering write-ups, and practitioner guides across the full topic surface of our stack — prompting and context engineering, agent architectures, retrieval and embeddings, evaluation, applied machine learning — and screens every candidate against one question: does this change how we build or operate?</p>
+  <p>This site is where I answer that question for agent workflows. It exists to show what it takes to run them in a way you can trust: the playbooks, the skills, and the failures. It's a public working record, built with <strong>Claude Cowork</strong> and published by the same kind of workflow it documents.</p>
 
-  <p><strong>What survives becomes a knowledge base, not a link dump.</strong> Every entry in the reading list carries a note on how it applies to our work and cross-links to a tutorial showing the idea running in our own workflows. A monthly curation cycle retires stale entries and promotes what's proven. Theory is indexed against practice, so nothing sits on a shelf.</p>
+  <h2>What I hold to</h2>
+  <p>The research-to-production habits transfer directly to agents: define the output contract, build the evaluation before you trust the result, and keep a human on the decisions that carry risk.</p>
+  <div class="principles">
+    <div class="principle">
+      <h3>Measure the workflow, not the demo</h3>
+      <p>A demo shows an agent can do the task once. Production needs to know how often it does the task right. Every page here passes a deterministic contract check before it ships; model-graded quality evals are the next layer.</p>
+      <a class="more" href="posts/prompt-context-harness-loop-engineering.html">Why a better prompt won't fix a broken harness →</a>
+    </div>
+    <div class="principle">
+      <h3>One fact, one home</h3>
+      <p>Agent memory rots when the same fact lives in three places. I split what an agent knows by how fast it goes stale, then audit the split every month.</p>
+      <a class="more" href="posts/one-fact-one-home.html">The memory architecture →</a>
+    </div>
+    <div class="principle">
+      <h3>Humans hold the gates</h3>
+      <p>Agents draft, verify, and publish. People review before anything ships and approve before any maintenance change lands. Autonomy is a dial, and I set it per step.</p>
+      <a class="more" href="posts/how-this-site-ships-itself.html">A 17-commit release, failures included →</a>
+    </div>
+  </div>
 
-  <p><strong>Then the ideas go to work.</strong> The same research feeds the workflows we run every day — packaged skills for bulk segment creation, scheduled reviews that maintain this very site, connector pipelines that turn meetings into action items and drafts into shipped documents. The distance from a paper we read to a workflow we run is measured in days, not quarters.</p>
+  <h2>How I work: research in, workflows out</h2>
+  <p>Search agents sweep new papers, engineering write-ups, and practitioner guides, and each candidate faces one question: does this change how I build or operate? What survives goes into the <a href="reading-list.html">AI Reading List</a> with a note on how it applies, and the ideas that earn it become packaged skills and scheduled workflows.</p>
 
   <figure class="diagram">
     <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three-stage pipeline: agentic discovery searches the AI literature, a curated knowledge base distills it, and daily agentic workflows apply it — with what ships feeding back into what gets searched next">
@@ -62,33 +91,36 @@
       <path d="M584 114 L584 160 L116 160 L116 118" fill="none" stroke="var(--neutral-300)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arw2)"/>
       <text x="350" y="150" font-size="11" fill="var(--text-3)" text-anchor="middle">what ships in practice steers what gets searched next</text>
     </svg>
-    <figcaption>The full loop: agents search the research, curation builds the knowledge base, and the knowledge base powers the workflows we run daily — which in turn steer the next search.</figcaption>
+    <figcaption>The loop: agents search the research, I curate the survivors into the reading list, and what ships in practice steers the next search.</figcaption>
   </figure>
 
-  <h2>What the team gets back</h2>
-  <p>The pipeline is judged by what it hands back to people. Agents absorb the mechanical work — clicking, assembling, formatting — while humans keep the judgment: what ships, what changes, what's next. The hours in the table below didn't vanish; they moved from production to decisions. Real tasks from our own team — measured, not marketed. Full context and more examples in <a href="posts/getting-started-with-cowork.html">Getting Started</a>:</p>
-  <table style="width:100%; border-collapse:collapse; margin:20px 0;">
-    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 8px 8px 0; color:var(--text-2);">Task</td><td style="padding:8px 8px 8px 0; color:var(--text-2);">Before</td><td style="padding:8px 0; color:var(--text-2);">With Cowork</td></tr>
-    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 8px 8px 0;">Bulk syndicated segment creation</td><td style="padding:8px 8px 8px 0;">≈ half a day of clicking</td><td style="padding:8px 0;">~15 min supervised run</td></tr>
-    <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 8px 8px 0;">Weekly POC status update to a partner</td><td style="padding:8px 8px 8px 0;">~45 min assembling and formatting</td><td style="padding:8px 0;">~10 min reviewing a drafted doc</td></tr>
-    <tr><td style="padding:8px 8px 8px 0;">Meeting notes → action items</td><td style="padding:8px 8px 8px 0;">~20 min per sync</td><td style="padding:8px 0;">~2 min reviewing a one-pager</td></tr>
-  </table>
-
   <h2>How this site is made</h2>
-  <p>This site isn't written <em>about</em> agentic workflows — it <em>is</em> one. Every page you're reading was drafted, cross-linked, and committed to production by Cowork. A person describes the deliverable; the agent writes the HTML, pushes the commit, and the change is live in about a minute. Humans hold exactly two gates: review before anything publishes, approval before any maintenance change ships.</p>
+  <p>This site isn't written <em>about</em> agentic workflows. It <em>is</em> one. An agent drafts each page, cross-links it, and commits it. I review before anything publishes. A contract-check harness then tests every page against the rules it has to honor: links, navigation, footer, read-time honesty, homepage sync, and white-label hygiene.</p>
+  <p>A scheduled agent audits the site monthly for stale entries, broken links, and drifted claims, and files a report. It proposes; it never decides. Each reviewer correction and each pipeline failure is encoded back into the skills and memory the agents run on, so the same mistake doesn't ship twice.</p>
 
-  <p>Maintenance runs on agents too. A scheduled agent audits the site monthly — stale entries, broken links, drifted claims — and files a report. It proposes; it never decides.</p>
+  <h2>What it gives back</h2>
+  <p>Agents absorb the mechanical work: clicking, assembling, formatting. People keep the judgment. The hours below moved from production to decisions.</p>
+  <table class="about-table">
+    <tr><th>Task</th><th>Before</th><th>With an agent workflow</th></tr>
+    <tr><td>Bulk audience-segment creation</td><td>≈ half a day of clicking</td><td>~15 min supervised run</td></tr>
+    <tr><td>Weekly partner status update</td><td>~45 min assembling and formatting</td><td>~10 min reviewing a drafted doc</td></tr>
+    <tr><td>Meeting notes → action items</td><td>~20 min per sync</td><td>~2 min reviewing a one-pager</td></tr>
+  </table>
+  <p class="table-note">Approximate timings from tasks on my own team: order of magnitude, not a benchmark. A person reviews every output.</p>
 
-  <p>And the system compounds. Every reviewer correction and every failure the pipeline hits is encoded back into the skills and memory the agents run on — a deployment quirk becomes a documented recovery step, a style correction becomes a rule the next draft follows automatically. The same mistake doesn't ship twice, and each publish cycle runs on everything learned from the last. That's the operating model we advocate everywhere: agentic, self-improving, running in production.</p>
+  <h2>Let's talk</h2>
+  <p>I'm not selling anything right now. If you're building agentic workflows into a data, product, or audience team, or you want to compare notes on evals and agent memory, grab 30 minutes with me.</p>
+  <div class="cta-box">
+    <p><strong>Working on something similar, or spot an error here?</strong> I read every message and take every call I can.</p>
+    <a class="pdp-btn" href="https://calendar.app.google/59NMPa4JzEoZf3W46">Book 30 minutes</a>
+  </div>
 
   <h2>Start here</h2>
-  <p>This is for everyone on the team — the examples lean toward Product, Data, and Engineering because that's where we started, but the workflows fit any role and assume no technical background.</p>
   <ol>
-    <li>Read <a href="posts/getting-started-with-cowork.html">Getting Started with Claude Cowork</a> — what it is, how it differs from a normal chat, and what it can safely touch.</li>
-    <li>Run its five-minute prompt against one of your own Drive folders — it's read-only, nothing gets modified, and it's the fastest way to build intuition.</li>
-    <li>Skim the <a href="reading-list.html">reading list</a>'s "Applying AI in our work" lane — the ideas behind the workflows, each with a note on how it applies here.</li>
+    <li><strong>New to agents?</strong> Read <a href="posts/getting-started-with-cowork.html">Getting Started with Claude Cowork</a>.</li>
+    <li><strong>Building one?</strong> Start with <a href="posts/one-fact-one-home.html">One Fact, One Home</a> and <a href="posts/how-this-site-ships-itself.html">How This Site Ships Itself</a>.</li>
+    <li><strong>Reading around the topic?</strong> The <a href="reading-list.html">reading list</a> is curated monthly, with a note on how each entry applies.</li>
   </ol>
-  <p>Built a workflow worth documenting, or read something that belongs on the <a href="reading-list.html">reading list</a>? Open a pull request — contributions welcome.</p>
 </article>
 </main>
 
