@@ -50,4 +50,21 @@ article.post .criterion-card h3{margin:0 0 4px}
 .criterion-card dl{margin:0;display:grid;grid-template-columns:90px 1fr;gap:8px 14px;font-size:.88rem}
 .criterion-card dt{padding-top:2px}
 .criterion-card dd{margin:0;color:var(--text-1)}
+.flow{margin:18px 0 30px;padding:0}
+.flow-intro{color:var(--text-2);font-size:.92rem;margin:0 0 14px}
+ol.flow-steps{list-style:none;margin:0;padding:0;display:grid;gap:26px}
+ol.flow-steps>li{position:relative;display:grid;grid-template-columns:34px 1fr;gap:4px 14px;align-items:start;background:var(--surface-0);border:1px solid var(--border-1);border-left:4px solid var(--fa,var(--action-secondary));border-radius:var(--radius-md);padding:14px 18px;box-shadow:var(--shadow-xs)}
+ol.flow-steps>li:not(:last-child)::after{content:"";position:absolute;left:30px;bottom:-21px;width:2px;height:16px;background:var(--text-3)}
+ol.flow-steps>li:not(:last-child)::before{content:"";position:absolute;left:25px;bottom:-24px;border:6px solid transparent;border-top:7px solid var(--text-3);border-bottom:0}
+.flow-num{grid-row:1 / span 3;width:30px;height:30px;border-radius:50%;background:var(--fa,var(--action-secondary));color:#fff;font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+article.post ol.flow-steps h3{margin:0;font-size:1rem;color:var(--text-1)}
+.flow-actor{grid-column:2;justify-self:start;font-size:.66rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--fa,var(--text-2));margin-top:2px}
+article.post ol.flow-steps p{grid-column:2;margin:2px 0 0;font-size:.88rem;color:var(--text-2)}
+.flow-ai{--fa:var(--action-secondary)}
+.flow-check{--fa:var(--alert-warning-dark)}
+.flow-author{--fa:var(--alert-success-dark)}
+.flow-out{--fa:var(--text-1)}
+.flow-audit{margin:26px 0 0;font-size:.86rem;color:var(--text-2);border:1px dashed var(--text-3);border-radius:var(--radius-md);padding:12px 16px}
+.flow-audit b{color:var(--text-1)}
+@media (max-width:560px){ol.flow-steps>li{padding:12px 14px;grid-template-columns:28px 1fr;gap:4px 10px}.flow-num{width:26px;height:26px}ol.flow-steps>li:not(:last-child)::after{left:26px}ol.flow-steps>li:not(:last-child)::before{left:21px}}
 @media (max-width:560px){ul.scores li{grid-template-columns:1fr}.rl-row.scorecard{grid-template-columns:1fr;padding:16px}.rl-row.scorecard .rl-num{display:none}.criterion-card dl{grid-template-columns:1fr}}
