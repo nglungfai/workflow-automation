@@ -622,6 +622,17 @@ p.rl-apply strong { color: var(--lane, var(--action-primary)); }
   color: var(--action-secondary-hover);
   border-color: rgba(61, 125, 123, 0.25);
 }
+.rl-pill--superseded {
+  background: var(--neutral-600);
+  color: var(--neutral-100);
+  border-color: var(--neutral-400);
+}
+article.post .rl-row p.rl-superseded {
+  grid-column: 2;
+  font-size: 0.82rem;
+  color: var(--text-2);
+  margin-top: 6px;
+}
 
 /* ---- Inline flow/structure diagrams within posts ---- */
 figure.diagram {
