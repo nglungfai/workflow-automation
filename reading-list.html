@@ -45,6 +45,51 @@
     <span style="--k:#3F2A7B">Research papers</span>
   </div>
 
+  <h2>September 2026</h2>
+  <h3>Applying AI in our work</h3>
+  <p class="rl-lane-desc">The practice — using AI tools day to day: prompting, AI-assisted coding, and automating our own workflows.</p>
+
+  <div id="rl-sep-01" class="rl-row lane-apply">
+    <div class="rl-num">01</div>
+    <div class="rl-head"><h4><a href="https://marmelab.com/blog/2026/09/24/the-state-of-ai-harness-engineering-2026.html">The State Of AI Harness Engineering 2026</a></h4><span class="rl-src">François Zaninotto (Marmelab) · Sep 2026</span><span class="rl-pill">Core</span></div>
+    <p>An audit of 246 open-source repositories and 57 publications finds that most projects write agent instructions but rarely test or enforce them; the author recommends keeping harnesses minimal, replacing prose rules with executable checks, and pruning controls as models improve.</p>
+    <p class="rl-apply"><strong>Apply it:</strong> Turn the rules in our skills into checks that run, not paragraphs the agent may ignore — and prune the ones newer models no longer need. <em>In practice: <a href="posts/prompt-context-harness-loop-engineering.html">Prompt vs. Context vs. Harness vs. Loop</a>.</em></p>
+  </div>
+
+  <div id="rl-sep-02" class="rl-row lane-apply">
+    <div class="rl-num">02</div>
+    <div class="rl-head"><h4><a href="https://developers.googleblog.com/the-anatomy-of-harness-engineering-how-to-evaluate-iterate-and-guard-ai-coding-agents/">The Anatomy of Harness Engineering: How to Evaluate, Iterate, and Guard AI Coding Agents</a></h4><span class="rl-src">Mullen &amp; Gunderman (Google) · Sep 2026</span><span class="rl-pill">Core</span></div>
+    <p>Argues for behavioral evaluations that check small, observable steps — did the agent run a validator before finishing? — alongside end-to-end benchmarks, starting from a single failure mode and tracking batch results over time.</p>
+    <p class="rl-apply"><strong>Apply it:</strong> A concrete way to start the scored, per-skill test cases our workflows still lack: pick one failure mode, write a strict check for it, and re-run it whenever the model changes. <em>In practice: <a href="posts/how-this-site-ships-itself.html">How This Site Ships Itself</a>.</em></p>
+  </div>
+
+  <h3>Engineering write-ups</h3>
+  <p class="rl-lane-desc">How industry teams actually built it — practitioner posts, more readable than papers, each linking to the original.</p>
+
+  <div id="rl-sep-03" class="rl-row lane-eng">
+    <div class="rl-num">03</div>
+    <div class="rl-head"><h4><a href="https://nextjs.org/blog/how-we-closed-1500-github-issues">How we closed 1,500 GitHub issues in one month</a></h4><span class="rl-src">Marcos Hernanz (Next.js) · Sep 2026</span><span class="rl-pill">Core</span></div>
+    <p>The Next.js team built a read-only research agent that scores whether each old issue can be closed, with a conservative confidence score; maintainers reviewed the evidence, a reopen window checked the calls, and 1,462 issues were closed in about three weeks.</p>
+    <p class="rl-apply"><strong>Apply it:</strong> A reusable pattern for agent work with real consequences: read-only by default, evidence attached to every verdict, a human review queue, and a cheap way to undo mistakes.</p>
+  </div>
+
+  <h3>Research papers</h3>
+  <p class="rl-lane-desc">The science — foundational methods and applied research behind audience modeling, response, and measurement.</p>
+
+  <div id="rl-sep-04" class="rl-row lane-papers">
+    <div class="rl-num">04</div>
+    <div class="rl-head"><h4><a href="https://arxiv.org/abs/2609.18257">Pseudo-Incrementality Testing: Measuring Advertising Lift from Naturally Occurring Interventions</a></h4><span class="rl-src">Filippou, Quach &amp; Jha · Sep 2026</span><span class="rl-pill">Core</span></div>
+    <p>Treats a firm's own abrupt marketing changes — budget cuts, channel launches, paused programs — as quasi-experiments, dating them with Bayesian inference and estimating impact against a structural time-series counterfactual; on Meta's GeoLift benchmarks its ad-removal estimate came within 6.2% of the experimental result.</p>
+    <p class="rl-apply"><strong>Apply it:</strong> A route to defensible lift estimates when a randomized holdout isn't feasible — useful for partner and client measurement conversations.</p>
+  </div>
+
+  <div id="rl-sep-05" class="rl-row lane-papers">
+    <div class="rl-num">05</div>
+    <div class="rl-head"><h4><a href="https://arxiv.org/abs/2609.40303">How Much of a Harness Does a Strong Agent Need for Autonomous ML Engineering?</a></h4><span class="rl-src">Brilliantov, Hernández-Cano &amp; Abbé · Sep 2026</span><span class="rl-pill">Core</span></div>
+    <p>Under an equal time budget and the same frontier model, leading open-source harnesses showed no advantage over a single session of a minimal coding agent with read, write, and bash tools; ablations suggest the extra orchestration layers are largely redundant.</p>
+    <p class="rl-apply"><strong>Apply it:</strong> Evidence for starting with the simplest agent setup and adding structure only when a measured failure demands it — before building orchestration around a model workflow.</p>
+  </div>
+
   <h2>August 2026</h2>
   <h3>Applying AI in our work</h3>
   <p class="rl-lane-desc">The practice — using AI tools day to day: prompting, AI-assisted coding, and automating our own workflows.</p>
