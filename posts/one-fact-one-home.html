@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Fact, One Home: How an Agent System Remembers — Workflow Automation</title>
+<meta name="description" content="Where lessons live so they survive the end of a session: procedures, decisions, and pointers split by how fast they rot — with a sync sweep to write facts in and a monthly anti-entropy audit to catch the drift.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Workflow Automation">
+<meta property="og:title" content="One Fact, One Home: How an Agent System Remembers">
+<meta property="og:description" content="Where lessons live so they survive the end of a session: procedures, decisions, and pointers split by how fast they rot — with a sync sweep to write facts in and a monthly anti-entropy audit to catch the drift.">
+<meta property="og:url" content="https://nglungfai.github.io/workflow-automation/posts/one-fact-one-home.html">
+<meta property="og:image" content="https://nglungfai.github.io/workflow-automation/assets/og/og-one-fact-one-home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="One Fact, One Home: How an Agent System Remembers: Case Study on Workflow Automation by Lungfai Ng.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">Workflow Automation</div>
+    <nav class="site-nav">
+      <a href="../index.html">Posts</a>
+      <a href="../reading-list.html">Reading List</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<a class="back-link" href="../index.html">&larr; All posts</a>
+<article class="post">
+  <h1>One Fact, One Home: How an Agent System Remembers</h1>
+  <div class="meta">Case Study · 4 min read</div>
+
+  <p>Every AI conversation ends with total amnesia. The agent that shipped a release yesterday wakes up today knowing nothing about the deploy trap it discovered, the style correction you made, or the decision you reached together. The naive fix is to write everything down everywhere — and that fails in a worse way, because now there are five copies of every fact, they disagree within a month, and the agent confidently acts on the stale one. The <a href="how-this-site-ships-itself.html">publishing pipeline behind this site</a> claims that "every failure becomes a lesson the agent keeps." This post is about the architecture that makes that true — where lessons actually live, and what stops them from rotting.</p>
+
+  <h2>Three stores, one rule</h2>
+  <p>Everything this system was designed to know lives in exactly one of three places, split by what kind of fact it is — because different kinds of facts change at different speeds and rot in different ways.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three knowledge stores (the project doc has since been retired, see the update below): the skill holds procedures and conventions, the project doc held decisions and status, agent memory holds pointers and orphan facts. Each fact lives in exactly one store; the others link to it. The live site is the ground truth all three are audited against monthly.">
+      <defs>
+        <marker id="kb-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--neutral-300)"/>
+        </marker>
+      </defs>
+
+      <rect x="12" y="24" width="210" height="96" rx="10" fill="var(--action-primary-soft)" stroke="var(--action-primary)"/>
+      <text x="117" y="50" font-size="12.5" font-weight="600" fill="var(--action-primary)" text-anchor="middle">The skill</text>
+      <text x="117" y="70" font-size="10.5" fill="var(--text-2)" text-anchor="middle">HOW: procedures, templates,</text>
+      <text x="117" y="86" font-size="10.5" fill="var(--text-2)" text-anchor="middle">conventions, recovery playbooks</text>
+      <text x="117" y="106" font-size="10" fill="var(--text-3)" text-anchor="middle">changes when a lesson is learned</text>
+
+      <rect x="245" y="24" width="210" height="96" rx="10" fill="var(--surface-0)" stroke="var(--border-2)"/>
+      <text x="350" y="50" font-size="12.5" font-weight="600" fill="var(--text-1)" text-anchor="middle">The project doc (retired)</text>
+      <text x="350" y="70" font-size="10.5" fill="var(--text-2)" text-anchor="middle">WHAT &amp; WHY: decisions,</text>
+      <text x="350" y="86" font-size="10.5" fill="var(--text-2)" text-anchor="middle">requirements, status, history</text>
+      <text x="350" y="106" font-size="10" fill="var(--text-3)" text-anchor="middle">changes when a decision is made</text>
+
+      <rect x="478" y="24" width="210" height="96" rx="10" fill="var(--surface-0)" stroke="var(--border-2)"/>
+      <text x="583" y="50" font-size="12.5" font-weight="600" fill="var(--text-1)" text-anchor="middle">Agent memory</text>
+      <text x="583" y="70" font-size="10.5" fill="var(--text-2)" text-anchor="middle">WHERE: pointers to the other two,</text>
+      <text x="583" y="86" font-size="10.5" fill="var(--text-2)" text-anchor="middle">plus facts with no other home</text>
+      <text x="583" y="106" font-size="10" fill="var(--text-3)" text-anchor="middle">smallest store, by design</text>
+
+      <text x="350" y="158" font-size="12" font-weight="600" fill="var(--text-1)" text-anchor="middle">One fact, one home — the other stores link, never copy</text>
+
+      <rect x="200" y="192" width="300" height="56" rx="10" fill="var(--brand-purple-deep)" stroke="var(--brand-purple-deep)"/>
+      <text x="350" y="216" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">The live site: ground truth</text>
+      <text x="350" y="234" font-size="10.5" fill="#FFFFFF" opacity="0.8" text-anchor="middle">all three stores audited against it, monthly</text>
+
+      <line x1="117" y1="120" x2="290" y2="190" stroke="var(--neutral-300)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#kb-arr)"/>
+      <line x1="350" y1="120" x2="350" y2="188" stroke="var(--neutral-300)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#kb-arr)"/>
+      <line x1="583" y1="120" x2="410" y2="190" stroke="var(--neutral-300)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#kb-arr)"/>
+      <text x="640" y="220" font-size="10" fill="var(--text-3)" text-anchor="middle">audit</text>
+    </svg>
+    <figcaption>Procedures, decisions, and pointers age differently — so they live apart, and nothing is stored twice.</figcaption>
+  </figure>
+
+  <p><strong>The skill</strong> is the agent's standing instructions: the post template, the browser-publishing procedure, the deploy-failure recovery playbook, the content rules. It loads automatically whenever relevant work starts. <strong>The project doc</strong> was a living PRD on Confluence: what was decided, what shipped when, what's still open, and why — the file a new collaborator (human or agent) would read first. It has since been retired; see the update below. <strong>Agent memory</strong> is deliberately the smallest: pointers to the other two, plus the handful of facts that belong nowhere else. The rule that holds it together: <em>a fact lives in exactly one store, and the others link to it.</em> Copies are how documentation lies to you — two versions of a fact means one of them is wrong and you don't know which.</p>
+
+  <blockquote><p><strong>Update, Nov 2026:</strong> the project doc is gone. It was the store that cost the most to maintain and the one the monthly audit kept finding stale, so we stopped updating it on 2026-10-31 rather than keep paying for a home that wasn't earning its keep. The system now runs on two stores, the skill and agent memory, plus one more rule: the shared working folder is the source of truth for the site's content, and the repository and live site are a mirror of it. A drift check compares the two at the start and end of every session, and the monthly audit reports any difference. Deleting a home is the same rule applied honestly: if a fact has no store worth keeping it in, it doesn't get a copy.</p></blockquote>
+
+  <h2>How lessons get in</h2>
+  <p>Any work session that changes the system's shape ends with a <em>sync sweep</em> — three questions, answered while the context is still hot: Did this make a procedure stale? Update the skill. Did it change a decision or status? That used to mean updating the project doc; now it means recording it in the skill, or in memory when no procedure is affected. Did it break a pointer, or create a fact with no home? Update memory. The sweep is why the skill's version history reads like an engineering log: v1 gave the human exact steps to execute; v2 let the agent push directly; v5 encoded a deploy-recovery playbook learned from four production failures; v6 encoded the white-label rules and a commit-verification discipline learned from a silently dropped commit. Each version is a scar with documentation.</p>
+
+  <h2>How rot gets caught</h2>
+  <p>Sweeps get missed — that's a when, not an if. So the backstop is an <em>anti-entropy audit</em>: a scheduled agent reads the live site once a month and checks every claim the stores make against what's actually deployed, and reports any drift between the working folder and the published copy. Stale procedure in the skill, status row that no longer matches reality, dead pointer in memory — each becomes a line in a report for human review. The audit proposes; it never decides. The design assumption is worth stating plainly: documentation is presumed to drift, so the system doesn't rely on discipline to prevent drift — it schedules the job of finding it.</p>
+
+  <h2>The questions worth asking</h2>
+  <p><strong>"Why not one big document?"</strong> Because procedures, decisions, and pointers have different lifecycles. A procedure changes when a lesson is learned; a decision changes rarely and its history matters; pointers change constantly and are worthless when stale. In one document, the fast-changing parts bury the stable parts, every edit risks the whole file, and nobody can tell which sections still hold. Splitting by rot-rate is the same reason databases separate hot and cold data.</p>
+  <p><strong>"The agent edits its own instructions — what stops that from going wrong?"</strong> The same gate that governs everything else: the agent drafts skill updates, but a human reviews and installs them. Instructions are versioned artifacts, not a scratchpad — the agent can propose that its own procedure was wrong, and it regularly does, but it can't quietly rewrite the rules it operates under.</p>
+  <p><strong>"What happens when the stores disagree anyway?"</strong> For what the public sees, the live site wins — it's the one artifact that can't drift from itself. For what is intended, the working folder wins. A disagreement isn't silently patched; it's filed as a finding, a human rules on which store lied, and the fix includes asking why the sweep missed it. Disagreement is treated as a bug in the process, not just an error in a file.</p>
+
+  <h2>So what?</h2>
+  <p>Most agent demos are impressive for one session and amnesiac by the next. The unglamorous half of agent engineering — the half that makes the <a href="how-this-site-ships-itself.html">publishing pipeline</a> compound instead of reset — is exactly this: deciding where facts live, how lessons get written in, and who catches the rot. Context windows end. Systems shouldn't. The same architecture runs the private production workflows this site describes; the version you're reading about is the one whose paper trail is public.</p>
+
+  <div class="try-box">
+    <p class="try-box-label">Try it — copy into Cowork</p>
+    <div class="try-box-row">
+      <code class="try-box-text">Ask about a project you work on with AI: "What did we decide about this last month, and where is that written down?" If the answer lives only in an old chat transcript, you have copies of conversations — not a system that remembers.</code>
+      <button type="button" class="try-copy-btn">Copy</button>
+    </div>
+  </div>
+
+  <blockquote>Related: <a href="how-this-site-ships-itself.html">How This Site Ships Itself</a> — the pipeline this architecture feeds; its "every failure becomes a lesson" loop is this post's write path in action.</blockquote>
+
+<blockquote><p><strong>Further reading:</strong> <a href="../reading-list.html#rl-04">Claude Code Best Practices</a> — the supply-context discipline this architecture exists to serve — on the <a href="../reading-list.html">AI Reading List</a>.</p></blockquote>
+</article>
+</main>
+
+<footer class="site-footer">
+  Built, shipped, and maintained by agentic workflows · Curated by Lungfai Ng
+</footer>
+
+<script src="../assets/copy-prompt.js" defer></script>
+</body>
+</html>
