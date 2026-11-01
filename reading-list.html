@@ -50,6 +50,55 @@
     <span style="--k:#3F2A7B">Research papers</span>
   </div>
 
+<!-- rl:month:2026-11:start -->
+  <h2>November 2026</h2>
+  <h3>Engineering write-ups</h3>
+  <p class="rl-lane-desc">How industry teams actually built it — practitioner posts, more readable than papers, each linking to the original.</p>
+
+  <div id="rl-nov-01" class="rl-row lane-eng">
+    <div class="rl-num">01</div>
+    <div class="rl-head"><h4><a href="https://simonwillison.net/2025/Dec/31/the-year-in-llms/">2025: The year in LLMs</a></h4><span class="rl-src">Simon Willison · published Dec 2025, scored in the Nov 2026 list</span><span class="rl-pill">Core</span></div>
+    <p>A tour of the year in language models: reasoning models that drive tools, coding agents and the risks of running them unattended, and a few lasting lessons such as giving agents an existing test suite to check their work.</p>
+    <p class="rl-apply"><strong>Apply it:</strong> Take the one transferable step: before handing an agent a task, find or write a test suite it can run against, and treat unattended runs as a risk you decide on, not a default.</p>
+    <!-- rl:chips:start --><a class="rl-chips" href="selection/2026-11.html#rl-nov-01" aria-label="Rubric scores for this entry; open the scorecard"><span class="sc partial"><b class="g g-partial" aria-hidden="true"></b>Evidence<span class="sr"> Partial</span></span><span class="sc weak"><b class="g g-weak" aria-hidden="true"></b>Method<span class="sr"> Weak</span></span><span class="sc partial"><b class="g g-partial" aria-hidden="true"></b>Limitations<span class="sr"> Partial</span></span><span class="sc partial"><b class="g g-partial" aria-hidden="true"></b>Actionability<span class="sr"> Partial</span></span><span class="sc partial"><b class="g g-partial" aria-hidden="true"></b>Interest<span class="sr"> Partial</span></span><span class="sc partial"><b class="g g-partial" aria-hidden="true"></b>Durability<span class="sr"> Partial</span></span><span class="sc-prov">Author-reviewed</span></a><!-- rl:chips:end -->
+  </div>
+
+  <h3>Research papers</h3>
+  <p class="rl-lane-desc">The science — foundational methods and applied research behind audience modeling, response, and measurement.</p>
+
+  <div id="rl-nov-03" class="rl-row lane-papers">
+    <div class="rl-num">03</div>
+    <div class="rl-head"><h4><a href="https://arxiv.org/abs/2601.06007">Don't Break the Cache: An Evaluation of Prompt Caching for Long-Horizon Agentic Tasks</a></h4><span class="rl-src">Lumer et al. (PricewaterhouseCoopers) · published Jan 2026 (v2 Jan 31), scored in the Nov 2026 list</span><span class="rl-pill">Core</span></div>
+    <p>Measures what prompt caching saves on a long-running research agent: across four models from three providers, caching cut cost by 41 to 80% with the best setup per model, and caching only the stable system prompt was the most consistent choice, while caching everything could slow responses.</p>
+    <p class="rl-apply"><strong>Apply it:</strong> A cheap test for any agent with a long, repeated prompt: check the cached-token counts your API already reports, move timestamps and session identifiers to the end of the system prompt, keep tool definitions fixed within a session, and compare caching only the stable prefix against caching everything on your own workload.</p>
+    <!-- rl:chips:start --><a class="rl-chips" href="selection/2026-11.html#rl-nov-03" aria-label="Rubric scores for this entry; open the scorecard"><span class="sc strong"><b class="g g-strong" aria-hidden="true"></b>Evidence<span class="sr"> Strong</span></span><span class="sc partial"><b class="g g-partial" aria-hidden="true"></b>Method<span class="sr"> Partial</span></span><span class="sc partial"><b class="g g-partial" aria-hidden="true"></b>Limitations<span class="sr"> Partial</span></span><span class="sc strong"><b class="g g-strong" aria-hidden="true"></b>Actionability<span class="sr"> Strong</span></span><span class="sc strong"><b class="g g-strong" aria-hidden="true"></b>Interest<span class="sr"> Strong</span></span><span class="sc partial"><b class="g g-partial" aria-hidden="true"></b>Durability<span class="sr"> Partial</span></span><span class="sc-prov">Author-reviewed</span></a><!-- rl:chips:end -->
+  </div>
+
+<!-- rl:month:2026-11:end -->
+
+<!-- rl:month:2026-10:start -->
+  <h2>October 2026</h2>
+  <h3>Research papers</h3>
+  <p class="rl-lane-desc">The science — foundational methods and applied research behind audience modeling, response, and measurement.</p>
+
+  <div id="rl-oct-02" class="rl-row lane-papers">
+    <div class="rl-num">02</div>
+    <div class="rl-head"><h4><a href="https://arxiv.org/abs/2610.16067">When Agent Evaluation Becomes Unreliable: An Empirical Study of Oracle Failures and Configuration-Dependent Measurement in an LLM Agent Benchmark</a></h4><span class="rl-src">Junjie Chen (Nanjing Univ. of Science and Technology) · Oct 2026</span><span class="rl-pill">Core</span></div>
+    <p>Treats an agent benchmark's grader as software and tests it: injected faults, state checks and known-answer controls. On a widely used benchmark it finds a reward function that never restores the database it resets, which inflated one run's success rate from 65.5% to 94.3% and reordered the top agents.</p>
+    <p class="rl-apply"><strong>Apply it:</strong> Two cheap checks to add to any harness that grades agent runs: score a finished episode twice and require the same verdict, and assert that the environment still holds the state the agent left. Report the score together with how it was measured.</p>
+    <!-- rl:chips:start --><a class="rl-chips" href="selection/2026-10.html#rl-oct-02" aria-label="Rubric scores for this entry; open the scorecard"><span class="sc strong"><b class="g g-strong" aria-hidden="true"></b>Evidence<span class="sr"> Strong</span></span><span class="sc partial"><b class="g g-partial" aria-hidden="true"></b>Method<span class="sr"> Partial</span></span><span class="sc strong"><b class="g g-strong" aria-hidden="true"></b>Limitations<span class="sr"> Strong</span></span><span class="sc strong"><b class="g g-strong" aria-hidden="true"></b>Actionability<span class="sr"> Strong</span></span><span class="sc strong"><b class="g g-strong" aria-hidden="true"></b>Interest<span class="sr"> Strong</span></span><span class="sc strong"><b class="g g-strong" aria-hidden="true"></b>Durability<span class="sr"> Strong</span></span><span class="sc-prov">Author-reviewed</span></a><!-- rl:chips:end -->
+  </div>
+
+  <div id="rl-oct-03" class="rl-row lane-papers">
+    <div class="rl-num">03</div>
+    <div class="rl-head"><h4><a href="https://arxiv.org/abs/2610.17418v1">Why Agentic Workflows Fail: A Taxonomy Derived from Literature and Empirical Data</a></h4><span class="rl-src">Li, Bahsoon &amp; Chen (University of Birmingham) · Oct 2026</span><span class="rl-pill">Core</span></div>
+    <p>Codes 397 failures from the research literature and 1,196 from public GitHub issues by who was responsible (the agent, an outside system, or both), mechanism, workflow stage and agent capability. Public issues cluster in tool and API execution; papers emphasize planning and reasoning.</p>
+    <p class="rl-apply"><strong>Apply it:</strong> A triage habit for any agent workflow: when a tool call fails, record whether the agent, the outside system or both were responsible, and at which stage it broke, before deciding whether to change the prompt or the integration.</p>
+    <!-- rl:chips:start --><a class="rl-chips" href="selection/2026-10.html#rl-oct-03" aria-label="Rubric scores for this entry; open the scorecard"><span class="sc strong"><b class="g g-strong" aria-hidden="true"></b>Evidence<span class="sr"> Strong</span></span><span class="sc strong"><b class="g g-strong" aria-hidden="true"></b>Method<span class="sr"> Strong</span></span><span class="sc strong"><b class="g g-strong" aria-hidden="true"></b>Limitations<span class="sr"> Strong</span></span><span class="sc partial"><b class="g g-partial" aria-hidden="true"></b>Actionability<span class="sr"> Partial</span></span><span class="sc strong"><b class="g g-strong" aria-hidden="true"></b>Interest<span class="sr"> Strong</span></span><span class="sc strong"><b class="g g-strong" aria-hidden="true"></b>Durability<span class="sr"> Strong</span></span><span class="sc-prov">Author-reviewed</span></a><!-- rl:chips:end -->
+  </div>
+
+<!-- rl:month:2026-10:end -->
+
   <h2>September 2026</h2>
   <h3>Applying AI in our work</h3>
   <p class="rl-lane-desc">The practice — using AI tools day to day: prompting, AI-assisted coding, and automating our own workflows.</p>
