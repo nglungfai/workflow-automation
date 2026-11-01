@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How entries are selected — Workflow Automation</title>
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../scorecards.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">Workflow Automation</div>
+    <nav class="site-nav">
+      <a href="../index.html">Posts</a>
+      <a href="../reading-list.html">Reading List</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="post">
+<a class="back-link" href="../reading-list.html">← Reading list</a>
+<h1>How entries are selected</h1>
+<div class="meta">Rubric v1.0 · Approved by Lungfai Ng on 2026-10-31</div>
+<p>Every entry on the reading list is scored against the criteria below. The scores are there so a reader can see why an entry earned its place and where it is weaker, not to rank articles.</p>
+<p>There is no total score, because a number implies precision the judgment does not have. Each entry instead gets a verdict that names the trade-off accepted, and any claim that could not be verified is flagged until it is checked.</p>
+<p>Scores are drafted by an AI model from the full text of each article, checked against the source, and reviewed by the author whenever a rating is Weak or Unverified, a flag is raised, or the independent second review is missing or disagrees.</p>
+<h2>The criteria</h2>
+<div class="criterion-card"><h3>Evidence basis</h3><p class="q-line">Does it report observed data or outcomes, or argue from opinion?</p><dl><dt><span class="chip strong">Strong</span></dt><dd>Reports observed data from a described sample or a real deployment, with counts or denominators a reader can check.</dd><dt><span class="chip partial">Partial</span></dt><dd>Reports some data, a single anecdote, or a benchmark without its sample or conditions.</dd><dt><span class="chip weak">Weak</span></dt><dd>Argument, framework or recommendation with no observed results.</dd></dl></div>
+<div class="criterion-card"><h3>Method transparency</h3><p class="q-line">Can you see how the numbers or conclusions were produced?</p><dl><dt><span class="chip strong">Strong</span></dt><dd>The procedure can be repeated: selection rule, steps, parameters or thresholds, and where the data or code lives.</dd><dt><span class="chip partial">Partial</span></dt><dd>Core steps are described, but at least one element needed to reproduce is missing (selection rule, threshold, prompt, dataset).</dd><dt><span class="chip weak">Weak</span></dt><dd>Conclusions are given with no account of how they were produced.</dd></dl></div>
+<div class="criterion-card"><h3>Stated limitations</h3><p class="q-line">Does the source say where it does not apply?</p><dl><dt><span class="chip strong">Strong</span></dt><dd>Names specific ways the result could be wrong or fail to generalize, and acts on them (for example a counter-test or a scoped claim).</dd><dt><span class="chip partial">Partial</span></dt><dd>Caveats are generic or incidental, or the method's limits are named but not the findings' limits.</dd><dt><span class="chip weak">Weak</span></dt><dd>No limitations are stated.</dd></dl></div>
+<div class="criterion-card"><h3>Actionability</h3><p class="q-line">Could a practitioner act on it within a week?</p><dl><dt><span class="chip strong">Strong</span></dt><dd>Names concrete first steps a practitioner can start within a week with tools they likely have.</dd><dt><span class="chip partial">Partial</span></dt><dd>The direction is clear but needs significant adaptation, or infrastructure the reader may not have.</dd><dt><span class="chip weak">Weak</span></dt><dd>An insight with no path to applying it.</dd></dl></div>
+<div class="criterion-card"><h3>Interest disclosed</h3><p class="q-line">Does the author have a stake in what they recommend, and is it disclosed?</p><dl><dt><span class="chip strong">Strong</span></dt><dd>The author has no evident stake, or states it plainly up front.</dd><dt><span class="chip partial">Partial</span></dt><dd>A stake exists and is disclosed late or in passing, or is evident from context without an explicit statement.</dd><dt><span class="chip weak">Weak</span></dt><dd>A stake exists (the author's own product, the employer's tooling) and is not disclosed.</dd></dl></div>
+<div class="criterion-card"><h3>Durability</h3><p class="q-line">Does the idea survive the next model release?</p><dl><dt><span class="chip strong">Strong</span></dt><dd>The main idea is independent of any specific model, tool version or vendor.</dd><dt><span class="chip partial">Partial</span></dt><dd>The core idea holds but leans on current model capabilities, a specific tool, or a snapshot that will age.</dd><dt><span class="chip weak">Weak</span></dt><dd>Tied to a specific model, version or benchmark number likely to be obsolete within months.</dd></dl></div>
+<h2>What the ratings mean</h2>
+<p>Strong, Partial and Weak are defined per criterion above. Two more values exist.</p>
+<ul><li><strong>Unverified</strong>: The source was read but the answer could not be determined from it. Requires a flag saying what to check.</li><li><strong>n/a</strong>: The criterion does not apply. Allowed only where a criterion says so.</li></ul>
+<h2>How each entry is handled</h2>
+<ul><li>If Interest disclosed is Partial or Weak, the entry must carry a stake statement, shown with the verdict.</li><li>Every flag must be resolved, with a resolution note, before publication. An Unverified rating requires a flag.</li><li>An entry needs author review (reviewed_by = author) if any rating is Weak or Unverified, any flag exists, or the second review is missing or disagrees. Otherwise it may publish as auto-scored, subject to the monthly audit.</li><li>Every quote is at most 25 words and must appear verbatim in the stored snapshot.</li></ul>
+<h2>Scoring guidance</h2>
+<ul><li>Rate the main idea, not the worked example, for Durability and Actionability.</li><li>Rate what the source states, not the author's reputation or the venue.</li><li>Illustrative numbers inside advice are not evidence.</li><li>Negative findings ('not stated', 'no dataset linked') are provisional until confirmed; flag them.</li></ul>
+<h2>Scored months</h2>
+<ul><li><a href="2026-09.html">September 2026</a>: 3 entries. Scored after selection (pilot).</li></ul>
+<h2>Changelog</h2>
+<h3>v1.0 (approved by the author, 2026-10-31)</h3>
+<ul>
+<li>Six criteria with anchored Strong / Partial / Weak definitions.</li>
+<li>"Independence" became "Interest disclosed": every source has an interest, so the criterion asks whether the reader is told.</li>
+<li>"Error rate reported" was proposed and dropped by the author. What it caught is kept elsewhere: unvalidated AI steps are noted under Method transparency, and unverified accuracy claims are raised as flags on Evidence basis.</li>
+<li>Six binding rules (R1 to R6). A proposed rule requiring an "included despite" line and a framework/opinion label for Weak evidence or method was dropped by the author; a Weak rating still routes the entry to author review (R3).</li>
+<li>Pilot: three September 2026 entries scored under v1 before it was approved. They are labeled pilot, and no selection-time reasoning was captured for them.</li>
+</ul>
+</article>
+</main>
+
+<footer class="site-footer">
+  Built, shipped, and maintained by agentic workflows · Curated by Lungfai Ng
+</footer>
+
+</body>
+</html>
