@@ -49,3 +49,11 @@ The working copy (the source of truth) is a Google Drive folder; the agentic pip
 3. Add a `<a class="post-card">` entry to `index.html` linking to it, with the same title and read time.
 4. Add share tags (description, `og:*`, `twitter:card`) and an OG card in `assets/og/`.
 5. Commit and push — GitHub Pages redeploys automatically.
+
+## Dates and verification
+
+Each card shows **Published** (the post's first-commit date; never backdated) and **Last verified** (the month the automated checks last passed on it). "Last verified" means: `evals/site_checks.py` passed (contract, read-time honesty, share-card validity, card/post sync) and the internal link and anchor audit found nothing broken. It does **not** claim external links were re-tested; those are checked when a source is re-scored in the monthly reading-list run.
+
+## Distribution files
+
+`evals/build_feeds.py` (Drive-only) regenerates `feed.xml` (Atom), `sitemap.xml`, `robots.txt`, `404.html`, `assets/favicon.svg`, the favicon/feed `<link>` tags in every page head, and the older/newer links at the bottom of each post. Run it after adding a post (add the slug and date to `ORDER` in the script), then `site_checks.py`, then `sync_status.py --stage`. Pages under `selection/` are written by the reading-list generator; re-run `build_feeds.py` after it so their head links are restored.

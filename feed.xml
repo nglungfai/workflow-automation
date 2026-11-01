@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Workflow Automation</title>
+  <subtitle>A public working record of agentic workflows in production.</subtitle>
+  <link href="https://nglungfai.github.io/workflow-automation/feed.xml" rel="self"/>
+  <link href="https://nglungfai.github.io/workflow-automation/"/>
+  <id>https://nglungfai.github.io/workflow-automation/</id>
+  <updated>2026-11-01T12:00:00Z</updated>
+  <author><name>Lungfai Ng</name></author>
+  <entry>
+    <title>One Fact, One Home: How an Agent System Remembers</title>
+    <link href="https://nglungfai.github.io/workflow-automation/posts/one-fact-one-home.html"/>
+    <id>https://nglungfai.github.io/workflow-automation/posts/one-fact-one-home.html</id>
+    <published>2026-11-01T12:00:00Z</published>
+    <updated>2026-11-01T12:00:00Z</updated>
+    <author><name>Lungfai Ng</name></author>
+    <summary>Where lessons live so they survive the end of a session: procedures, decisions, and pointers split by how fast they rot, with a sync sweep to write facts in and a monthly audit to catch the rot.</summary>
+  </entry>
+  <entry>
+    <title>Piloting a Scored Reading List</title>
+    <link href="https://nglungfai.github.io/workflow-automation/posts/scoring-the-reading-list.html"/>
+    <id>https://nglungfai.github.io/workflow-automation/posts/scoring-the-reading-list.html</id>
+    <published>2026-11-01T12:00:00Z</published>
+    <updated>2026-11-01T12:00:00Z</updated>
+    <author><name>Lungfai Ng</name></author>
+    <summary>How the reading list got a published rubric: six criteria, an AI draft, an independent second review and an author gate, plus what the first pilot month got wrong.</summary>
+  </entry>
+  <entry>
+    <title>How This Site Ships Itself: Inside an Agent-Run Publishing Pipeline</title>
+    <link href="https://nglungfai.github.io/workflow-automation/posts/how-this-site-ships-itself.html"/>
+    <id>https://nglungfai.github.io/workflow-automation/posts/how-this-site-ships-itself.html</id>
+    <published>2026-07-05T12:00:00Z</published>
+    <updated>2026-07-05T12:00:00Z</updated>
+    <author><name>Lungfai Ng</name></author>
+    <summary>One real 17-commit release, with receipts: browser-driven commits, hash-verified payloads, deploy failures — and the missed commit the verification habit itself caught.</summary>
+  </entry>
+  <entry>
+    <title>Turn a Drive Folder into a Cowork Skill: Auto-Applying a Design System</title>
+    <link href="https://nglungfai.github.io/workflow-automation/posts/design-system-skill.html"/>
+    <id>https://nglungfai.github.io/workflow-automation/posts/design-system-skill.html</id>
+    <published>2026-07-04T12:00:00Z</published>
+    <updated>2026-07-04T12:00:00Z</updated>
+    <author><name>Lungfai Ng</name></author>
+    <summary>How we packaged a company design system from Google Drive into an installable skill, so every future HTML task is on-brand automatically — no copy-pasting hex codes.</summary>
+  </entry>
+  <entry>
+    <title>Automating Audience Segments with Two Cowork Skills</title>
+    <link href="https://nglungfai.github.io/workflow-automation/posts/audience-platform-automation-skills.html"/>
+    <id>https://nglungfai.github.io/workflow-automation/posts/audience-platform-automation-skills.html</id>
+    <published>2026-07-04T12:00:00Z</published>
+    <updated>2026-07-04T12:00:00Z</updated>
+    <author><name>Lungfai Ng</name></author>
+    <summary>Inside agent-new-syndicated-segments and agent-update-syndicated-segments — what each does, when to use which, and the guardrails that keep bulk changes safe.</summary>
+  </entry>
+  <entry>
+    <title>Prompt Engineering vs. Context Engineering vs. Harness Engineering vs. Loop Engineering</title>
+    <link href="https://nglungfai.github.io/workflow-automation/posts/prompt-context-harness-loop-engineering.html"/>
+    <id>https://nglungfai.github.io/workflow-automation/posts/prompt-context-harness-loop-engineering.html</id>
+    <published>2026-07-04T12:00:00Z</published>
+    <updated>2026-07-04T12:00:00Z</updated>
+    <author><name>Lungfai Ng</name></author>
+    <summary>Four layers of the same agent system, four different failure modes — and why rewording a prompt won&#x27;t fix a broken harness.</summary>
+  </entry>
+  <entry>
+    <title>Creating Your First Skill: A Beginner&#x27;s Guide</title>
+    <link href="https://nglungfai.github.io/workflow-automation/posts/creating-your-first-skill.html"/>
+    <id>https://nglungfai.github.io/workflow-automation/posts/creating-your-first-skill.html</id>
+    <published>2026-07-04T12:00:00Z</published>
+    <updated>2026-07-04T12:00:00Z</updated>
+    <author><name>Lungfai Ng</name></author>
+    <summary>What a skill actually is, why progressive disclosure makes it different from a saved prompt, and the three steps to build and install your own — with links to Anthropic&#x27;s official docs.</summary>
+  </entry>
+  <entry>
+    <title>Five Cowork Workflows for Data &amp; Product Teams</title>
+    <link href="https://nglungfai.github.io/workflow-automation/posts/five-workflows-for-data-and-product-teams.html"/>
+    <id>https://nglungfai.github.io/workflow-automation/posts/five-workflows-for-data-and-product-teams.html</id>
+    <published>2026-07-04T12:00:00Z</published>
+    <updated>2026-07-04T12:00:00Z</updated>
+    <author><name>Lungfai Ng</name></author>
+    <summary>From POC write-ups to bulk segment automation — real workflows mapped to how Product, Data Science, and Engineering teams actually work.</summary>
+  </entry>
+  <entry>
+    <title>Prompting Tips That Actually Move the Needle in Cowork</title>
+    <link href="https://nglungfai.github.io/workflow-automation/posts/prompting-tips-for-cowork.html"/>
+    <id>https://nglungfai.github.io/workflow-automation/posts/prompting-tips-for-cowork.html</id>
+    <published>2026-07-04T12:00:00Z</published>
+    <updated>2026-07-04T12:00:00Z</updated>
+    <author><name>Lungfai Ng</name></author>
+    <summary>Why vague requests waste turns, and the prompt patterns that get you a usable first draft.</summary>
+  </entry>
+  <entry>
+    <title>Getting Started with Claude Cowork</title>
+    <link href="https://nglungfai.github.io/workflow-automation/posts/getting-started-with-cowork.html"/>
+    <id>https://nglungfai.github.io/workflow-automation/posts/getting-started-with-cowork.html</id>
+    <published>2026-07-04T12:00:00Z</published>
+    <updated>2026-07-04T12:00:00Z</updated>
+    <author><name>Lungfai Ng</name></author>
+    <summary>What Cowork actually is, how it differs from claude.ai chat, and a five-minute first prompt to try today.</summary>
+  </entry>
+</feed>
