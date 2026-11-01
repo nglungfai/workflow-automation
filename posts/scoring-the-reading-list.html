@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piloting a Scored Reading List — Workflow Automation</title>
+<meta name="description" content="How the AI Reading List got a published rubric: six criteria, an AI draft, an independent second review and an author gate, plus what the first pilot month got wrong.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Workflow Automation">
+<meta property="og:title" content="Piloting a Scored Reading List">
+<meta property="og:description" content="How the AI Reading List got a published rubric: six criteria, an AI draft, an independent second review and an author gate, plus what the first pilot month got wrong.">
+<meta property="og:url" content="https://nglungfai.github.io/workflow-automation/posts/scoring-the-reading-list.html">
+<meta property="og:image" content="https://nglungfai.github.io/workflow-automation/assets/og/og-home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Workflow Automation: agentic workflows that can prove they work.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">Workflow Automation</div>
+    <nav class="site-nav">
+      <a href="../index.html">Posts</a>
+      <a href="../reading-list.html">Reading List</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<a class="back-link" href="../index.html">&larr; All posts</a>
+<article class="post">
+  <h1>Piloting a Scored Reading List</h1>
+  <div class="meta">Case Study · 2 min read</div>
+
+  <p>The AI Reading List has always claimed to be curated, which says someone chose the entries but not why. Starting this month, each entry carries six ratings and a line saying who scored and reviewed it. Here is how that works and what the first pilot month got wrong.</p>
+
+  <h2>The rubric</h2>
+  <p>Six criteria with written Strong, Partial and Weak anchors: evidence, method, limitations, actionability, interest disclosed, and durability. There is no total score, because a number implies precision the judgment lacks. Each entry gets a one-line verdict naming the trade-off instead. The anchors are on the <a href="../selection/index.html">selection page</a>.</p>
+
+  <h2>The pipeline</h2>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Scoring pipeline: the AI snapshots the article, drafts ratings, and a second AI pass reviews independently; automated checks validate the draft; the author reviews flagged or disputed entries; the result is published as rating chips and a provenance line. A dashed line shows a random entry re-scored blind each month and compared with the draft.">
+      <defs>
+        <marker id="sc-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="var(--neutral-300)"/>
+        </marker>
+      </defs>
+      <text x="210" y="26" font-size="11" font-weight="600" fill="var(--text-3)" letter-spacing="1" text-anchor="middle">AI</text>
+      <text x="490" y="26" font-size="11" font-weight="600" fill="var(--text-3)" letter-spacing="1" text-anchor="middle">CHECKS</text>
+      <text x="630" y="26" font-size="11" font-weight="600" fill="var(--text-3)" letter-spacing="1" text-anchor="middle">HUMAN GATE</text>
+
+      <rect x="14" y="40" width="112" height="56" rx="10" fill="var(--action-primary-soft)" stroke="var(--action-primary)"/>
+      <text x="70" y="64" font-size="12" font-weight="600" fill="var(--action-primary)" text-anchor="middle">Snapshot</text>
+      <text x="70" y="82" font-size="10.5" fill="var(--text-2)" text-anchor="middle">save the full text</text>
+
+      <line x1="126" y1="68" x2="150" y2="68" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#sc-arr)"/>
+
+      <rect x="154" y="40" width="112" height="56" rx="10" fill="var(--action-primary-soft)" stroke="var(--action-primary)"/>
+      <text x="210" y="64" font-size="12" font-weight="600" fill="var(--action-primary)" text-anchor="middle">Draft</text>
+      <text x="210" y="82" font-size="10.5" fill="var(--text-2)" text-anchor="middle">ratings + quotes</text>
+
+      <line x1="266" y1="68" x2="290" y2="68" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#sc-arr)"/>
+
+      <rect x="294" y="40" width="112" height="56" rx="10" fill="var(--action-primary-soft)" stroke="var(--action-primary)"/>
+      <text x="350" y="64" font-size="12" font-weight="600" fill="var(--action-primary)" text-anchor="middle">Second pass</text>
+      <text x="350" y="82" font-size="10.5" fill="var(--text-2)" text-anchor="middle">never sees the draft</text>
+
+      <line x1="406" y1="68" x2="430" y2="68" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#sc-arr)"/>
+
+      <rect x="434" y="40" width="112" height="56" rx="10" fill="var(--surface-0)" stroke="var(--border-2)"/>
+      <text x="490" y="64" font-size="12" font-weight="600" fill="var(--text-1)" text-anchor="middle">Validate</text>
+      <text x="490" y="82" font-size="10.5" fill="var(--text-2)" text-anchor="middle">quotes, flags, notes</text>
+
+      <line x1="546" y1="68" x2="570" y2="68" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#sc-arr)"/>
+
+      <rect x="574" y="40" width="112" height="56" rx="10" fill="var(--surface-0)" stroke="var(--border-2)" stroke-dasharray="5 3"/>
+      <text x="630" y="64" font-size="12" font-weight="600" fill="var(--text-1)" text-anchor="middle">Author review</text>
+      <text x="630" y="82" font-size="10.5" fill="var(--text-2)" text-anchor="middle">flagged or disputed</text>
+
+      <line x1="630" y1="96" x2="630" y2="122" stroke="var(--neutral-300)" stroke-width="1.5" marker-end="url(#sc-arr)"/>
+
+      <rect x="574" y="126" width="112" height="56" rx="10" fill="var(--action-primary-soft)" stroke="var(--action-primary)"/>
+      <text x="630" y="150" font-size="12" font-weight="600" fill="var(--action-primary)" text-anchor="middle">Publish</text>
+      <text x="630" y="168" font-size="10.5" fill="var(--text-2)" text-anchor="middle">chips + provenance</text>
+
+      <path d="M574 154 L210 154 L210 100" fill="none" stroke="var(--neutral-300)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#sc-arr)"/>
+      <text x="392" y="146" font-size="10.5" fill="var(--text-3)" text-anchor="middle">monthly: one random entry re-scored blind,</text>
+      <text x="392" y="170" font-size="10.5" fill="var(--text-3)" text-anchor="middle">then compared with the draft</text>
+    </svg>
+    <figcaption>Three AI steps, one mechanical check, one human gate. Entries that clear every check may publish without individual review, and the monthly blind re-score audits them.</figcaption>
+  </figure>
+
+  <p>The article is saved as a snapshot first, and every quote the draft uses must appear word for word in it. A second AI pass, which never sees the draft, rates independently. Any Weak or Unverified rating, unresolved flag, or disagreement between the passes sends the entry to me.</p>
+
+  <h2>What the pilot got wrong</h2>
+  <p>Three entries, eighteen ratings. The second pass disagreed with the draft on six. I changed four of the draft's ratings, and three moved down: on one how-to article I moved Method and Limitations from Partial to Weak, because it teaches a technique without saying how its authors reached their conclusions. The draft is lenient exactly where skepticism matters. I sided with the reviewer on three of the six disagreements and with the draft on three, so a disagreement is a reason to look, not a verdict. A blind re-score of one random entry differed from the draft on three of six criteria. Three entries is too few to call these error rates.</p>
+
+  <h2>What it does not do</h2>
+  <p>These ratings measure how well an article shows its work, not whether it is right. The draft and the reviewer are the same model family, so their agreement is weaker evidence than it looks, and clean entries can publish without my review. A placeholder note nearly shipped because no check looked for one. Automated checks only catch the failures someone has already imagined.</p>
+
+  <p>The pattern transfers to any judgment you make by gut: write the anchors down, require evidence, get an independent second read, route exceptions to a person, and sample your own work blind.</p>
+
+  <div class="try-box">
+    <p class="try-box-label">Audit a scorecard — copy into Cowork</p>
+    <div class="try-box-row">
+      <code class="try-box-text">Open nglungfai.github.io/workflow-automation/selection/2026-09.html. For each scorecard, check that every quoted passage appears in the source article it cites, and flag any rating whose quoted evidence does not support it. Report what you could not verify.</code>
+      <button type="button" class="try-copy-btn">Copy</button>
+    </div>
+  </div>
+
+  <blockquote>Related: <a href="how-this-site-ships-itself.html">How This Site Ships Itself</a> — the same describe, draft, gate, execute, verify loop, applied to publishing.</blockquote>
+
+  <blockquote><p><strong>Further reading:</strong> the scored entries on the <a href="../reading-list.html">AI Reading List</a>.</p></blockquote>
+</article>
+</main>
+
+<footer class="site-footer">
+  Built, shipped, and maintained by agentic workflows · Curated by Lungfai Ng
+</footer>
+
+<script src="../assets/copy-prompt.js" defer></script>
+</body>
+</html>
