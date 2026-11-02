@@ -40,10 +40,13 @@
   <h1>Piloting a Scored Reading List</h1>
   <div class="meta">Case Study · 2 min read</div>
 
-  <p>The AI Reading List has always claimed to be curated, which says someone chose the entries but not why. Starting this month, each entry carries six ratings and a line saying who scored and reviewed it. Here is how that works and what the first pilot month got wrong.</p>
+  <p>The AI Reading List has always claimed to be curated. That says someone chose the entries. It doesn't say why.</p>
+
+  <p>Starting this month, each entry carries six ratings and a line saying who scored and reviewed it. Here is how that works, and what the pilot month got wrong.</p>
 
   <h2>The rubric</h2>
-  <p>Six criteria with written Strong, Partial and Weak anchors: evidence, method, limitations, actionability, interest disclosed, and durability. There is no total score, because a number implies precision the judgment lacks. Each entry gets a one-line verdict naming the trade-off instead. The anchors are on the <a href="../selection/index.html">selection page</a>.</p>
+  <p>Six criteria, each with written Strong, Partial and Weak anchors: evidence, method, limitations, actionability, interest disclosed, and durability. The anchors are on the <a href="../selection/index.html">selection page</a>.</p>
+  <p>There is no total score, because a number implies precision the judgment lacks. Each entry gets a one-line verdict naming the trade-off instead.</p>
 
   <h2>The pipeline</h2>
 
@@ -99,15 +102,43 @@
     <figcaption>Three AI steps, one mechanical check, one human gate. Entries that clear every check may publish without individual review, and the monthly blind re-score audits them.</figcaption>
   </figure>
 
-  <p>The article is saved as a snapshot first, and every quote the draft uses must appear word for word in it. A second AI pass, which never sees the draft, rates independently. Any Weak or Unverified rating, unresolved flag, or disagreement between the passes sends the entry to me.</p>
+  <p>The article is saved as a snapshot first, and every quote the draft uses must appear word for word in it. A second AI pass, which never sees the draft, rates independently.</p>
+  <p>Any Weak or Unverified rating, unresolved flag, or disagreement between passes sends the entry to me.</p>
 
   <h2>What the pilot got wrong</h2>
-  <p>Three entries, eighteen ratings. The second pass disagreed with the draft on six. I changed four of the draft's ratings, and three moved down: on one how-to article I moved Method and Limitations from Partial to Weak, because it teaches a technique without saying how its authors reached their conclusions. The draft is lenient exactly where skepticism matters. I sided with the reviewer on three of the six disagreements and with the draft on three, so a disagreement is a reason to look, not a verdict. A blind re-score of one random entry differed from the draft on three of six criteria. Three entries is too few to call these error rates.</p>
+  <p>Three entries, eighteen ratings. The second pass disagreed with the draft on six.</p>
+  <p>I changed four of the draft's ratings, and three moved down. On one how-to article I moved Method and Limitations from Partial to Weak: it teaches a technique without saying how its authors reached their conclusions.</p>
+  <p>The draft is lenient exactly where skepticism matters.</p>
+  <p>I sided with the reviewer on three of the six disagreements and with the draft on three. A disagreement is a reason to look, not a verdict.</p>
 
-  <h2>What it does not do</h2>
-  <p>These ratings measure how well an article shows its work, not whether it is right. The draft and the reviewer are the same model family, so their agreement is weaker evidence than it looks, and clean entries can publish without my review. A placeholder note nearly shipped because no check looked for one. Automated checks only catch the failures someone has already imagined.</p>
+  <h2>The numbers</h2>
+  <table>
+    <thead><tr><th>Measure</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Entries scored</td><td>3</td></tr>
+      <tr><td>Ratings</td><td>18</td></tr>
+      <tr><td>Second-pass disagreements with the draft</td><td>6</td></tr>
+      <tr><td>Disagreements I settled for the reviewer / the draft</td><td>3 / 3</td></tr>
+      <tr><td>Draft ratings I changed</td><td>4 (3 moved down)</td></tr>
+      <tr><td>Blind re-score of one random entry</td><td>Differed on 3 of 6 criteria</td></tr>
+    </tbody>
+  </table>
+  <p>Three entries is too few to call these error rates.</p>
 
+  <h2>What still leaks</h2>
+  <p><strong>The ratings measure showing work, not being right.</strong></p>
+  <p><strong>The reviewer is not independent.</strong> The draft and the reviewer are the same model family, so their agreement is weaker evidence than it looks.</p>
+  <p><strong>Clean entries can publish without my review.</strong> The monthly blind re-score is what audits them.</p>
+  <p><strong>Checks catch imagined failures.</strong> A placeholder note nearly shipped because no check looked for one. Automated checks only catch the failures someone has already imagined.</p>
+
+  <h2>What I'd do differently</h2>
+  <p>Run the pilot on more than three entries before drawing conclusions about the process.</p>
+  <p>I'd also write the placeholder check on day one, not after a note nearly shipped.</p>
+
+  <h2>The bottom line</h2>
+  <p>A curated list is a claim until the criteria are written down. The rubric, quote check, second read and author gate make it auditable.</p>
   <p>The pattern transfers to any judgment you make by gut: write the anchors down, require evidence, get an independent second read, route exceptions to a person, and sample your own work blind.</p>
+  <p>Curation you can't audit is just taste.</p>
 
   <div class="try-box">
     <p class="try-box-label">Audit a scorecard — copy into Cowork</p>

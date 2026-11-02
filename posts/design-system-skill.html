@@ -40,13 +40,17 @@
   <h1>Turn a Drive Folder into a Cowork Skill: Auto-Applying a Design System</h1>
   <div class="meta">Skill Deep Dive · 5 min read</div>
 
-  <p>This site itself just got re-themed with a real company design system — Poppins type, aubergine/teal action colors, pill buttons, 20px card radii — instead of a generic dark theme. The interesting part isn't the re-theme; it's how we made that automatic for every future HTML task, not just this one. If your team ships internal tools, decks, or prototypes and wants them on-brand without re-explaining the brand every time, this is the pattern to copy.</p>
+  <p>This site just got re-themed with a real company design system: Poppins type, aubergine and teal action colors, pill buttons, 20px card radii. It replaced a generic dark theme.</p>
+  <p>The re-theme isn't the interesting part. Making it automatic for every future HTML task is.</p>
+  <p>If your team ships internal tools, decks, or prototypes and wants them on-brand without re-explaining the brand every time, this is the pattern to copy.</p>
 
-  <h2>The problem: a design system sitting in Drive doesn't help unless something reads it</h2>
-  <p>Our company already had a real design system — <code>colors_and_type.css</code> with every color, type, radius, and shadow token; logo SVGs; a Figma-sourced brand guide — living in a "Design System" folder in Google Drive. Useful, but only if whoever's building something remembers it exists, finds it, and copies the right values in by hand. That doesn't scale past one person.</p>
+  <h2>A design system in Drive doesn't help until something reads it</h2>
+  <p>Our company already had a real design system. <code>colors_and_type.css</code> held every color, type, radius, and shadow token. There were logo SVGs and a Figma-sourced brand guide. All of it lived in a "Design System" folder in Google Drive.</p>
+  <p>That's useful only if whoever's building something remembers the folder exists, finds it, and copies the right values by hand. It doesn't scale past one person.</p>
 
-  <h2>The fix: package it as an installable Cowork skill</h2>
-  <p>Cowork skills are just a folder with a <code>SKILL.md</code> manifest plus supporting files, zipped with a <code>.skill</code> extension. Once installed via <strong>Settings → Capabilities → Skills</strong>, Cowork matches the skill's description against your requests and pulls it in automatically — no need to say "use the design system" every time. It turns out our Drive folder already had a <code>SKILL.md</code> sitting in it, written for exactly this purpose; it just hadn't been packaged and installed yet.</p>
+  <h2>Packaging it as a Cowork skill</h2>
+  <p>A Cowork skill is a folder with a <code>SKILL.md</code> manifest plus supporting files, zipped with a <code>.skill</code> extension. Once it's installed via Settings → Capabilities → Skills, Cowork matches the skill's description against your requests and pulls it in automatically. Nobody has to say "use the design system."</p>
+  <p>Our Drive folder already had a <code>SKILL.md</code> written for exactly this purpose. It just hadn't been packaged or installed.</p>
 
   <h3>What we did, step by step</h3>
 
@@ -125,11 +129,11 @@
   </figure>
 
   <ol>
-    <li><strong>Located the source folder.</strong> Searched Google Drive for the design-system folder and found <code>SKILL.md</code>, <code>README.md</code>, <code>colors_and_type.css</code>, plus an <code>assets/</code> folder with logo SVGs and bundled Poppins font files.</li>
-    <li><strong>Pulled exact file contents.</strong> This is the part that's easy to get wrong: reading a file's "natural language representation" (what you get from a casual content preview) mangles code syntax — quotes get escaped, symbols get converted to entities. For anything that has to run as real CSS or markdown, you need the exact bytes, which means downloading the raw file content and decoding it, not summarizing it.</li>
+    <li><strong>Located the source folder.</strong> Searched Google Drive and found <code>SKILL.md</code>, <code>README.md</code>, <code>colors_and_type.css</code>, plus an <code>assets/</code> folder with logo SVGs and bundled Poppins font files.</li>
+    <li><strong>Pulled exact file contents.</strong> This is the step that's easy to get wrong. A file's "natural language representation", what a casual content preview returns, mangles code syntax: quotes get escaped and symbols become entities. Anything that has to run as real CSS or markdown needs the exact bytes, so download the raw file and decode it. Don't summarize it.</li>
     <li><strong>Assembled the skill folder.</strong> <code>SKILL.md</code>, <code>README.md</code>, and <code>colors_and_type.css</code> copied byte-for-byte, plus the 6 logo SVGs under <code>assets/</code>.</li>
-    <li><strong>Zipped it with the right structure.</strong> The zip needs to contain the skill's folder (matching the <code>name:</code> field in <code>SKILL.md</code>'s frontmatter) with <code>SKILL.md</code> inside it — not a flat dump of files, and not the folder's contents zipped without the wrapping folder.</li>
-    <li><strong>Installed it.</strong> Uploaded the <code>.skill</code> file via Settings → Capabilities → Skills. From that point on, any request that looks like building a branded interface, mock, deck, or prototype triggers the skill automatically.</li>
+    <li><strong>Zipped it with the right structure.</strong> The zip needs the skill's folder (matching the <code>name:</code> field in the <code>SKILL.md</code> frontmatter) with <code>SKILL.md</code> inside it. Not a flat dump of files, and not the folder's contents zipped without the wrapping folder.</li>
+    <li><strong>Installed it.</strong> Uploaded the <code>.skill</code> file via Settings → Capabilities → Skills. From then on, any request that looks like building a branded interface, mock, deck, or prototype triggers the skill automatically.</li>
   </ol>
 
   <figure class="diagram">
@@ -181,16 +185,18 @@
     <figcaption>The zip has to contain the wrapping <code>design-system.skill</code> folder itself — not just its contents — with <code>SKILL.md</code> at that folder's root.</figcaption>
   </figure>
 
-  <h2>What we deliberately left out — and why</h2>
-  <p>The full Drive folder also has ~30 HTML preview cards (every component rendered standalone) and a full React reconstruction of our data platform's UI under <code>ui_kits/platform/</code>. Those stayed in Drive rather than going into the installed skill, for a simple reason: package size and relevance. The core token file plus logos covers the vast majority of "make this on-brand" requests — plain HTML pages, decks, one-off mocks. The full UI kit is for a narrower case (recreating the actual platform app) and is still just a Drive search away when someone needs it.</p>
-  <p>We also left out the 8 bundled Poppins <code>.ttf</code> font files — binary assets are impractical to move through a text-based packaging pipeline. <code>colors_and_type.css</code> still references them via local <code>@font-face</code> rules, so if they're genuinely absent, add a Google Fonts fallback link to the page <code>&lt;head&gt;</code> before the stylesheet:</p>
+  <h2>What we deliberately left out</h2>
+  <p>The full Drive folder also has about 30 HTML preview cards, each component rendered standalone, and a full React reconstruction of our data platform's UI under <code>ui_kits/platform/</code>. Those stayed in Drive for two reasons: package size and relevance.</p>
+  <p>The core token file plus logos covers most "make this on-brand" requests: plain HTML pages, decks, one-off mocks. The UI kit serves a narrower case, recreating the actual platform app, and it's still one Drive search away.</p>
+  <p>We also left out the 8 bundled Poppins <code>.ttf</code> files. Binary assets are impractical to move through a text-based packaging pipeline. <code>colors_and_type.css</code> still references them through local <code>@font-face</code> rules. If they're absent, add a Google Fonts fallback link to the page <code>&lt;head&gt;</code> before the stylesheet:</p>
   <pre><code>&lt;link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap"&gt;</code></pre>
 
-  <h2>A real discrepancy we caught in the process</h2>
-  <p>Worth flagging for whoever owns the design system: <code>README.md</code> and <code>colors_and_type.css</code> disagree on the primary action color. The README describes royal purple <code>#590094</code> as primary with turquoise <code>#00CBB2</code> as secondary. The actual CSS file — which labels itself "source of truth" — defines deep aubergine <code>#3F2A7B</code> as primary and muted teal <code>#3D7D7B</code> as secondary. We used the CSS file's values everywhere on this site, since that's what actually renders, but the two documents should be reconciled so the next person pulling from Drive doesn't get conflicting guidance.</p>
+  <h2>A discrepancy we caught along the way</h2>
+  <p><code>README.md</code> and <code>colors_and_type.css</code> disagree on the primary action color. The README describes royal purple <code>#590094</code> as primary with turquoise <code>#00CBB2</code> as secondary. The CSS file, which labels itself "source of truth", defines deep aubergine <code>#3F2A7B</code> as primary and muted teal <code>#3D7D7B</code> as secondary.</p>
+  <p>We used the CSS values everywhere on this site, since that's what actually renders. Whoever owns the design system should reconcile the two documents, so the next person pulling from Drive doesn't get conflicting guidance.</p>
 
   <h2>Try it yourself</h2>
-  <p>The <code>design-system</code> skill is now installed and available. If you're building an internal tool, a one-off HTML mock, or a deck and want it on-brand without hand-copying hex codes:</p>
+  <p>The <code>design-system</code> skill is installed and available. If you're building an internal tool, a one-off HTML mock, or a deck and want it on-brand without hand-copying hex codes:</p>
 
   <figure class="diagram">
     <svg viewBox="0 0 700 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Trigger flow: teammate makes a request mentioning the brand or branded, Cowork matches it against installed skill descriptions, design-system skill loads automatically, output uses real brand tokens">
@@ -239,10 +245,38 @@
   </figure>
 
   <ul>
-    <li>Just ask Cowork to build it — mentioning the brand name or "branded" is usually enough to trigger the skill.</li>
-    <li>Link <code>colors_and_type.css</code> in your page <code>&lt;head&gt;</code> and use its CSS variables (<code>var(--action-primary)</code>, <code>var(--radius-pill)</code>, etc.) instead of hardcoding hex values — that's what keeps everything consistent if the tokens ever change.</li>
+    <li>Just ask Cowork to build it. Mentioning the brand name or "branded" is usually enough to trigger the skill.</li>
+    <li>Link <code>colors_and_type.css</code> in your page <code>&lt;head&gt;</code> and use its CSS variables (<code>var(--action-primary)</code>, <code>var(--radius-pill)</code>, etc.) instead of hardcoding hex values. That keeps everything consistent if the tokens ever change.</li>
     <li>Reach for the existing utility classes (<code>.pdp-btn--primary</code>, <code>.pdp-chip--succeeded</code>, <code>.pdp-card</code>) before rolling your own.</li>
   </ul>
+
+  <h2>The numbers</h2>
+  <table>
+    <thead><tr><th>Measure</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Packaging steps</td><td>5: four one-time setup steps, then install</td></tr>
+      <tr><td>Files in the installed skill</td><td>4 files (<code>SKILL.md</code>, <code>README.md</code>, <code>colors_and_type.css</code>, <code>INSTALL_NOTES.md</code>) plus <code>assets/</code></td></tr>
+      <tr><td>Logo SVGs bundled</td><td>6</td></tr>
+      <tr><td>HTML preview cards left in Drive</td><td>About 30</td></tr>
+      <tr><td>Poppins <code>.ttf</code> files left out</td><td>8</td></tr>
+      <tr><td>Primary action color, README vs. CSS</td><td><code>#590094</code> vs. <code>#3F2A7B</code></td></tr>
+    </tbody>
+  </table>
+  <p>Every row is something the packaging itself confirms. How often the skill triggers on its own, and how often output lands on-brand without edits, aren't tracked.</p>
+
+  <h2>Where this breaks</h2>
+  <p><strong>Two documents disagree.</strong> The skill follows the CSS, but anyone who reads the README still gets a different primary color until someone reconciles them.</p>
+  <p><strong>The installed skill is a copy.</strong> It was zipped from the Drive folder at one point in time, so the Drive version and the installed one can drift apart.</p>
+  <p><strong>The fonts aren't bundled.</strong> Without the <code>.ttf</code> files, the <code>@font-face</code> rules point at nothing, and pages rely on the Google Fonts fallback link.</p>
+  <p><strong>Triggering rides on the description.</strong> Mentioning the brand or "branded" usually pulls the skill in. A request that never hints at the brand may not.</p>
+
+  <h2>What I'd do differently</h2>
+  <p>Reconcile the README and the CSS before packaging, not after. We shipped with the conflict and flagged it.</p>
+  <p>I'd also put the exact-bytes download at the top of the checklist. A casual preview is the easy way to corrupt a stylesheet.</p>
+
+  <h2>The bottom line</h2>
+  <p>A design system in a folder is documentation. Packaged as a skill, it's something Cowork applies without being asked.</p>
+  <p>Steps 1 to 4 are one-time work, and step 5 is the only one a teammate thinks about again. Write the brand down once, then stop re-explaining it.</p>
 
   <blockquote>If your team has a similar "the real answer lives in a doc/folder somewhere" problem — a style guide, a glossary, a set of house rules — this same pattern (SKILL.md + supporting files, zipped, installed) is worth copying. See <a href="../about.html">About</a> for how to contribute a follow-up post once you've tried it.</blockquote>
 

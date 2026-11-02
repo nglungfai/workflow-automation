@@ -38,11 +38,15 @@
 <a class="back-link" href="../index.html">&larr; All posts</a>
 <article class="post">
   <h1>Prompt Engineering vs. Context Engineering vs. Harness Engineering vs. Loop Engineering</h1>
-  <div class="meta">Concepts · 7 min read</div>
+  <div class="meta">Concepts · 6 min read</div>
 
-  <p>These four terms get used interchangeably in agent discourse, which is a problem, because they describe four different layers of the same system and each one fails for a different reason. If your Cowork workflow is underperforming, the fix depends on which layer is actually broken. Treating a harness problem as a prompt problem — rewording instructions when the real issue is missing tool access or no verification step — burns turns without fixing anything.</p>
+  <p>These four terms get used interchangeably in agent discourse. They describe four layers of the same system, and each fails for a different reason.</p>
 
-  <p>Here's the layer breakdown, roughly in the order the industry adopted the vocabulary: prompt engineering (ChatGPT era, 2022), context engineering (2025, as agents started juggling multi-turn state and long context windows), harness engineering (2026, as the scaffolding around the model became the bottleneck), and loop engineering (mid-2026, for systems that decide on their own when to invoke the agent at all — a term Addy Osmani popularized building on work from Peter Steinberger and Anthropic's Boris Cherny).</p>
+  <p>If your Cowork workflow is underperforming, the fix depends on the broken layer. Rewording instructions when the real issue is missing tool access or no verification step burns turns for nothing.</p>
+
+  <p>The vocabulary arrived in layers. Prompt engineering came with the ChatGPT era, in 2022. Context engineering followed in 2025, as agents started juggling multi-turn state and long context windows. Harness engineering came in 2026, as the scaffolding around the model became the bottleneck.</p>
+
+  <p>Loop engineering arrived in mid-2026, for systems that decide on their own when to invoke the agent at all. Addy Osmani popularized the term, building on work from Peter Steinberger and Anthropic's Boris Cherny.</p>
 
   <style>
     .layer-tag { display:inline-block; font-size:0.72rem; font-weight:600; padding:4px 14px; border-radius:var(--radius-pill); margin-bottom:14px; letter-spacing:0.02em; }
@@ -58,22 +62,27 @@
 
   <h2>Prompt engineering: what to ask</h2>
   <div class="layer-tag layer-tag--prompt">Single turn · everything already provided</div>
-  <p>This is the layer everyone starts with and the one this site already covers in depth. It's about a single turn: the wording, structure, and constraints of one request to the model. Specify the deliverable, the audience, the format, what's out of scope. This is necessary but it's the smallest lever in the stack — a perfectly worded prompt still fails if the model doesn't have the right information or the right tools to act on it.</p>
+  <p>This is the layer everyone starts with, and the one this site already covers in depth. It covers a single turn: the wording, structure, and constraints of one request.</p>
+  <p>It's necessary, and the smallest lever in the stack. A perfect prompt still fails if the model lacks the right information or tools.</p>
 
   <h2>Context engineering: what the model needs to know</h2>
   <div class="layer-tag layer-tag--context">What information the model can see</div>
-  <p>Context engineering is about curating what gets loaded into the model's working memory for a given task — which files, which prior turns, which retrieved documents, which schema definitions — so the model can answer confidently without guessing or hallucinating. This matters more than prompt wording once you're past toy tasks, because a context window is a scarce, expensive resource: cramming in everything "just in case" degrades performance as much as leaving out the one fact that mattered.</p>
-  <p>In our world, this looks like the difference between asking Cowork to "summarize the [client] audience" cold versus pointing it at our platform's actual MCP tools so it pulls live composition data instead of working from stale training knowledge or a half-remembered Slack thread. The prompt didn't change much; what changed is what the model had in front of it when it answered.</p>
+  <p>Context engineering curates what gets loaded into the model's working memory: which files, prior turns, retrieved documents, and schema definitions. The goal is a model that answers without guessing.</p>
+  <p>Past toy tasks, this matters more than wording. Cramming in everything "just in case" hurts as much as omitting the one fact that mattered.</p>
+  <p>In our world, that's the difference between asking Cowork to "summarize the [client] audience" cold and pointing it at our platform's MCP tools, so it pulls live composition data instead of working from stale training knowledge or a half-remembered Slack thread. The prompt barely changed. What the model had in front of it did.</p>
 
   <h2>Harness engineering: how the whole thing operates reliably</h2>
   <div class="layer-tag layer-tag--harness">Multi-step · tools · safety gates</div>
-  <p>Harness engineering is the operational layer around the model: the toolchain it can call, the constraints on what it's allowed to touch, the feedback loops that tell it whether an action succeeded, and the lifecycle that carries state across multiple context windows rather than a single turn. Where context engineering optimizes what's inside one window, harness engineering is what happens when a task is too big for one window — context resets, structured handoffs between phases, and phase gates that keep a multi-step task coherent as the model's working memory gets wiped and rebuilt.</p>
-  <p>This is the layer that actually determines whether an agent can be trusted with a real, multi-step, technical task. A skill definition with a scoped tool list, a checklist the agent has to satisfy before moving to the next phase, and a verification step before anything ships — that's harness, not prompt. The <code>agent-pm</code> skill's rule that Slack drafts always route to a review channel before hitting a real recipient is a harness constraint: it's not asking the model nicely to be careful, it's removing the ability to skip the check.</p>
+  <p>Harness engineering is the operational layer around the model: the toolchain it can call, the limits on what it may touch, the feedback that says whether an action succeeded, and the lifecycle that carries state across context windows.</p>
+  <p>Context engineering optimizes what's inside one window. Harness engineering handles a task too big for one: context resets, structured handoffs between phases, and phase gates that keep the task coherent while working memory is wiped and rebuilt.</p>
+  <p>A scoped tool list, a checklist to satisfy before the next phase, and a verification step before anything ships: that's harness, not prompt.</p>
+  <p>The <code>agent-pm</code> skill's rule that Slack drafts always route to a review channel before reaching a real recipient is a harness constraint. It doesn't ask the model nicely to be careful. It removes the ability to skip the check.</p>
 
   <h2>Loop engineering: the system that decides when to prompt at all</h2>
   <div class="layer-tag layer-tag--loop">Runs unattended · self-evaluates</div>
-  <p>Loop engineering is the newest and most autonomous layer: instead of a human typing each prompt, you build the system that decides what work exists, acts on it, verifies the result, remembers what's done, and decides what to do next — on a schedule or continuously, without a human in the loop for each cycle. The agent stops being a tool you hold and becomes a long-running process with its own scheduling and evaluation logic.</p>
-  <p>A scheduled Cowork task that checks a data pipeline every morning and only pings you when something's actually wrong is a small-scale version of this. The interesting failure mode at this layer isn't a bad response — it's a system that keeps confidently doing the wrong thing on a loop because nothing is verifying its own output before it acts on step two.</p>
+  <p>Loop engineering is the newest and most autonomous layer. Instead of a human typing each prompt, you build the system that decides what work exists, acts on it, verifies the result, remembers what's done, and decides what comes next, with no human in each cycle.</p>
+  <p>A scheduled Cowork task that checks a data pipeline every morning and pings you only when something is wrong is a small version of this.</p>
+  <p>The failure mode here isn't a bad response. It's a system that keeps confidently doing the wrong thing on a loop, because nothing verifies its output before it acts on step two.</p>
 
   <figure class="diagram">
     <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four nested layers from innermost to outermost: prompt engineering inside context engineering inside harness engineering inside loop engineering, showing increasing scope from a single turn to an autonomous multi-cycle system.">
@@ -113,10 +122,11 @@
     <tr><td style="padding:8px 0;">A recurring/scheduled agent keeps taking the wrong action unattended</td><td style="padding:8px 0;" class="layer-cell--loop">Loop</td></tr>
   </table>
 
-  <p>For a Product org managing model development, audience infrastructure, and partner POCs, the practical implication is where you invest engineering time. Prompt quality is a training problem — coach the team, see <a href="prompting-tips-for-cowork.html">Prompting Tips That Actually Move the Needle in Cowork</a>. Context and harness quality are skill-design problems — this is what we're doing every time we scope a Cowork skill's tool list, add a phase gate, or require a review step before something goes external. Loop engineering is where scheduled tasks and always-on monitoring live, and it's the layer that most needs a verification step baked in before you trust it unattended, since nothing is watching it turn by turn.</p>
+  <p>For a Product org, this decides where engineering time goes. Prompt quality is a training problem: coach the team, and see <a href="prompting-tips-for-cowork.html">Prompting Tips That Actually Move the Needle in Cowork</a>. Context and harness quality are skill-design problems: scoping a tool list, adding a phase gate, requiring review before something goes external.</p>
+  <p>Loop engineering is where scheduled tasks and always-on monitoring live, and where a verification step matters most.</p>
 
   <h2>Which layer does this task need?</h2>
-  <p>The table above diagnoses a task that's already misbehaving. Before building anything, it's more useful to ask the question forward: escalate one layer at a time, and only once the current layer has a demonstrated, specific gap — never start from loop engineering by default because it feels more "automated."</p>
+  <p>The table above diagnoses a task that's already misbehaving. Before building anything, ask forward: escalate one layer at a time, and only once the current layer has a demonstrated, specific gap. Never start from loop engineering because it feels more automated.</p>
 
   <figure class="diagram">
     <svg viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Decision chart for choosing which engineering layer a new task needs. Start by asking if the task fits in one prompt and one turn; if not, ask whether it is missing information, then whether it needs multiple steps or safety gates, then whether it needs to run unattended and re-evaluate itself. Each yes lands on a layer; if none apply, the task likely does not need automation.">
@@ -201,7 +211,7 @@
   </table>
 
   <h2>When each layer is over-engineering</h2>
-  <p>Every layer above the one a task actually needs is pure overhead — added latency, added failure surface, and added maintenance burden for a benefit nobody collects. The same impact-vs-effort lens we'd apply to a roadmap decision applies here: escalate to the next layer only when the current one has a demonstrated, specific failure, not because the heavier pattern feels more rigorous.</p>
+  <p>Every layer above the one a task needs is overhead: added latency, failure surface, and maintenance, for a benefit nobody collects. It's the impact-vs-effort lens you'd apply to a roadmap decision.</p>
 
   <table style="width:100%; border-collapse:collapse; margin:20px 0;">
     <tr style="border-bottom:1px solid var(--border-1);"><td style="padding:8px 0; color:var(--text-2);">Layer</td><td style="padding:8px 0; color:var(--text-2);">Over-engineering signal</td><td style="padding:8px 0; color:var(--text-2);">Cost when misapplied</td></tr>
@@ -210,7 +220,34 @@
     <tr><td style="padding:8px 0;" class="layer-cell--loop">Loop</td><td style="padding:8px 0;">Nobody actually needs it to act without a human deciding each time</td><td style="padding:8px 0;">Becomes ignored alert noise, an unowned maintenance liability, or a source of compounding errors from unverified output</td></tr>
   </table>
 
-  <p>A useful tell across all three: if you can't name the specific failure mode the extra structure prevents, you're adding ceremony, not reliability. The right question before automating anything into a loop isn't "could this run on a schedule" — almost anything could — it's "does this need to act without a human deciding each time, and do we have a way to catch it if it starts confidently doing the wrong thing." If the honest answer is "we just wanted it off our plate," that's a one-off task wearing a loop's clothing, and it will cost more in cleanup than it ever saved in typing.</p>
+  <p>A tell across all three: if you can't name the failure the extra structure prevents, you're adding ceremony, not reliability.</p>
+  <p>Before automating anything into a loop, don't ask whether it could run on a schedule. Almost anything could. Ask whether it must act without a human deciding each time, and whether you can catch it doing the wrong thing.</p>
+  <p>If the honest answer is "we just wanted it off our plate," that's a one-off task wearing a loop's clothing.</p>
+
+  <h2>The numbers</h2>
+  <table>
+    <thead><tr><th>Layer</th><th>Term arrived</th><th>Scope</th></tr></thead>
+    <tbody>
+      <tr><td>Prompt</td><td>2022, ChatGPT era</td><td>One request, one turn</td></tr>
+      <tr><td>Context</td><td>2025</td><td>What the model sees for a task</td></tr>
+      <tr><td>Harness</td><td>2026</td><td>Tools, gates, state across windows</td></tr>
+      <tr><td>Loop</td><td>Mid-2026</td><td>When to run the agent at all</td></tr>
+    </tbody>
+  </table>
+  <p>That's vocabulary history, not a benchmark. This post doesn't measure how often each layer causes a failure.</p>
+
+  <h2>Where this breaks</h2>
+  <p><strong>The vocabulary is young.</strong> Loop engineering dates from mid-2026, so treat the nesting as a working model, not a standard.</p>
+  <p><strong>Symptoms overlap.</strong> A confidently wrong answer can be stale context, a harness with no verification step, or a loop acting on unchecked output. The symptom table says where to look first, not what is wrong.</p>
+  <p><strong>The top layer is the least supervised.</strong> Nothing watches a loop turn by turn, so a missing verification step costs the most there.</p>
+
+  <h2>What I'd do differently</h2>
+  <p>Start every task at the prompt, and add a layer only when a specific failure shows up. Before building it, write down the failure it prevents.</p>
+
+  <h2>The bottom line</h2>
+  <p>Four layers, four failure modes. A prompt fix can't repair a broken harness, and a better harness can't fix a loop with no verification step.</p>
+  <p>Each layer is additive, so escalate only on a demonstrated failure.</p>
+  <p>Name the failure the extra structure prevents, or don't add it.</p>
 
   <div class="try-box">
     <p class="try-box-label">Try it — copy into Cowork</p>

@@ -40,10 +40,12 @@
   <h1>One Fact, One Home: How an Agent System Remembers</h1>
   <div class="meta">Case Study · 4 min read</div>
 
-  <p>Every AI conversation ends with total amnesia. The agent that shipped a release yesterday wakes up today knowing nothing about the deploy trap it discovered, the style correction you made, or the decision you reached together. The naive fix is to write everything down everywhere — and that fails in a worse way, because now there are five copies of every fact, they disagree within a month, and the agent confidently acts on the stale one. The <a href="how-this-site-ships-itself.html">publishing pipeline behind this site</a> claims that "every failure becomes a lesson the agent keeps." This post is about the architecture that makes that true — where lessons actually live, and what stops them from rotting.</p>
+  <p>Every AI conversation ends with total amnesia. The agent that shipped a release yesterday wakes up knowing nothing about the deploy trap it found, the style correction you made, or the decision you reached together.</p>
+  <p>The naive fix is to write everything down everywhere. That fails worse. Now there are five copies of every fact, they disagree within a month, and the agent acts on the stale one with full confidence.</p>
+  <p>The <a href="how-this-site-ships-itself.html">publishing pipeline behind this site</a> claims that "every failure becomes a lesson the agent keeps." This post shows where those lessons live, what it cost to keep them there, and where the design still leaks.</p>
 
   <h2>Three stores, one rule</h2>
-  <p>Everything this system was designed to know lives in exactly one of three places, split by what kind of fact it is — because different kinds of facts change at different speeds and rot in different ways.</p>
+  <p>Every fact lives in exactly one store, split by how fast that kind of fact rots.</p>
 
   <figure class="diagram">
     <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three knowledge stores (the project doc has since been retired, see the update below): the skill holds procedures and conventions, the project doc held decisions and status, agent memory holds pointers and orphan facts. Each fact lives in exactly one store; the others link to it. The live site is the ground truth all three are audited against monthly.">
@@ -85,23 +87,50 @@
     <figcaption>Procedures, decisions, and pointers age differently — so they live apart, and nothing is stored twice.</figcaption>
   </figure>
 
-  <p><strong>The skill</strong> is the agent's standing instructions: the post template, the browser-publishing procedure, the deploy-failure recovery playbook, the content rules. It loads automatically whenever relevant work starts. <strong>The project doc</strong> was a living PRD on Confluence: what was decided, what shipped when, what's still open, and why — the file a new collaborator (human or agent) would read first. It has since been retired; see the update below. <strong>Agent memory</strong> is deliberately the smallest: pointers to the other two, plus the handful of facts that belong nowhere else. The rule that holds it together: <em>a fact lives in exactly one store, and the others link to it.</em> Copies are how documentation lies to you — two versions of a fact means one of them is wrong and you don't know which.</p>
+  <p><strong>The skill</strong> holds the agent's standing instructions: the post template, the browser-publishing procedure, the deploy-recovery playbook, the content rules. It loads automatically when relevant work starts.</p>
+  <p><strong>The project doc</strong> was a living PRD on Confluence: what was decided, what shipped, what's still open, and why. It has since been retired (see the update below).</p>
+  <p><strong>Agent memory</strong> is deliberately the smallest: pointers to the other two, plus the few facts that belong nowhere else.</p>
+  <p>The rule that holds it together: <em>a fact lives in exactly one store, and the others link to it.</em> Two versions of a fact means one is wrong and you can't tell which.</p>
 
-  <blockquote><p><strong>Update, Nov 2026:</strong> the project doc is gone. It was the store that cost the most to maintain and the one the monthly audit kept finding stale, so we stopped updating it on 2026-10-31 rather than keep paying for a home that wasn't earning its keep. The system now runs on two stores, the skill and agent memory, plus one more rule: the shared working folder is the source of truth for the site's content, and the repository and live site are a mirror of it. A drift check compares the two at the start and end of every session, and the monthly audit reports any difference. Deleting a home is the same rule applied honestly: if a fact has no store worth keeping it in, it doesn't get a copy.</p></blockquote>
+  <blockquote><p><strong>Update, Nov 2026:</strong> the project doc is gone. It cost the most to maintain and was the store the monthly audit kept finding stale, so we stopped updating it on 2026-10-31. The system now runs on two stores, plus one more rule: the shared working folder is the source of truth for site content, and the repository and live site are a mirror. A drift check compares the two at the start and end of every session. Deleting a home is the same rule applied honestly: if a fact has no store worth keeping it in, it gets no copy.</p></blockquote>
 
   <h2>How lessons get in</h2>
-  <p>Any work session that changes the system's shape ends with a <em>sync sweep</em> — three questions, answered while the context is still hot: Did this make a procedure stale? Update the skill. Did it change a decision or status? That used to mean updating the project doc; now it means recording it in the skill, or in memory when no procedure is affected. Did it break a pointer, or create a fact with no home? Update memory. The sweep is why the skill's version history reads like an engineering log: v1 gave the human exact steps to execute; v2 let the agent push directly; v5 encoded a deploy-recovery playbook learned from four production failures; v6 encoded the white-label rules and a commit-verification discipline learned from a silently dropped commit. Each version is a scar with documentation.</p>
+  <p>Any session that changes the system's shape ends with a <em>sync sweep</em>: three questions, answered while the context is still hot.</p>
+  <p>Did this make a procedure stale? Update the skill. Did it change a decision or status? Record it in the skill, or in memory when no procedure is affected. Did it break a pointer or create a fact with no home? Update memory.</p>
+  <p>The sweep is why the skill's version history reads like an engineering log. v1 gave the human exact steps. v2 let the agent push directly. v5 encoded a recovery playbook learned from four production failures. v6 added the white-label rules and a commit-verification step after one commit was silently dropped.</p>
+  <p>Each version is a scar with documentation.</p>
 
   <h2>How rot gets caught</h2>
-  <p>Sweeps get missed — that's a when, not an if. So the backstop is an <em>anti-entropy audit</em>: a scheduled agent reads the live site once a month and checks every claim the stores make against what's actually deployed, and reports any drift between the working folder and the published copy. Stale procedure in the skill, status row that no longer matches reality, dead pointer in memory — each becomes a line in a report for human review. The audit proposes; it never decides. The design assumption is worth stating plainly: documentation is presumed to drift, so the system doesn't rely on discipline to prevent drift — it schedules the job of finding it.</p>
+  <p>Sweeps get missed. That's a when, not an if, so the backstop is a scheduled <em>anti-entropy audit</em>.</p>
+  <p>Once a month an agent reads the live site and checks every claim the stores make against what's deployed. It also compares the working folder with the published copy. Each stale procedure, mismatched status row, or dead pointer becomes a line in a report for human review. The audit proposes; it never decides.</p>
+  <p>The design assumption: documentation drifts, so the system schedules the job of finding the drift instead of relying on discipline to prevent it.</p>
 
-  <h2>The questions worth asking</h2>
-  <p><strong>"Why not one big document?"</strong> Because procedures, decisions, and pointers have different lifecycles. A procedure changes when a lesson is learned; a decision changes rarely and its history matters; pointers change constantly and are worthless when stale. In one document, the fast-changing parts bury the stable parts, every edit risks the whole file, and nobody can tell which sections still hold. Splitting by rot-rate is the same reason databases separate hot and cold data.</p>
-  <p><strong>"The agent edits its own instructions — what stops that from going wrong?"</strong> The same gate that governs everything else: the agent drafts skill updates, but a human reviews and installs them. Instructions are versioned artifacts, not a scratchpad — the agent can propose that its own procedure was wrong, and it regularly does, but it can't quietly rewrite the rules it operates under.</p>
-  <p><strong>"What happens when the stores disagree anyway?"</strong> For what the public sees, the live site wins — it's the one artifact that can't drift from itself. For what is intended, the working folder wins. A disagreement isn't silently patched; it's filed as a finding, a human rules on which store lied, and the fix includes asking why the sweep missed it. Disagreement is treated as a bug in the process, not just an error in a file.</p>
+  <h2>The numbers</h2>
+  <table>
+    <thead><tr><th>Measure</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Stores</td><td>3 at launch, 2 after the project doc was retired on 2026-10-31</td></tr>
+      <tr><td>Sync-sweep questions per session</td><td>3</td></tr>
+      <tr><td>Drift checks per session</td><td>2 (start and end)</td></tr>
+      <tr><td>Anti-entropy audit cadence</td><td>Monthly, 2 comparisons: claims vs. live site, working folder vs. published copy</td></tr>
+      <tr><td>Skill versions that came from a specific failure</td><td>v5 (4 production failures), v6 (1 dropped commit)</td></tr>
+    </tbody>
+  </table>
+  <p>The table is short on purpose. Every row is something this site's paper trail can confirm. The measures that would matter most, such as how many audit findings a sweep should have caught, aren't tracked yet.</p>
 
-  <h2>So what?</h2>
-  <p>Most agent demos are impressive for one session and amnesiac by the next. The unglamorous half of agent engineering — the half that makes the <a href="how-this-site-ships-itself.html">publishing pipeline</a> compound instead of reset — is exactly this: deciding where facts live, how lessons get written in, and who catches the rot. Context windows end. Systems shouldn't. The same architecture runs the private production workflows this site describes; the version you're reading about is the one whose paper trail is public.</p>
+  <h2>What still leaks</h2>
+  <p><strong>A fact that is wrong in two places passes the audit.</strong> The audit compares stores against the live site and each other. If the skill and the site agree on something false, nothing flags it.</p>
+  <p><strong>The human gate is a queue.</strong> The agent drafts skill updates, but a person reviews and installs them. That keeps the agent from quietly rewriting its own rules, and it also means a lesson can sit unlearned until someone reads the report. A report nobody reads is drift with paperwork.</p>
+  <p><strong>The sweep is still a habit.</strong> It's a three-question checklist, not an enforced step. The audit exists because the sweep gets skipped.</p>
+  <p><strong>The project doc earned its retirement late.</strong> It duplicated what the commit history and the skill already said, and I kept paying for it until the monthly audit made the cost undeniable. The "one home" rule should have flagged it on day one.</p>
+
+  <h2>What I'd do differently</h2>
+  <p>Start counting audit findings by cause from the first month: missed sweep, bad pointer, or genuinely new drift. That one metric would show whether the sweep is working or whether the audit is quietly doing its job.</p>
+  <p>I'd also ask, before adding any store, which existing store its facts would otherwise live in. If the answer is "one we already have," skip the new home.</p>
+
+  <h2>The bottom line</h2>
+  <p>Most agent demos are impressive for one session and amnesiac by the next. What makes the <a href="how-this-site-ships-itself.html">publishing pipeline</a> compound instead of reset is deciding where facts live, how lessons get written in, and who catches the rot.</p>
+  <p>Context windows end. Systems shouldn't.</p>
 
   <div class="try-box">
     <p class="try-box-label">Try it — copy into Cowork</p>

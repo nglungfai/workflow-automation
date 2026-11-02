@@ -38,15 +38,17 @@
 <a class="back-link" href="../index.html">&larr; All posts</a>
 <article class="post">
   <h1>Automating Audience Segments with Two Cowork Skills</h1>
-  <div class="meta">Skill Deep Dive · 3 min read</div>
+  <div class="meta">Skill Deep Dive · 4 min read</div>
 
-  <p>Bulk segment work on our Audience Creation Platform — creating dozens of syndicated audiences, or refreshing keywords across a batch of existing ones — used to mean clicking through the same UI flow over and over. We built two Cowork skills to turn that into a review-and-approve task instead: <code>agent-new-syndicated-segments</code> and <code>agent-update-syndicated-segments</code>. Both drive the platform UI directly through Claude in Chrome, so they work exactly like a careful analyst clicking through the app — just faster and consistent.</p>
+  <p>Creating dozens of syndicated audiences on our Audience Creation Platform used to mean clicking through the same UI flow, one segment at a time. Refreshing keywords across a batch of existing audiences meant doing it all again.</p>
+  <p>We built two Cowork skills to turn that into a review-and-approve task: <code>agent-new-syndicated-segments</code> and <code>agent-update-syndicated-segments</code>.</p>
+  <p>Both drive the platform UI directly through Claude in Chrome. They work like a careful analyst clicking through the app, only faster and the same every time.</p>
 
   <h2>Prerequisite: Claude in Chrome</h2>
-  <p>Both skills automate the live web app rather than calling an API, so they require the <strong>Claude in Chrome</strong> extension installed and active. If it isn't set up, ask Cowork to trigger either skill and it will tell you what's missing.</p>
+  <p>Both skills automate the live web app instead of calling an API, so they need the Claude in Chrome extension installed and active. If it isn't set up, ask Cowork to trigger either skill and it will tell you what's missing.</p>
 
-  <h2>Skill 1 — <code>agent-new-syndicated-segments</code>: bulk creation</h2>
-  <p>Use this when you have a list of new segment names to create from scratch, typically sitting in a Google Sheet.</p>
+  <h2>Skill 1: <code>agent-new-syndicated-segments</code> for bulk creation</h2>
+  <p>Use this when you have new segment names to create from scratch, typically in a Google Sheet.</p>
 
   <h3>What it needs from you</h3>
   <ul>
@@ -61,7 +63,7 @@
     <li>Shows you the parsed segment list and waits for confirmation before touching anything</li>
     <li>Asks which taxonomy to create audiences in</li>
     <li>For each segment: clicks <em>Create New Audience</em>, names it, clicks <em>Autoscale Topics</em>, sets the preferred size, and saves it as a draft</li>
-    <li>Reports a clean pass/fail summary at the end — including duplicates it skipped</li>
+    <li>Reports a clean pass/fail summary at the end, including duplicates it skipped</li>
   </ol>
 
   <div class="try-box">
@@ -72,8 +74,8 @@
     </div>
   </div>
 
-  <h2>Skill 2 — <code>agent-update-syndicated-segments</code>: keyword refresh</h2>
-  <p>Use this when segments already exist and need their topics re-autoscaled — for example, after a taxonomy update or a periodic refresh cycle. It does not create anything new.</p>
+  <h2>Skill 2: <code>agent-update-syndicated-segments</code> for keyword refresh</h2>
+  <p>Use this when segments already exist and need their topics re-autoscaled, for example after a taxonomy update or a periodic refresh cycle. It creates nothing new.</p>
 
   <h3>What it does</h3>
   <ol>
@@ -100,16 +102,45 @@
   </table>
 
   <h2>Guardrails baked into both skills</h2>
-  <p>These matter because the skills operate on live production audiences:</p>
-  <ul>
-    <li><strong>Never "Approve All."</strong> Both skills are explicitly instructed to avoid this button — it approves every audience in the taxonomy, not just the ones being touched.</li>
-    <li><strong>Confirm before the bulk loop starts.</strong> Both skills show you the full parsed list (segments to create, or audiences to update) and wait for explicit confirmation before making any changes. Mistakes at scale are expensive — review the list.</li>
-    <li><strong>Everything saves as a draft.</strong> Nothing goes live automatically; drafts still need your normal review/approval step downstream.</li>
-    <li><strong>Timing matters more than it looks.</strong> The update skill waits ~18 seconds for autoscale to generate topics and 5 seconds after adding them before saving — React's state needs time to commit. If a run looks like it's "hanging," that's usually why.</li>
-  </ul>
+  <p>These skills operate on live production audiences, so the guardrails matter more than the speed.</p>
+  <p><strong>Never "Approve All."</strong> Both skills are told to avoid that button. It approves every audience in the taxonomy, not just the ones being touched.</p>
+  <p><strong>Confirm before the bulk loop starts.</strong> Both skills show the full parsed list and wait for explicit confirmation before changing anything. Review it.</p>
+  <p>Mistakes at scale are expensive.</p>
+  <p><strong>Everything saves as a draft.</strong> Nothing goes live automatically. Drafts still need your normal review and approval downstream.</p>
+  <p><strong>Timing matters more than it looks.</strong> The update skill waits about 18 seconds for autoscale to generate topics, then 5 seconds after adding them before saving, because React's state needs time to commit. If a run looks like it's hanging, that's usually why.</p>
 
-  <h2>Why this is a good template for your own skill</h2>
-  <p>Both skills follow the same shape worth copying if you're building your own UI-automation skill: collect inputs up front, show the user what you found and get confirmation, execute one item at a time with a verification screenshot after each risky step, and end with an explicit success/failure summary rather than a vague "done." That structure is what makes it safe to run against production data unattended.</p>
+  <h2>The shape worth copying</h2>
+  <p>Both skills share a shape you can reuse for your own UI-automation skill. Collect inputs up front, show what you found and get confirmation, then execute one item at a time with a verification screenshot after each risky step.</p>
+  <p>End with an explicit success or failure summary, not a vague "done." That structure is what makes it safe to run against production data unattended.</p>
+
+  <h2>The numbers</h2>
+  <table>
+    <thead><tr><th>Measure</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Skills</td><td>2: one creates, one refreshes</td></tr>
+      <tr><td>Steps in a creation run</td><td>5</td></tr>
+      <tr><td>Steps in a refresh run</td><td>4</td></tr>
+      <tr><td>Review points before any change</td><td>1 per skill: the list is shown and the skill waits</td></tr>
+      <tr><td>Fixed waits in the refresh skill</td><td>About 18 s after autoscale, 5 s after adding topics</td></tr>
+      <tr><td>Manual baseline (approximate)</td><td>3-4 min of clicking per segment; 40 segments is about half a day</td></tr>
+      <tr><td>Supervised skill run (approximate)</td><td>About 15 min for that same job</td></tr>
+    </tbody>
+  </table>
+  <p>The time figures are the rough ones on this site's <a href="getting-started-with-cowork.html">getting-started page</a>, not measurements from a logged run. Pass and fail counts per run, and how often the refresh skill flags a failed audience, aren't tracked yet.</p>
+
+  <h2>Where this breaks</h2>
+  <p><strong>It's UI automation.</strong> The skills click through the live web app instead of calling an API, so a change to the app's screens can stop a run.</p>
+  <p><strong>The waits are a guess.</strong> A fixed 18 seconds is an assumption about how fast autoscale responds. It works until the app is slower than the assumption.</p>
+  <p><strong>The confirmation gate checks what it's shown.</strong> If the sheet holds a wrong name, the parsed list will faithfully show the wrong name. The review is only as good as the reviewer.</p>
+  <p><strong>Draft is not the last gate.</strong> Nothing goes live on its own, but the safety depends on the downstream approval step actually happening.</p>
+
+  <h2>What I'd do differently</h2>
+  <p>Log the pass/fail summary from every run from day one. Then "it saves time" would rest on counts instead of the approximate times above.</p>
+  <p>I'd also write the reason for each wait next to the number. The next person who finds a run slow will otherwise shorten it.</p>
+
+  <h2>The bottom line</h2>
+  <p>Two skills turned repetitive clicking into a review-and-approve task. They're safe to point at production audiences because they show the list first, change one item at a time, and save only drafts.</p>
+  <p>The same pattern fits any UI-automation skill. Show the list before the loop.</p>
 
   <blockquote>Have a workflow like this worth turning into a skill? See <a href="../about.html">About</a> for how this site is built — the same pattern applies to any UI-automation skill.</blockquote>
 
