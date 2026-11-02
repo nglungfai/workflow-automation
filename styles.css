@@ -137,6 +137,24 @@ header.site-header {
 
 .brand img { height: 24px; width: auto; display: block; }
 
+/* Brand mark: assets/logo/mark.svg (resolved relative to this stylesheet) */
+.brand::before {
+  content: "";
+  flex: none;
+  width: 34px;
+  height: 34px;
+  margin: -4px 0;
+  background: url("assets/logo/mark.svg") center / contain no-repeat;
+}
+
+@media (max-width: 520px) {
+  /* keep the brand on one line and give the nav its own row */
+  .header-inner { flex-wrap: wrap; gap: 6px 16px; }
+  .brand { white-space: nowrap; }
+  nav.site-nav { white-space: nowrap; }
+  nav.site-nav a:first-child { margin-left: 0; }
+}
+
 nav.site-nav a {
   color: var(--text-2);
   margin-left: 22px;
